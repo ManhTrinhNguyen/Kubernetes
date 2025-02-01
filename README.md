@@ -36,8 +36,9 @@
 **Service and Ingress**
 ```
   Service:
-    - Service is Static IP address or permannet IP can be attach to each Pod
+    - Service is Static IP address or permanent IP can be attach to each Pod
     - Lifecyle of Pod and Service not connected
+    - Each Pod has 1 service
     - External Service :
       - Make a App to accessable from Browser
       - External service is service that open the commnunication from external sources
@@ -53,6 +54,8 @@
 
 **ConigMap and Secrect**
 ```
+  So Pod Communicate with each other using Service . So my App will have database endpoint let's say MongoDB service that uses to communicate with DB but where do I configure DB URL . Usually I would do it in Application properties files , or inside of built Image of Application . For example if the endpoint of the service name changed. The solution for that is ConfigMap .
+
   ConfigMap:
     - External configuration of the Application
       - Usually contain configuration data like URLs of database or some other services that you use
@@ -108,5 +111,52 @@ Statefull set:
   - It is also deploy just one Pod or 1 Replica on each Node in the cluster
   - So when I added new Node it will automatically Pod replica there and when I remove Node it will remove Replica pod
 ```
+
+## Kubernetes Architecture 
+
+### 2 types of Node ( machine ) that Kubernetes operate on 
+
+#### How Kubernetes does, What it does, and how cluster is self-managed and self-healing and automated ? 
+
+**Worker Node**
+```
+  Node Processes :
+    - 1 Node can have multiple Pods with container running on that Node
+
+  Three Processes must be installed on every Node that are used to schedule and manage those Pods:
+    1. Container Runtime: Docker, Container D, Cri-o ... (container d is the most used container runtime in Kubernetes Cluster) 
+    2. The processes that actually schedule those pods and the containers then underneath is Kubelet which is a process of Kubernetes itself that has interface both container run and and Node (machine)
+      - Kublet start the pod with the container inside
+      - Kublet is responsible for taking that configuration and actually running a pod or starting a pod with a container inside then assigning Resources from that Node to that Container like CPU, RAM and Storage
+ 
+  !!! Usually Kubernetes cluster is made up of multiple nodes which also must have container runtime and Kublet services installed. And I can have hundred of those worker Node which will run other pods and container and replica of the existing pods and the way communication between them work is using Services ( static IP address )
+  !!! Services which is sort of the load balancer basically catch the request directed to the Pod or application like DB and forward that to respective Pods
+
+   3. KubeProxy is Responsible for forwarding the Request from Services to Pods
+      - Kube Proxy has accutally intelligent forwarding logic inside that makes sure the communication also works in the performant way with low overhead
+      - Example : If my Application, my-app replica making the request to DB instead of Service randomly forwarding the request to any Replica it will forward to a Replica that running on the same Node as the Pods that initiated the request. Thus this way avoiding low network overhead
+```
+
+
+**Control Plane** -> **How to interact with Cluster**
+```
+  How to : Schedule Pod, Monitor, Restart Pods , Join new Node ?
+
+  Control Plane proccesses
+    - Control plane server or Control Node have completely different processes running inside
+    - That is 4 processes that run on every control plane node that control the Cluster state and the Worker Node as well
+
+    1. API Server:
+      - So me as the user want to deploy a new application in the Kubenetes Cluster , I interact with API server using some client which is UI, CLI like Kublets or Kubernetes API
+      - API Server is like a cluster gateway which get a initials request of any update into the cluster or even query from cluster and also act as a gatekeeper for authentication
+      - That mean when I want Schedule new Pod, Create new Services, Deploy new App I have to talk to a API Server on the Control Plane Node and API Server then Validate my Request if everything is fine then it will forward My request to other processes in order to schedule the Pods or create Component I requested
+
+    2. Scheduler:
+      - If I send an API server a Request to shedule a new Pod, API server after it validates my request will actually hand it over to the Scheduler in order to start Application Pod on one of the worker Nodes, and of course instead of randomly assign it to any Nodes , Scheduler has a intelligent where to put a Pod, the next Pod will be schedule or next component will be schedule
+      - First it will look at my Request and see how much Resources the application that I want to schedule will need how much CPU, RAM and It will go through Worker Node and see available resources in which one of them and if it see one Node has the least busy or have the most resources avalable it will schedule on that Node
+      - Note : Sheduler just decide on which Node the new Pod should be scheduled the Process that actually does the schedule mean that actually start the container is Kubelet so it get the request from Scheduler then get the request from that Node
+```
+
+
 
 
