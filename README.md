@@ -6,7 +6,7 @@
   - Open source container tool developed by Google
   - Kubernetes help manage Applications that are that made up of hundreds or maybe thousands of Containers in the Differents Environment like ( Physical Machine, Virtual Machine, or Cloud Enviroment)
 
-**What is probles Kubernetes solve ?**
+**What is problems Kubernetes solve ?**
   - Trends from Monolith to Microservices
   - The Rise of Microservices Technology increased usage of Container Technology bcs the Container offer perfect host for small independent applications, like microservices
   - And the Rise of Container resulted in Application they are now comprised 100 or 1000 of container Managing those container accross multiple Environment using script and self make tools can be really complex
