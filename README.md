@@ -186,6 +186,18 @@ Statefull set:
 ```
 
 **kubectl**
+```
+  Now I have this virtual Node I need the way to interact with that cluster
+  The way to create and others Kubernetes componets on that Node
+  kubectl help to do that
 
+  - Kubectl is the Kubernetes CLI tools for Kubernetes cluster
+   
+  How is work ?
+  - Minikube run both Control Plane and Worker Processes
+  - One of Control Plane Proccesses called API Server is the main entry point to the Kubenetes cluster -> Create anything, configure anything first have to talk to API Server .
+  - And the way to talk to API Server is : UI, API, CLI (Kubectl)
+  - So when Kubectl command go through API Server to create, destroy pods or etc ... the worker proccesses on minikube node will actually make it happen they will be executing a command to create, destroy pod ..etc  
+```
 
 
