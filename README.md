@@ -172,6 +172,20 @@ Statefull set:
   !!! In Practice a Kubernetes cluster is often made up of multiple control planes where each control plane node run its control plane processes Where API server is load balanced and the etcd store form distributed storage accross all control plane nodes
 ```
 
+## Minikube and kubectl 
+
+**Minikube**
+```
+  - When I am setting a production cluster .
+  - I would have multiple Control Plane Nodes and Worker Node both have their own seprate Responsiblity
+  - Separate Virtual or Physical Machine
+  - If I want to test something on my local Environment or run something quick etc ... obviously setting a cluster this will be pretty difficult, or maybe even impossible if you don't have enough resources like memory and CPU ...etc
+
+  - So Minikube is 1 Node cluster where Control Plane Processes and Worker Processes both run in 1 Node
+  - And this Node will have Docker runtime preinstall so I will able to run a container or the pods with container of this node
+```
+
+**kubectl**
 
 
 
