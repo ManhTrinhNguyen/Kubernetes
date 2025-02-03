@@ -266,7 +266,8 @@ Statefull set:
 
   When I am creating Kubernetes component likes deployment, using kubectl create deployment I have to provide all the option on the CLI
   -> Better practice Kubernetes Configuration files
-  - kubectl apply : take the configuration files as a parameter and does whatever in the file
+
+  - kubectl apply -f [filename] : take the configuration files as a parameter and does whatever in the file
 ```
 
 
