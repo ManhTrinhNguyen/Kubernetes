@@ -46,6 +46,11 @@
   -> Better practice Kubernetes Configuration files
 
   - kubectl apply -f [filename] : take the configuration files as a parameter and does whatever in the file
+
+      ----Get More detail----
+
+  - kubectl get pod -o wide : Get more info of the Pod
+
 ```
 
 

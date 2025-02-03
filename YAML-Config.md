@@ -60,6 +60,13 @@
   !!! Service has a Port where the Service itself accessible at ( port : 80 ) . And the Service need to know to which Pod it should forward a request and also which port is that Pod is listening ( targetPort: 8080 ) is where Pod is listening ( port : 8080 )
 ```
 
+**Get Status**
+```
+  Status automatically created 
+  To get status I use : kubectl get deployment nginx-deployment -o yaml > nginx-deployment-result.yaml
+
+  !!! NOTE: If I want to copy a deployment that I already have using automated script I have to removed most of generated stuff. So i have to clean deployment configuration file first then i can create another Deployment
+```
 
 
 
