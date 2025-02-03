@@ -242,6 +242,14 @@ Statefull set:
   - kubectl get replicaset :
     -> Replica set is managing Replica of the Pod
     -> In Practice I do not have to create or delete replica set . I will working with Deployment directly
+
+  Layer Abstraction
+    - Deployment manage a -> Replicaset manage a -> Pod is abtractions of Container
+    - Everythin Below Deployment should be manage by Kubernetes
+
+  Make change from Deployment
+    - edit in the Deployment : kubectl edit deployment [name]
+      -> I will get auto generated file configuration 
     
 ```
 
