@@ -212,7 +212,10 @@ Statefull set:
     2. Docker inside Minikube to run Applications Container
 ----
 
+  1. Create and Start Minikube Cluster :  minikube start --driver docker
+  2. To check Minikube status : minikube status
 
+  To Interact with Cluster I use kubectl
   
 ```
 
