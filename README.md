@@ -255,8 +255,18 @@ Statefull set:
     -----Debugging Pods------
 
   - kubectl logs [pods name]
-  - kubectl describe pod [pods name] 
-    
+  - kubectl describe pod [pods name]
+
+  - kubectl exec -it [pod name] -- bin/bash
+    -> With this command I can get into terminal of Mongodb Application
+
+    -----Delete and Apply Configuration File------
+
+  -  kubectl delete deployment [deployment name]
+
+  When I am creating Kubernetes component likes deployment, using kubectl create deployment I have to provide all the option on the CLI
+  -> Better practice Kubernetes Configuration files
+  - kubectl apply : take the configuration files as a parameter and does whatever in the file
 ```
 
 
