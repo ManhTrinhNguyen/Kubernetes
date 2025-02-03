@@ -13,7 +13,9 @@
     - Once I have that set up I will need Mongo Express accessiable through browser in order to do that will create external Service that will allow external request to talk to the Pod
 ```
 
-**Create MongoDB Deployment**
+**1. Create MongoDB Deployment Yaml**
+**2. Create Secret**
 ```
-  
+  - From where I will reference value
+  - Secrect live in K8s, not it the Repo
 ```
