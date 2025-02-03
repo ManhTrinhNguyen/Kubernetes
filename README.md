@@ -249,7 +249,13 @@ Statefull set:
 
   Make change from Deployment
     - edit in the Deployment : kubectl edit deployment [name]
-      -> I will get auto generated file configuration 
+      -> I will get auto generated file configuration
+
+
+    -----Debugging Pods------
+
+  - kubectl logs [pods name]
+  - kubectl describe pod [pods name] 
     
 ```
 
