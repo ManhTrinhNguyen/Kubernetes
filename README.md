@@ -200,4 +200,20 @@ Statefull set:
   - So when Kubectl command go through API Server to create, destroy pods or etc ... the worker proccesses on minikube node will actually make it happen they will be executing a command to create, destroy pod ..etc  
 ```
 
+**How to install and run Minikube**
+```
+  To Install ( https://minikube.sigs.k8s.io/docs/start/ )
+
+----
+  - Minikube can run either the Container or Virtual Machine (A driver for Minikube)
+  - Inside of Kubernetes cluster, We run Docker container !!! Important to note here that Minikube installation actually come with Docker already installed to run those container
+  - But Docker as a driver for Minikube mean that We're hosting Minikube on our local machine as a Docker container itself so We have two layers of Docker
+    1. Minikube run as a Docker Container
+    2. Docker inside Minikube to run Applications Container
+----
+
+
+  
+```
+
 
