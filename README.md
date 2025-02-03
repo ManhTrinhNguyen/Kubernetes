@@ -216,6 +216,9 @@ Statefull set:
   2. To check Minikube status : minikube status
 
   To Interact with Cluster I use kubectl
+
+  Minikube CLI to start or create a cluster
+  kubectl to configure a cluster
   
 ```
 
