@@ -41,7 +41,23 @@
   - Metadatas part contain the Label and the Specification part contain Selector
     
     ----Connecting Deployment to Pod----
-  - In metadata, I give components like Deployment or Pods, a key value pair and it could be any key value pair that I can think of 
+  - In metadata, I give components like Deployment or Pods, a key value pair and it could be any key value pair that I can think of like 'app:nginx'
+  - Pod get lables through template blueprint
+  - And we tell the deployment to connect or to match all the labels with 'app:nginx' to create connection
+
+    ----Connecting Services to Deployment----
+  - Now Deployment has its own label 'app:nginx' and these two label are used by Serviced Selector
+  - In Specification of Service , We define a selector which basically make a connection between a Service and Deployments or its Pod
+
+    ----Configure Port for Services and Pod----
+  - Service :
+    - protocal : TCP
+    - port : 80
+    - targetPort: 8080
+  - Pod :
+    - port : 8080
+
+  !!! Service has a Port where the Service itself accessible at ( port : 80 ) . And the Service need to know to which Pod it should forward a request and also which port is that Pod is listening ( targetPort: 8080 ) is where Pod is listening ( port : 8080 )
 ```
 
 
