@@ -3,7 +3,7 @@
 **The First 2 lines declare what I want to deploy**
 ```
   apiVersion: App name 
-  kind: Deployment Or Service 
+  kind: Deployment Or Service Or ConfigMap Or Secret
 ```
 
 **First part is Metatdata**
