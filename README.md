@@ -59,7 +59,7 @@
   ConfigMap:
     - External configuration of the Application
       - Usually contain configuration data like URLs of database or some other services that you use
-      - In Kubernetes, I just connect it to the pod so that pod acctually gets the data that config map contain . Now you change the name of the service and endpoint of the service I just need adjust the config map
+      - In Kubernetes, I just connect it to the pod so that pod acctually gets the data that config map contain . Now I change the name of the service and endpoint of the service I just need adjust the config map
       - Part of external Config can be username and password which may also change
       - But config map is non-confidental data only so I have Secrect
 
