@@ -298,11 +298,11 @@ Statefull set:
 ```
   - To change default namepsace to whatever namepsace i choose 
 
-  kubectl config set-context --current --namepsace=my-namepsace
+  - kubectl config set-context --current --namepsace=my-namepsace
 
-  There also a tool call kubens but I have to install separtely
+  - There also a tool call kubens but I have to install separtely
 
-  brew install kubectx 
+  - brew install kubectx 
 
   https://github.com/ahmetb/kubectx
 ```
