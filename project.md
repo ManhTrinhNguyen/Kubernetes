@@ -3,7 +3,7 @@
 ## Demo 
 ```
   1. Create MongoDB pod 
-    - In order to talk to Pod I need service 
+    - In order to talk to Pod I need Service 
     - I will create Internal Service . Only the components inside cluster can request to it 
   2. Create Mongo Express 
     - Need URL of MongoDB so Mongo Express can connect to it 
@@ -16,6 +16,22 @@
 **1. Create MongoDB Deployment Yaml**
 **2. Create Secret**
 ```
-  - From where I will reference value
+  - From there I will reference value
   - Secrect live in K8s, not it the Repo
+
+  - kubectl apply -f mongo-secret.yaml : Apply secret 
+  - kubectl get secret : To check secret
+```
+
+**3. Create Internal Service**
+```
+  - Internal Service help other component or other pods can talk to MongoDB
+
+  ----Service Configuration----
+  - kind : Service 
+  - metadata/name: Random Name
+  - selector: to connect to Pod through Label 
+  - ports : 
+    - port : Service Port
+    - targetPort: Container of Deployment 
 ```
