@@ -220,3 +220,37 @@ Statefull set:
   Minikube CLI to start or create a cluster
   kubectl to configure a cluster
 ```
+
+## Kubernetes Namespaces 
+**What is Namespaces ?**
+```
+  - In Kubernetes cluster I can organize resources in namespaces
+  - I can have multiple Namespaces in Cluster 
+  - I can think of namespaces as a Virtual cluster inside of a Kubernetes Cluster 
+
+  ----4 Namespaces per Default----
+  - kubectl get namespace : To get name space
+
+  1. kube-system : 
+    - Not mean for use 
+    - The component that are deployed in a namespace are the system processes that are from the control plane managing processes or Kubectl etc ...
+
+  2. kube-public : 
+    - kubectl cluster-info
+    - Publicly accessible data
+    - Configmap which contains cluster infomation which is accessible even without authentication 
+    
+  3. kube-node-lease : 
+    - Heartbeats of Nodes 
+    - Each Node has associated lease object in namespace
+    - Determines the availability of a Node  
+  
+  4. default : 
+    - Is the one I will use to create the resources at the beginning if I haven't created a new namespace
+    - I can add a new namespace : kubectl create namespace <namespace-name>
+    - Using configuration file to create namespace : better way
+```
+
+**What need for Namespace ?**
+```
+```
