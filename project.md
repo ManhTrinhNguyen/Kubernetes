@@ -35,3 +35,34 @@
     - port : Service Port
     - targetPort: Container of Deployment 
 ```
+
+**4. Create Mongo Express Deployment (External Configuration where will put DB in MongoDB)**
+```
+  - Use configmap inside the deployment is : configMapKeyRef
+```
+
+**5. Create Configmap**
+```
+  - External Configuration
+  - Centralized
+  - Other component can use it
+  - So if I have 2 Application they are using MongoDB then I can just reference that external Configuration. And if i have to change it I will change it in 1 place . Nothing get updated
+
+  kind: Configmap
+  metadata/name: a random name
+  data: The actual content in key-value pair
+```
+
+**Create external Service to access mongo express from browser**
+```
+  To expose the service externally 
+  - type: LoadBalancer : Assign service an external IP address and so accepts external request
+  - nodePort: Port for external IP address must be between 30000-32767
+  - ClusterIP: same as internal service type, is default
+    - ClusterIP will give the Service an internal IP
+    - And LoadBalancer will also give Service an internal IP and also give Service external IP
+
+  In Minikube :
+    minikube service <service name> : Assign external service a public IP
+    - When command executed Minikube create a tunnel and use localhost http://127.0.0.1 instead of real public IP
+```
