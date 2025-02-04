@@ -39,7 +39,7 @@
     - targetPort: Container of Deployment 
 ```
 
-**4. Create Mongo Express Deployment (External Configuration where will put DB in MongoDB)**
+**4. Create Mongo Express Deployment (External Configuration where will put Data into MongoDB)**
 ```
   - Use configmap inside the deployment is : configMapKeyRef
 ```
