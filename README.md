@@ -253,4 +253,56 @@ Statefull set:
 
 **What need for Namespace ?**
 ```
+  1. Frist use case is 'Following' 
+    - If I create all my resources in that default namespace with my complex Application that have multiple deployment replicas of many pods and I have resources etc ... Very soon my namespace will fill with different component and it will very difficult to have an overview of what is in there 
+    - Better way is to group resources into namespace 
+    - For example : I have DB namespace where I deploy all my DB resources or Mornitoring namepsace where I deploy Mirnitoring resources I need 
+
+  2. Second use case is 'Multiple team conflict': 
+    - Use namespace to avoid conflict so each team can work in their own namespace 
+
+  3. Resource Sharing: Staging and Development 
+    - If I have 1 cluster and I want to host staging and Development . I can deploy in 1 cluster and use it for both environment. That way I don't have to deploy common resources twice . So now Staging can use both resources as well as Development
+
+    - Blue/Green deployment : Mean in the same cluster I want to have 2 different version production . One is in production now and other one will be the next production the verison of those 2 applications will be different but those 2 still need to use the same resources with that they can use both resources without set up another cluster 
+
+  4. Access and Resources Limit on Namespace 
+    - When I have 2 team working on the same cluster each one of them have their own namespace . So I can give a team access to only their namepsace so they can CRUD resources on their own namespace 
+    - Limit the resources each team consume . Limit CPU, RAM, Storage per Namespace
+
+  ----Wrap up----
+  1. Structure Component 
+  2. Avoid Confict between team
+  3. Share services between differnt Environment
+  4. Access and Resources Limits on Namespaces Level 
+
+  !!! NOTE : I Can't access most of resources from another namespace like: ConfigMap, Secret 
+  !!! NOTE : Resources can share is Service
+  !!! NOTE : Live globally in cluster and can't isolate them : Persistence volumne and node 
+
+    - I can list components there is not bound to a namespace using : kubectl api-resources --namespaced=false and vice versa kubectl api-resources --namespaced=true
+```
+
+**2 ways to create namepsace**
+```
+   - kubectl apply -f <yaml file> --namepsace=my-name-space
+
+   - In the configuration file : 
+      - Under metadata: 
+        - namespace: my-namespace
+
+   - Get configuration from namespace is : kubectl get configmap -n <my-namespace> 
+```
+
+**Change Active namespace**
+```
+  - To change default namepsace to whatever namepsace i choose 
+
+  kubectl config set-context --current --namepsace=my-namepsace
+
+  There also a tool call kubens but I have to install separtely
+
+  brew install kubectx 
+
+  https://github.com/ahmetb/kubectx
 ```
