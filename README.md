@@ -439,6 +439,15 @@ Statefull set:
   - So entry point become the Load Balancer first and it can then direct the traffic to NodePort and ClusterIP
 ```
 
+**Wrap Up**
+```
+  NodePort Service not for external connection
+
+  I would have Ingress for external connection OR
+
+  I would have Load Balancer for external connection
+```
+
 
 
 
