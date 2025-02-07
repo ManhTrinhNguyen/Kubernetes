@@ -326,7 +326,13 @@ Statefull set:
 ```
 
 **ClusterIP Services**
+```
+  - Default type of Service
 
+  ----How it is work and where it is used ?----
+
+  - When I have Microservice deployed on the cluster -> A Pod with Micro container running inside -> Beside that Micro container I have side-car container that collects logs of Micro and then send that to DB -> Micro container run at Port 3000 and Loggin container run at Port 9000 -> Pod also get an IP address from range that is assigned to Node . If I have 3 worker nodes (3 servers) in my Kubernetes cluster each worker node will get a range of IP address which are internal in the cluster -> If Replica count to 2 we gonna have another Pod which identical to the first one, which will open to the same port and it will get different IP address -> If Micro accessible from Browser so I have Ingress configured and the Request coming in from Browser to the Micro service will be handle by Ingress -> The incoming request get forward from Ingress to the Pod through Service (ClusterIP or Internal Service) 
+```
 
 
 
