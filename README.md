@@ -2,7 +2,7 @@
 
 ## Big Picture 
 
-**What is Kubernetes ?**
+**What is Kubernetes ?** 
   - Open source container tool developed by Google
   - Kubernetes help manage Applications that are that made up of hundreds or maybe thousands of Containers in the Differents Environment like ( Physical Machine, Virtual Machine, or Cloud Enviroment)
 
