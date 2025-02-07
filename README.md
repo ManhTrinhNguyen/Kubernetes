@@ -361,8 +361,8 @@ Statefull set:
 
 **Service Communication Example**
 
-<img width="954" alt="Screenshot 2025-02-07 at 11 27 25" src="https://github.com/user-attachments/assets/5b4ec13e-6ebc-44bc-a34c-164988d80464" />
 
+<img width="500" alt="Screenshot 2025-02-07 at 11 32 03" src="https://github.com/user-attachments/assets/46dd9ec2-dda7-4f91-8503-5ba18a364086" />
 
 
 
