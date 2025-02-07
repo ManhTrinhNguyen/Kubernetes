@@ -361,8 +361,14 @@ Statefull set:
 
 **Service Communication Example**
 
+    <img width="600" alt="Screenshot 2025-02-07 at 11 32 03" src="https://github.com/user-attachments/assets/46dd9ec2-dda7-4f91-8503-5ba18a364086" />
 
-<img width="600" alt="Screenshot 2025-02-07 at 11 32 03" src="https://github.com/user-attachments/assets/46dd9ec2-dda7-4f91-8503-5ba18a364086" />
+```
+  Let's say Microservice Applications using MongoDB
+
+  - I have 2 Repilica of MongDB in the cluster which also have Service Endpoint (ClusterIp) and the Service has its own IP address 
+  - Now the microservice application inside the pod can talk to the MongoDB also using Service endpoint so the request will come from one of the Pod that get request from the Service to the MongoDB service at Service of MongDB IP address and the Port the Service has open then Service will again select one of those Pod Replica and forward those request to the Selected Pods at the Port 
+```
 
 
 
