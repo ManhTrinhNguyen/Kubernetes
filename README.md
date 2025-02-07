@@ -309,3 +309,39 @@ Statefull set:
 
   https://github.com/ahmetb/kubectx
 ```
+
+## Services 
+
+**What is Services and Why do we need it ?**
+
+```
+  - Each Pod has its own IP address. But Pod easy to die and everytime it regenerate it will create new IP address which is so inconvinience bcs I have to input that new IP address to connect to other pod
+  - Stable IP address : 
+    - With Service We have solution of stable or static IP address. That stay even when the pod died
+    - In front of each pod I set a Service which represent a persistent stable IP address access this Pod
+  - Load Balancer :
+    - Service also provide Load Balancing Bcs when I have Pod Replica (let's say 3 Repilica) the Service basically get each request target to those 3 Repilica Pod and forward to one of those Pod so client can call 1 single IP address instead of calling each pod individually
+  - Loose Coupling:
+    - Service are good abstraction ofr loose coupling communication within a cluster . So within cluster, components or pods inside the cluster also from external services like if I have browser request coming to a cluster or if you talking to external DB 
+```
+
+**ClusterIP Services**
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
