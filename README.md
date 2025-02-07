@@ -378,6 +378,7 @@ Statefull set:
   - Inside the MongoDB Pods, there is another container running that select the monitoring metrics for Prometheus that would be MongoDB exporter
   - And that container run at Port 9216
   - In the cluster , We have Prometheus Application that scrapes the metric endpoints from this MongoDB exporter container from this endpoint. That mean that service has to handle two different endpoints request which also mean that service has two of its own port open for handling these two different request -> 1 from client that request to MongoDB and 1 from the client like Prometheus that want to talk to the MongoDB exporter Application . So that is Multi-Port Service
+
   - So when I have Multi-Port in 1 Service . I have to Name those Port 
 ```
 
@@ -404,7 +405,38 @@ Statefull set:
   !!! When we deploy Stateful Application in the Cluster like MongoDB . We have ClusterIP Service (Do loadbalancing stuff, ...) and along side with Headless Service (Client need to communicate to one of those Pod directly)
 ```
 
+**Node Port Services**
 
+<img width="600" alt="Screenshot 2025-02-07 at 13 46 24" src="https://github.com/user-attachments/assets/d33c50a1-a608-4eef-b4a2-610cf7343fd8" />
+
+```
+  - When we define Service Configuration , we can specify the type of the Service
+  - 3 Type Attribute : ClusterIP, NodePort, Load Balancer
+
+  - Type Node Port Services is create a service that is accessible on a static port on each worker node in the cluster
+
+  ----To compare Cluster IP and Node Port----
+  - The ClusterIP service is only accessible within the cluster itself so no external traffic can directly address Cluster IP
+  - The NodePort Service makes the external Service accessible on static or fixed port on each worker Node
+    - So instead of Ingress Browser will request directly to the Worker Node at the Port that the Service Specification define
+    - And the Port that node Port service type expose is defined in the Node Port attributed
+    - Nodeport predefine value has range 30000 - 32767
+```
+
+**Load Balancer Services**
+  <img width="600" alt="Screenshot 2025-02-07 at 13 56 55" src="https://github.com/user-attachments/assets/c85cc99e-f80b-4f06-87e7-5a33de956440" />
+
+```
+  - Service become accessible externally through a cloud provider load balancer functionallity
+  - Each cloud provider has its own native load balancer implementation and that is created and used whenever we created a load balancer service type
+  - Whenever we create Load Balancer service, Nodeport and clusterIP service are created automatically by Kubernetes to which the external load balancer of the cloud platform will route the traffic to
+
+  ----How to define Load Balancer?----
+  - Type: Load Balancer
+  - Port of the Service (Cluster IP Service)
+  - nodePort: Port open on Worker Node but it is not directly accessible externally but only through the Load Balancer itself
+  - So entry point become the Load Balancer first and it can then direct the traffic to NodePort and ClusterIP
+```
 
 
 
