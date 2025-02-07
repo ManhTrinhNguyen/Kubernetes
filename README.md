@@ -339,8 +339,19 @@ Statefull set:
   - A Services in Kubernetes is a component just like a pod but it is not process . It is a abtraction layer that basically represent an IP address . So Service will get an IP address that it is accessible at also be accessible at certion port (Let's say at 3200) . So Ingress will talk to a Service or hand over the request to the service at this IP address at this Port
 
   - So the way it work is I define Ingress rule that forward the request based on the request address to certain services and we define the services by its name and the DNS resolution then map Service name to IP address that this service actually got assigned  So this is how Ingress knows how to talk to a Service
-``` 
 
+  - Once the request hand over Service at this address and then Service will know to forwards this request to one of those pods that register at service endpoint
+```
+
+**How does Service know which Pods to forward the request to and which Ports to forward it to ?**
+
+<img width="621" alt="Screenshot 2025-02-07 at 11 17 05" src="https://github.com/user-attachments/assets/e225ed02-7733-477f-8523-52694a1a15f4" />
+
+```
+- Service know which Pods bcs of Seletor :
+  - Pod identified via Selector
+  - Key-Value pair defined in Selector (Lable of the Pod)
+```
 
 
 
