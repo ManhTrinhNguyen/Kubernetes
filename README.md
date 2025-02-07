@@ -424,6 +424,7 @@ Statefull set:
 ```
 
 **Load Balancer Services**
+
   <img width="600" alt="Screenshot 2025-02-07 at 13 56 55" src="https://github.com/user-attachments/assets/c85cc99e-f80b-4f06-87e7-5a33de956440" />
 
 ```
