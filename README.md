@@ -381,6 +381,28 @@ Statefull set:
   - So when I have Multi-Port in 1 Service . I have to Name those Port 
 ```
 
+**Headless Service**
+
+<img width="600" alt="Screenshot 2025-02-07 at 12 27 03" src="https://github.com/user-attachments/assets/7c07a5cc-e0a7-4379-b61b-d4eda7152476" />
+
+```
+  - Client  want to communicate with 1 Specific Pod directly
+  - Or Pod want to talk directly with specific Pod
+  - Not randomly selected
+
+  ----Use case----
+  - Deploy Statefull Application like DB -> Pod replica are not indentical -> Each one has individual state and characteristic
+
+  - Client need to figure out IP address of each Pod
+    - Option 1 : API call to K8s API Server ?
+    - Option 2 : DNS lookup
+      - DNS lookup Service - return single IP address (ClusterIP)
+      - However if I set ClusterIP : none it will return the Pod IP address instead of the service
+
+  !!! So the way to defined Headless Service is to set ClusterIP : none
+
+  !!! When we deploy Stateful Application in the Cluster like MongoDB . We have ClusterIP Service (Do loadbalancing stuff, ...) and along side with Headless Service (Client need to communicate to one of those Pod directly)
+```
 
 
 
