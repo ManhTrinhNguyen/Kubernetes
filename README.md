@@ -326,6 +326,9 @@ Statefull set:
 ```
 
 **ClusterIP Services**
+
+<img width="822" alt="Screenshot 2025-02-07 at 11 04 08" src="https://github.com/user-attachments/assets/2a88c861-5fe9-44a3-82ea-8b96a1025da7" />
+
 ```
   - Default type of Service
 
