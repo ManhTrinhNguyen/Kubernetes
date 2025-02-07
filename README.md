@@ -327,7 +327,7 @@ Statefull set:
 
 **ClusterIP Services**
 
-<img width="822" alt="Screenshot 2025-02-07 at 11 04 08" src="https://github.com/user-attachments/assets/2a88c861-5fe9-44a3-82ea-8b96a1025da7" />
+<img width="600" alt="Screenshot 2025-02-07 at 11 04 08" src="https://github.com/user-attachments/assets/2a88c861-5fe9-44a3-82ea-8b96a1025da7" />
 
 ```
   - Default type of Service
@@ -345,7 +345,7 @@ Statefull set:
 
 **How does Service know which Pods to forward the request to and which Ports to forward it to ?**
 
-<img width="954" alt="Screenshot 2025-02-07 at 11 27 25" src="https://github.com/user-attachments/assets/d75e6041-c6e5-43d0-80aa-726af23b0948" />
+<img width="600" alt="Screenshot 2025-02-07 at 11 27 25" src="https://github.com/user-attachments/assets/d75e6041-c6e5-43d0-80aa-726af23b0948" />
 
 ```
 - Service know which Pods bcs of Seletor :
@@ -362,7 +362,7 @@ Statefull set:
 **Service Communication Example**
 
 
-<img width="500" alt="Screenshot 2025-02-07 at 11 32 03" src="https://github.com/user-attachments/assets/46dd9ec2-dda7-4f91-8503-5ba18a364086" />
+<img width="600" alt="Screenshot 2025-02-07 at 11 32 03" src="https://github.com/user-attachments/assets/46dd9ec2-dda7-4f91-8503-5ba18a364086" />
 
 
 
