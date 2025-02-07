@@ -34,6 +34,9 @@
 ```
 
 **Service and Ingress**
+
+<img width="749" alt="Screenshot 2025-02-07 at 09 59 08" src="https://github.com/user-attachments/assets/36dc3565-2569-4dac-8311-590978d46ded" />
+
 ```
   Service:
     - Service is Static IP address or permanent IP can be attach to each Pod
