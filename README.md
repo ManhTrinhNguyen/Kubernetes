@@ -371,10 +371,14 @@ Statefull set:
 ```
 
 **Multi Port Service**
+
+<img width="600" alt="Screenshot 2025-02-07 at 12 16 54" src="https://github.com/user-attachments/assets/5f7582c8-4d9f-4bcb-a9b8-8a0089ec3334" />
+
 ```
   - Inside the MongoDB Pods, there is another container running that select the monitoring metrics for Prometheus that would be MongoDB exporter
   - And that container run at Port 9216
-  - In the cluster , We have Prometheus Application that scrapes the metric endpoints from this MongoDB exporter container from this endpoint. That mean that service has to handle two different endpoints request which also mean that service has two of its own port open for handling these two different request
+  - In the cluster , We have Prometheus Application that scrapes the metric endpoints from this MongoDB exporter container from this endpoint. That mean that service has to handle two different endpoints request which also mean that service has two of its own port open for handling these two different request -> 1 from client that request to MongoDB and 1 from the client like Prometheus that want to talk to the MongoDB exporter Application . So that is Multi-Port Service
+  - So when I have Multi-Port in 1 Service . I have to Name those Port 
 ```
 
 
