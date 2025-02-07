@@ -345,13 +345,26 @@ Statefull set:
 
 **How does Service know which Pods to forward the request to and which Ports to forward it to ?**
 
-<img width="621" alt="Screenshot 2025-02-07 at 11 17 05" src="https://github.com/user-attachments/assets/e225ed02-7733-477f-8523-52694a1a15f4" />
+<img width="954" alt="Screenshot 2025-02-07 at 11 27 25" src="https://github.com/user-attachments/assets/d75e6041-c6e5-43d0-80aa-726af23b0948" />
 
 ```
 - Service know which Pods bcs of Seletor :
   - Pod identified via Selector
   - Key-Value pair defined in Selector (Lable of the Pod)
+
+- If a Pod has multiple Ports. How do Service know which port to forward to
+  - Defined in "targetPort" atrribute
+
+  ----Service Endpoint----
+  - When I create Service K8 create endpoints object that has the same name as Service itself . K8 will use this to keep track of which Pods are members of Services or Which Port are endpoint of the Service 
 ```
+
+**Service Communication Example**
+
+<img width="954" alt="Screenshot 2025-02-07 at 11 27 25" src="https://github.com/user-attachments/assets/5b4ec13e-6ebc-44bc-a34c-164988d80464" />
+
+
+
 
 
 
