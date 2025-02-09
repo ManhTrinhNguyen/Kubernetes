@@ -457,9 +457,17 @@ Statefull set:
 ```
 
 **Yaml File syntax**
+
 <img width="505" alt="Screenshot 2025-02-09 at 13 05 50" src="https://github.com/user-attachments/assets/8d9f82f4-7850-4c4d-9c6b-383c730b30c4" />
 
 ```
+  apiVersion: networking.k8.io/v1
+  kind: Ingress
+  metadata:
+    name: myapp-ingress
+  # Routing rules
+  spec:
+    rules: 
 ```
 
 
