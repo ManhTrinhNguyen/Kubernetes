@@ -457,9 +457,6 @@ Statefull set:
 ```
 
 **Yaml File syntax**
-
-<img width="505" alt="Screenshot 2025-02-09 at 13 05 50" src="https://github.com/user-attachments/assets/8d9f82f4-7850-4c4d-9c6b-383c730b30c4" />
-
 ```
   apiVersion: networking.k8.io/v1
   kind: Ingress
@@ -468,7 +465,9 @@ Statefull set:
   # Routing rules
   spec:
     rules:
-      # The main address or all the requests to this host must be foward to a internal Service
+      // The main address or all the requests to this host must be foward to a internal Service
+      # This should be a valid domain address
+      # Should map domain name to IP address which is the entrypoint 
       - host: myapp.com
         # This http is Incoming request get forward to internal-service 
         http:
@@ -476,6 +475,7 @@ Statefull set:
               # URL path . Everything after the domain name 
             - path: /
               pathType: Prefix
+              # Backend is a target where the request, the incoming request will be redirected and the service name should corespond the internal-service and the port should be internal service port 
               backend:
                 service:
                   name: my-app-internal-service
