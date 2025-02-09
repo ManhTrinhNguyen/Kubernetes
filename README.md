@@ -467,7 +467,20 @@ Statefull set:
     name: myapp-ingress
   # Routing rules
   spec:
-    rules: 
+    rules:
+      # The main address or all the requests to this host must be foward to a internal Service
+      - host: myapp.com
+        # This http is Incoming request get forward to internal-service 
+        http:
+          paths:
+              # URL path . Everything after the domain name 
+            - path: /
+              pathType: Prefix
+              backend:
+                service:
+                  name: my-app-internal-service
+                  port:
+                    number: 8080
 ```
 
 
