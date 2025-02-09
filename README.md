@@ -448,6 +448,19 @@ Statefull set:
   I would have Load Balancer for external connection
 ```
 
+## Ingress 
+
+**External Service and Ingress**
+```
+  - User Ingress instead of external Service I would instead have internal Service
+  - I would not open to the Browser through a IP address and Port 
+```
+
+**Yaml File syntax**
+<img width="505" alt="Screenshot 2025-02-09 at 13 05 50" src="https://github.com/user-attachments/assets/8d9f82f4-7850-4c4d-9c6b-383c730b30c4" />
+
+```
+```
 
 
 
