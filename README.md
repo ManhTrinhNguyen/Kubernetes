@@ -593,10 +593,42 @@ Statefull set:
 
   - In the Peristent Volumne Spec section I can define which storage backend I want to use to create storage abstraction or storage resources for application
 
-  - Depend on storage type, Spec attribute will be different 
+  - Depend on storage type, Spec attribute will be different
+
+  - Peristence Volume are not namespace -> Their accessible to the whole cluster
 ```
 <img width="400" alt="Screenshot 2025-02-10 at 13 00 19" src="https://github.com/user-attachments/assets/b20ff559-a96a-478b-b9e4-eb0eb3861086" /> <img width="400" alt="Screenshot 2025-02-10 at 13 00 51" src="https://github.com/user-attachments/assets/05bd1a28-1041-4344-823a-138af6d1602e" /> <img width="400" alt="Screenshot 2025-02-10 at 13 07 31" src="https://github.com/user-attachments/assets/23053794-eb78-4a7d-801f-2f31c65091a3" />
 
+**Local and Remote volumes Type**
+```
+  - Local volume type is violate 2/ 3/ requirment for data persistence:
+    -- Being tied to 1 specificed Node
+    -- Not survive when cluster crashed
+    -- Should alway use remote storage 
+```
+
+**Who create peristen volume and when?**
+```
+  - Persistence volumne are Resources need to be there BEFORE then the Pod depend on it created
+
+  ----K8s Administator and K8s User----
+  - K8s Administator will set up cluster and maintain it . Make sure cluster has enough resources
+    - K8s Admin will configure actual storage
+    - Create the PV components from these storage backends
+
+  - K8s User deploy K8s applications directly or through CI/CD pipelines
+    - K8s User will configure Applications base on the Storage K8 admin provioned
+    - In other words Applications have to claim that Persistence Volume . To do that I use PVC (Persistent Volume Claim)
+```
+
+**Peristence Volume Claim**
+
+<img width="600" alt="Screenshot 2025-02-10 at 13 50 00" src="https://github.com/user-attachments/assets/26632c0f-1c63-4cd4-9dfe-a697519bd945" />
+
+```
+  - Created by Yaml configuration
+  - PVC claim a volume with certain storage size or capacity which is define in the persistent volume claim . and some additional characteristic like access type like Readonly ReadWrite etc... whatever PV match this criteria or sastisfy this claim will be used for the Application then I have to use that claim in Pod configuration . So in the Pod specification here, I have the volume attribute that references the persistent volume claim with its name so now the pod and all the container inside the pod will have access to Peristent volumne
+```
 
 
 
