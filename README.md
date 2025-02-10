@@ -648,8 +648,19 @@ Statefull set:
 
 <img width="600" alt="Screenshot 2025-02-10 at 14 51 26" src="https://github.com/user-attachments/assets/c41a3d09-6bf0-4aec-964f-5aecea823fe1" />
 
+**Wrap up**
 
+<img width="600" alt="Screenshot 2025-02-10 at 15 03 44" src="https://github.com/user-attachments/assets/5af710fe-b7c8-4ce2-9771-d10717d084c7" />
 
+```
+  - In the volumes : Specify what volume to provide
+  - In the container : Where to mount those in the container
+      - mouthPath : The path to mount the volume into inside the container
+
+  !!! Note : Pod can use multiple Volumne of different Type  
+```
+
+<img width="600" alt="Screenshot 2025-02-10 at 15 09 34" src="https://github.com/user-attachments/assets/c0405b4b-3006-41b0-ba2e-af81d239a808" />
 
 
 
