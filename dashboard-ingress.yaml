@@ -3,5 +3,16 @@ kind: Ingress
 metadata: 
   name: dashboard-ingress
   namespace: kubernetes-dashboard
-spec: 
+spec:
+  rules:
+  - host: dashboard.com
+    http:
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: kubernetes-dashboard
+              port:
+                number: 80
   

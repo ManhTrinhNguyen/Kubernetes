@@ -515,7 +515,9 @@ Statefull set:
   Step 2: Create Ingress rule that the controll can evaluate
     - Enabling the Minikube dashboard: minikube dashboard -> this will set up dashboard in my environtment and open up in a new browser window for us to access internally when it ready
   Step 3: kubectl get all -n kubernetes-dashboard ---- Show me all the components I have in kubernetes-dashboard
-  Step 4: Create Ingress rule 
+  Step 4: Create Ingress rule -> Then apply ingress rule : kubectl apply -f dashboard-ingress.yaml 
+  Step 5: kubectl get ingress -n kubenertes-dashboard -> to see my Ingress 
+
 ```
 
 
