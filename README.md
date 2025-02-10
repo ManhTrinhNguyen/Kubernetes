@@ -554,6 +554,46 @@ Statefull set:
 
 <img width="600" alt="Screenshot 2025-02-10 at 12 01 18" src="https://github.com/user-attachments/assets/ba42cc09-33cb-4e7f-b8e3-d84871a42447" />
 
+## Kubernetes Volumes 
+
+**3 Components of Kubernetes Storage : Persisten Volume, Persisten Volume Claim, Storage Class**
+
+**The needs of Volumes**
+```
+  - If the Pod died and restart . All the data in that pod will be gone . So I need volumes
+
+  ----Storage Requirment----
+  - I need storage that doesn't depend on the Pod lifecycle to store data
+  - Storage must be available on all Node in the cluster
+  - Storage need to survive even whole cluster crash
+
+  ----Another Use Case is a Directory----
+  - Maybe I have Apps that writes and read files from pre-configured directory . This could be session file for Apps or configuration file etc.... 
+```
+
+**Persist Volumne**
+
+<img width="600" alt="Screenshot 2025-02-10 at 12 42 38" src="https://github.com/user-attachments/assets/ddf100b0-6f6b-4566-b2d7-571e0fa91f60" />
+
+```
+  - Peristent Volume is like cluster Resource like RAM, CPU to store data
+  - Create Persistent Volumne by using Kubernetes Yaml file
+  - Persitent Volume is just an abstract component . It need physical Storage like : local hardrive, nfs server, or cloud storage ....
+
+  ----Where does this storage come from and who makes it available to  cluster?----
+  - K8's doesn't care about what actual physical store is
+  - I have to decide what type of storage my cluster services or application would needs and create and manage them myself .
+  - Managing meaning do backup, and make sure they don't get corrupt ...etc
+
+  - So storage in Kubernetes is an external plugin to my cluster . Whether it local storage (on actual node where cluster running) or remote storage
+
+  - I can have multiple storages configured for my cluster .
+
+  - By creating persistent volumne I can use this actual physical storage
+
+  - In the Peristent Volumne Spec section I can define which storage backend I want to use to create storage abstraction or storage resources for application
+```
+
 
 
 
