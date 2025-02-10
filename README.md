@@ -517,7 +517,22 @@ Statefull set:
   Step 3: kubectl get all -n kubernetes-dashboard ---- Show me all the components I have in kubernetes-dashboard
   Step 4: Create Ingress rule -> Then apply ingress rule : kubectl apply -f dashboard-ingress.yaml 
   Step 5: kubectl get ingress -n kubenertes-dashboard -> to see my Ingress 
+      -- The Address in my ingress would be the address that would map to the host dashboard.com -> But minikube work different . For demo I will use the localhost address of 127.0.0.1 as a replacment to complete the ingress step instead of the Address
+      -- Go to /etc/hosts -> 127.0.0.1  dashboard.com
+      -- Which mean that the Request will come to Minikube cluster will be hand over to Ingress controller and Ingress controller will go and evaluate the rule that we defined and finally foward that rerquest to Service
+  Step 6 : run minikube tunnel
+      -- Tunnel specific to Minikube
+      -- Minikube tunnel is a process will map this local address to a Service for Ingress 
+      -- If I were set up in the Traditional Kubernetes Environment on the cloud platform I just need to put the assign IP address IP address to our host file 
+```
 
+**Ingress Default Backend**
+
+<img width="585" alt="Screenshot 2025-02-10 at 11 39 40" src="https://github.com/user-attachments/assets/8dac2513-0994-4f41-81e3-8d4f7200ff81" />
+
+```
+  - kubectl describe ingress dashboard-ingress -n kubernetes-dashboard
+  - There is a default backend 
 ```
 
 
