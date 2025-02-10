@@ -593,6 +593,9 @@ Statefull set:
 
   - In the Peristent Volumne Spec section I can define which storage backend I want to use to create storage abstraction or storage resources for application
 ```
+<img width="300" alt="Screenshot 2025-02-10 at 13 00 19" src="https://github.com/user-attachments/assets/b20ff559-a96a-478b-b9e4-eb0eb3861086" /> <img width="300" alt="Screenshot 2025-02-10 at 13 00 51" src="https://github.com/user-attachments/assets/05bd1a28-1041-4344-823a-138af6d1602e" />
+
+
 
 
 
