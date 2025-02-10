@@ -486,19 +486,35 @@ Statefull set:
 **How to configure Ingress in the Cluster**
 ```
   - Need a Implementation for Ingress call Ingress Controller
-  - Step 1 : Install an Ingress Controller
+  - Step 1 : Install an Ingress Controller : https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/
     - Which is basically another Pod or another set of Pod that run on My Node and does evaluation and processing of Ingress rule
     - Ingress Controller is to evaluate all the rules that I have define in my Cluster, and this way to manage all the redirections -> This will be a Entrypoint for the Cluster request to that domain or subdomain rules that I have configured . And this evaluate all the rule 
 ```
 
 **Consider Environment on which your cluster run**
+
+<img width="600" alt="Screenshot 2025-02-09 at 13 57 53" src="https://github.com/user-attachments/assets/018d0cef-802a-43c1-ae55-57c6c59d0194" />
+
 ```
   ---Things need to understand for setting up whole cluster to be able to recive external request---
 
   1. Consider The Eviroment where K8 is running
-    - Cloud Provider 
+    - Cloud Provider: Have their own K8's solution and their own virtualization load balancer
+      - I would have Cloud load Balancer that is specificlly implemented by cloud provider and external request will first hit  a load balancer and the balancer will redirect the request to ingress controller
+    - In Bare Metal Environment : I would have to do that part myself . I need to configure some kind of entrypoint myself
+      - Use Proxy Server that will take a role to of that load balancer
+      - I have seperate Server, Give it Puplic IP address, open port in order for the request to be accepted, and this proxy server will act as a entry point to my cluster
+
+  ----Wrap up----
+  - External Request -> proxy server or cloud provider load balancer -> Ingress controller -> Decide which Ingress rule to that specific request 
 ```
 
+**Ingress Controller in Minikube**
+```
+  Step 1. Install Ingress controller on Minikube : minikube addons enable ingress
+  Step 2: Create Ingress rule that the controll can evaluate
+    - Enabling the Minikube dashboard: minikube dashboard -> this will set up dashboard in my environtment and open up in a new browser window for us to access internally when it ready 
+```
 
 
 
