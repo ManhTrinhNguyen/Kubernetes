@@ -635,9 +635,15 @@ Statefull set:
 <img width="600" alt="Screenshot 2025-02-10 at 14 22 49" src="https://github.com/user-attachments/assets/de0ff827-906c-4a4f-b619-02f9a464489e" />
 
 ```
-  Pod request Volume through PVC (Persistent Volume Claim) -> PVC will try to find a PV (Persistence Volumn) in the cluster that sactify the PVC -> The PC that has the backend Storage that it will create Storage Resources from
+  - Pod request Volume through PVC (Persistent Volume Claim) -> PVC will try to find a PV (Persistence Volumn) in the cluster that sactify the PVC -> The PC that has the backend Storage that it will create Storage Resources from
 
-  !!! NOTE : PVC must be in the same namespace as the Pod using PVC 
+  !!! NOTE : PVC must be in the same namespace as the Pod using PVC
+
+  - Once the Pod finds matching persistence Volume through PVC -> The Volume is then mounted into the Pod -> then Volume can be mounted into the Container inside the Pod -> Now the container can read and write to the Storage and when the pod die new one get created it will have access to the same storage and see all the change the previous Pod or previous container made
+
+  ----Why so many Abstraction?----
+  - The benefits is as a K8 user or developer when I create cluster I don't care where the actual volume is
+  - Don't want to setup actual storage 
 ```
 
 
