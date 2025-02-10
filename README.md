@@ -528,14 +528,21 @@ Statefull set:
 
 **Ingress Default Backend**
 
-<img width="585" alt="Screenshot 2025-02-10 at 11 39 40" src="https://github.com/user-attachments/assets/8dac2513-0994-4f41-81e3-8d4f7200ff81" />
+<img width="961" alt="Screenshot 2025-02-10 at 11 48 51" src="https://github.com/user-attachments/assets/cf5e73ce-a0f8-4d93-b4dc-2e607123f44b" />
 
 ```
   - kubectl describe ingress dashboard-ingress -n kubernetes-dashboard
-  - There is a default backend 
+  - The attribute default backend that map to attribute default backend port 80 -> What is mean is that whenever the request come in to Kubernetes cluster that is not mapped to any backend so no rule for mapping that request to a service then this default backend is used to handle that request . If I don't have this service created or defined in my cluster, Kubernetes will try to forward it to Service, it won't find i will get default error
+
+  ----Good Use----
+  - To define custom error messages when a page isn't find, when request coming in i can handle
+
+  - So I have to create a Internal Service, Default backend and port number, and also the pod or application that sends that error custom response 
 ```
 
+**Multiple path for the same host**
 
+<img width="600" alt="Screenshot 2025-02-10 at 11 54 54" src="https://github.com/user-attachments/assets/b61a6e4f-fe1d-49a0-b0d5-8299e29bcf05" />
 
 
 
