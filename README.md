@@ -630,6 +630,15 @@ Statefull set:
   - PVC claim a volume with certain storage size or capacity which is define in the persistent volume claim . and some additional characteristic like access type like Readonly ReadWrite etc... whatever PV match this criteria or sastisfy this claim will be used for the Application then I have to use that claim in Pod configuration . So in the Pod specification here, I have the volume attribute that references the persistent volume claim with its name so now the pod and all the container inside the pod will have access to Peristent volumne
 ```
 
+**Level of Volume Abstractions**
+
+<img width="600" alt="Screenshot 2025-02-10 at 14 22 49" src="https://github.com/user-attachments/assets/de0ff827-906c-4a4f-b619-02f9a464489e" />
+
+```
+  Pod request Volume through PVC (Persistent Volume Claim) -> PVC will try to find a PV (Persistence Volumn) in the cluster that sactify the PVC -> The PC that has the backend Storage that it will create Storage Resources from
+
+  !!! NOTE : PVC must be in the same namespace as the Pod using PVC 
+```
 
 
 
