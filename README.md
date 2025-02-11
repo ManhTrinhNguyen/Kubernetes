@@ -660,7 +660,52 @@ Statefull set:
   !!! Note : Pod can use multiple Volumne of different Type  
 ```
 
+**Different Volunme in 1 Container**
 <img width="600" alt="Screenshot 2025-02-10 at 15 09 34" src="https://github.com/user-attachments/assets/c0405b4b-3006-41b0-ba2e-af81d239a808" />
+
+**Storage Class**
+
+<img width="500" alt="Screenshot 2025-02-11 at 11 52 31" src="https://github.com/user-attachments/assets/7e95a769-1ebe-474c-b070-deb7d8ae66fd" /> <img width="600" alt="Screenshot 2025-02-11 at 11 58 13" src="https://github.com/user-attachments/assets/4adacde4-99da-412d-8320-b1cb95fc65dc" />
+
+```
+  - To persist data in Kubernetes, admin need to configure storage for the cluster , created PV so Developer can use PVC to claim that storage
+  - But consider cluster where 100 of applications where things get deployed daily and storage is needed for these application so Developer ask Admin to create Volumne they need before deploying them and Admin may have to manually request storage from cloud or storage provider and create 100 of PV for the Apps manually and that can be time consuming, tediuous,
+so to make it more efficent the solution is Storage Class
+
+  - Storage Class create Peristent Volumne dynamically when PVC claim it
+  - Created by using Yaml
+  - Storage Backend is defined in the Storage Class component via Provisioner attr
+  - Provisioner tell Kubernetes which Provisioner to be use for specific storage platform or cloud provider to create PV out of it
+  - Each storage backend has own provisioner
+  - Internal Provisioner - "Kubernetes.io"
+  - other type is External Provisioner
+  - Parameters : Configure for storage we want to request for our Persistent Volumn
+
+  ----Storage Class is another Abstraction Level----
+  - Abstract undelying storage provider
+  - Parameter for storage
+
+  ----Storage Class usage----
+  - Request or claim by PVC 
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
