@@ -712,7 +712,91 @@ so to make it more efficent the solution is Storage Class
 <img width="600" alt="Screenshot 2025-02-11 at 12 51 33" src="https://github.com/user-attachments/assets/4f23ae5c-d4fb-444f-a8e3-f65840253f48" />
 
 
+## Stateful set 
 
+**Stateful Applications**
+```
+  - State Apps like data basis : MongoDb, elasticsearch, MySql ect ... or any applications that store data to keep track of its state .
+  - In other words is the Application that track state by saving that infomation in some storage
+```
+
+**Stateless Applications**
+```
+  - Don't keep record of previous interaction
+  - Each request is completely new | isolated interaction based entirely on the information come with it
+  - Sometime Stateless Apps connect to Statefull Apps to forward those request like 
+```
+
+**Example**
+
+<img width="600" alt="Screenshot 2025-02-11 at 13 17 08" src="https://github.com/user-attachments/assets/803839f5-c6f2-4907-9dc3-b3e731a7dbea" />
+
+```
+  - Nodejs Apps (Stateless )connect to MongoDB database (Statefull)
+  - When request come in Nodejs Apps it doesn't depend on any previous data to handle incoming request
+  - It can handle on the payload of the request itself
+  - Now typical such request will additionally need to update some data in the database or query the data that's where MongoDB comes in
+  - When Nodejs forward the request to mongoDB, mongoDB will update the data based on its previous state or query the data from its storage, for each request it need to handle data and alway depend on data or state to be available
+  - Nodejs is just pass through for data query/update 
+```
+
+**Deploy of Stateful and Stateless applications**
+
+<img width="600" alt="Screenshot 2025-02-11 at 13 30 18" src="https://github.com/user-attachments/assets/46e08802-e740-4a39-99af-7622218a9ce4" />
+
+```
+  - Stateless Apps deploy using Deployment
+
+  - Statefull Apps deploy using Statefullset Component
+    - Just like Deployment . StatefulSet relicate apps pods or to run multiple replica of it
+
+  - They both manage Pods base on the container Specification
+  - Configure Storage the same way
+
+  ----What is the different of Deployment and StatefulSet ?----
+  - Replicate Stateful Apps is more difficult
+  - Statefull Apps has additional requirment that Stateless Apps do not have
+    - Can't be create/delete at the same time
+    - Can't be randomly address
+    - Bcs Replica Pods are not Identical
+    - Pods have their own identity on top of the blueprint of the Pod that they are created from
+    - And giving each pod its own required individual indentity is what StatefulSet does
+```
+
+**Pod identity**
+
+<img width="600" alt="Screenshot 2025-02-11 at 13 38 06" src="https://github.com/user-attachments/assets/f1bc29b3-8c9b-4019-a9b3-afebbb053454" />
+
+```
+  - Sticky identity for each pod
+  - Create from same Specication but they Not interchangeable
+  - Peristent Identifier accross any re-sheduling : Mean when pod died it get replaced by new Pod with the same Indentity
+
+  ----Why is it need Identity ?----
+
+    ----Scaling DB applications----
+      - When I start with Single Mysql Pod I can use for Read/Write data
+      - But then I add the second one it can not act the same way bcs if I let 2 instances of Mysql Write or Change the same data I will end up with data Inconsistence
+      - Instead there is mechanism that decide only 1 pod is allowed to Change or Write the data which is Shared Reading at the same time by multiple Pod .
+      - And the Pod that is allow to Update or Change data is called the main other is call replica
+      - And there are different between those Replicas Pod in term of Storage
+
+    ----Next point of differnt is Storage----
+      - They do not use the same physical storage eventhough they use the same data they are not using the same physical storage data
+      - They each have their own replica of storage that each one of them have access for itself
+      - This mean each Pod replicas at any time must have the same data as the other ones -> To achive that they have to continously syncchronization of the data
+      - Since the Main is the only one can Change data and Replicas need to take care of their own data storage . Replicas must know about each such change so they can update their own data storage to be up to date for the next query request
+
+      ----What happen when new Pod join that existing setup ?----
+      - New Pods also need to create its own Storage and take care of synchronzing it
+      - It first clone the data from previous pod . Once it has up to date data from previous pod . It start continous synchornize as well
+      - It also mean I can have temporary storage theoetically for Statefull Application and not persist the data at all . Since the data get replica between the pod . It just rely on data replication between the pod -> But data will lost when pod die
+      - Therefore it still best practice is using PV (Persistence Volume)
+      - When Pod died or StatefulSet get comepletely wiped out the PV still remain the data Bcs PV lifecycle isn't tied to other component's lifecycle
+
+    -----So I have to configuring PV for my StatefulSet----
+    - Since each pods has its own Storage meaning it's the own persistent volume that is then backed up by its own physical Storage which include the synchoronized data or replica database but also the state of the Pod  
+```
 
 
 
