@@ -689,18 +689,27 @@ so to make it more efficent the solution is Storage Class
   - Request or claim by PVC 
 ```
 
+## ConfigMap & Secret Volumn Type 
+**When to use Configmap and Secret Volumn ?**
+```
+  - Think of Applications that take Configuration as Parameters when they start like Promethus, elastic search, mosquitto ... or Application that have password or sensitive data need to secure
 
+  ----How to pass these config files to Kubernetes Pods?----
+  - ConfigMap and Secret are used for external configuration of individual value
+  - Individual value are used as value for the environment variable
 
+  ----Create files of Configmap and Secrect then mount to the pod and the container----
+```
 
+**Example of Create files of ConfigMap and Secret**
 
+<img width="600" alt="Screenshot 2025-02-11 at 12 17 04" src="https://github.com/user-attachments/assets/5231f362-d997-424b-8456-e54a3ee245ed" />
 
+```
+  - ConfigMap and Secret must be created and exist before Pod start in the cluster 
+```
 
-
-
-
-
-
-
+<img width="600" alt="Screenshot 2025-02-11 at 12 51 33" src="https://github.com/user-attachments/assets/4f23ae5c-d4fb-444f-a8e3-f65840253f48" />
 
 
 
