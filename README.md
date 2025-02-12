@@ -985,8 +985,19 @@ so to make it more efficent the solution is Storage Class
     - And Deployment and Service of each of those microservice are pretty much the same and the different is Application name and verison or docker image name and verison tag
     - Since most value are the same I can use Helm :
       1. To define common blueprint for all MicroServices
-      2. Dynamic Value are replaced by placeholders and that would be Template File 
-```  
+      2. Dynamic Value are replaced by placeholders and that would be Template File
+    - Practical for CI/CD : In Build I can replace Value on the Fly before deployment
+```
+
+**Another Use Case**
+
+<img width="600" alt="Screenshot 2025-02-12 at 12 57 12" src="https://github.com/user-attachments/assets/69034734-a811-4e42-8cd5-00c425e9a3b8" />
+
+```
+  - When I deploy the same Applications accross different Kubernetes Cluster
+  - Consider use Case when I have my MicroService Applications that I want to Deploy on Development, Staging, and Production Cluster
+  - Intead of Deploy the individual yaml files separately in each cluster, you can package them up to make your own application chart, that will have all the necessary yaml files that particular deployment needs. And then to can use them to redeploy the same environment in Kubernetes Cluster 
+```
 
 
 
