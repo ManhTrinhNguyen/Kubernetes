@@ -1032,10 +1032,20 @@ so to make it more efficent the solution is Storage Class
 
   ----Release Managment----
   - Manage by Helm Binary 
-  - The way it works is by using the Helm upgrade and rollback command 
+  - The way it works is by using the Helm upgrade and rollback command
+    - If an update to Helm Chart is Release or if need to change Configuration of my Deployment I can run Helm upgrade
+    - When helm upgrade <chartname> executed : Any Change since installation of the last Release are going to be applied . Simply Remove it and Create new one
+  - If Upgrade go wrong I can rollback with command : helm rollback <chartname>
 ```
 
 
+## Helm Demo Project Managed K8 Cluster 
+
+**Install Statefull App Using Helm**
+
+**Technology Use**
+  - Linode : Cloud platform
+  - Helm K8's cluster
 
 
 
