@@ -845,6 +845,39 @@ so to make it more efficent the solution is Storage Class
   Bcs Statefull App not perfect for containerized Environment 
 ```
 
+## Manage K8 Service 
+
+**Build a Use Case Web App**
+```
+  ----Set Up----
+    - Web app with DB
+    - Available from a Browser https with my domain name
+    - Security Cluster
+    - Data Peristent for DB
+    - Have Dev and PRO Environment so I can test new features before release
+    - Set up as effecicent as possible 
+```
+
+**Managed and UnManaged K8s CLuster**
+```
+  ----Where will my K8s Cluster will be deploy?----
+    - Consider when I want to set up K8s Cluster on cloud platform like Linode . I have 2 options : 
+      1 . Set up from sratch : Spin up 6 Server Instances . Set up Control Plane and Node Worker . I need to manage completely myself
+      2 . Cloud Provider provide Manage Kubernetes Service
+        - I don't have to create Cluster from Sratch
+        - Done Automatically by Cloud Platform
+        - I need to choose how many Worker Node -> Everthing pre-installed included container runtime
+        - Control Plane Nodes created and managed by Cloud Provider
+        - Save time and effort and cost 
+```
+
+**Process**
+
+
+
+
+
+
 
 
 
