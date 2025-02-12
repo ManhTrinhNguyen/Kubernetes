@@ -999,10 +999,19 @@ so to make it more efficent the solution is Storage Class
   - Intead of Deploy the individual yaml files separately in each cluster, you can package them up to make your own application chart, that will have all the necessary yaml files that particular deployment needs. And then to can use them to redeploy the same environment in Kubernetes Cluster 
 ```
 
+## Helm Chart Structure 
 
+<img width="600" alt="Screenshot 2025-02-12 at 13 07 42" src="https://github.com/user-attachments/assets/071e9d29-170c-4ad5-b3e2-66a84d9c81e3" />
 
-
-
+```
+  - Chart is made up of Dir Structure
+  - Top level: name of the chart
+  - chart.yaml: metadata infomation
+  - values.yaml: Values for template files -> default value that I can overwrite
+  - chart folder: Chart dependencies inside
+    - If this chart depend on other charts, then those chart dependencies will be stored here .
+  - Template folder: Acutal template files 
+```
 
 
 
