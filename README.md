@@ -931,14 +931,62 @@ so to make it more efficent the solution is Storage Class
     - And I can do that using Automation tools: Teraform 
 ```
 
+## Helm (Package Manager for K8)
 
+**What is Helm**
+```
+  - Helm is Package Manager for K8
+  - To Package YAML Files and distribute them in public and private Repo
 
+  ----Helm Chart----
+  - Bundle of Yaml File
+  - Using Helm to create Helm Chart
+  - And push to Helm Repository
+  - Or Download and use Existing one
 
+  ----Commonly Use Deployment Repo----
+  - Database Apps: MongoDB, Elastic Search, MySQL, etc ....
+  - Mornitoring Apps 
+```
 
+**Example**
+```
+  - I have deployed my App in K8 cluster and I want to deploy Elastic Search additionally -> That my Cluster use to collect its logs
+  - To Deploy Elastic Search stack in my K8 Cluster I would need couple of K8 Component like :
+    - Statefull Set for Statefull Application
+    - ConfigMap with External Configuration
+    - Secret for Credential or Secrect Data
+    - K8s User with Permissions
+    - and Services
+  - So it take some time to Configure all of that . But Elastic Search deployment is standard accross all Cluster, other people will properly have to go through the same .
+  - So If someone created files once and packaged them up and make it available somewhere who that other people who also use the same kind of deployment could use them in K8 Cluster
+  - And that bundle of Yaml File called Helm Chart
 
+  - Now I have a Cluster I need to deploy third Party Application -> I can look it up
+    - Using CLI: helm search <keyword>
+    - OR Heml'own Public Repo at ArtifactHub
+```
 
+**Public and Private Repo Helm**
 
+```
+  - Public Repo at ArtifactHub
 
+  - Private Repo Helm : Shared  in Origanization . Not Public 
+```
+
+**Second Feature of Helm**
+
+<img width="400" alt="Screenshot 2025-02-12 at 12 25 24" src="https://github.com/user-attachments/assets/1f9ff2c7-d195-4dd8-9f83-9b19f0ff99f0" /> <img width="400" alt="Screenshot 2025-02-12 at 12 26 21" src="https://github.com/user-attachments/assets/338d1c01-06bb-435d-ac86-7cdc91078765" />
+
+```
+  - Templating Engine
+    - Imagine If I have an Applications that made up of multiple MicroServices in my K8 Cluster
+    - And Deployment and Service of each of those microservice are pretty much the same and the different is Application name and verison or docker image name and verison tag
+    - Since most value are the same I can use Helm :
+      1. To define common blueprint for all MicroServices
+      2. Dynamic Value are replaced by placeholders and that would be Template File 
+```  
 
 
 
