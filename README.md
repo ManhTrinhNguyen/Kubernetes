@@ -1010,10 +1010,30 @@ so to make it more efficent the solution is Storage Class
   - values.yaml: Values for template files -> default value that I can overwrite
   - chart folder: Chart dependencies inside
     - If this chart depend on other charts, then those chart dependencies will be stored here .
-  - Template folder: Acutal template files 
+  - Template folder: Acutal template files
+
+  - Install command : helm install <chartname>
+    - When command executed Helm install command to actually deploy those yaml
+    - Template file will be filled with the values from values.yaml, producing Kubernetes manifests that can be deploy to Kubernetes 
 ```
 
+**Values Injection**
 
+<img width="600" alt="Screenshot 2025-02-12 at 14 06 02" src="https://github.com/user-attachments/assets/b6f4f80a-5bac-4137-936e-6fb190761002" />
+
+<img width="600" alt="Screenshot 2025-02-12 at 14 14 55" src="https://github.com/user-attachments/assets/9e1b38a2-4738-48fc-a573-d9fd299106a2" />
+
+```
+  ----Default value can be override----
+    - Can override when execute : helm install --values=my-values.yaml<chartname>
+      --values : with this flag I can provide the alternative value
+    - OR command line : helm install --set verions=2.0.0
+      --set : Can also define value with this flag
+
+  ----Release Managment----
+  - Manage by Helm Binary 
+  - The way it works is by using the Helm upgrade and rollback command 
+```
 
 
 
