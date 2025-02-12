@@ -1047,7 +1047,21 @@ so to make it more efficent the solution is Storage Class
   - Linode : Cloud platform
   - Helm K8's cluster
 
+**Overview**
 
+<img width="600" alt="Screenshot 2025-02-12 at 14 57 36" src="https://github.com/user-attachments/assets/e79a5741-9612-42f1-8597-d855e41c6c8b" />
+
+```
+  - I will deploy a replicated DB and configure its PV and make it accessible from UI client Browser using Ingress
+  - I will use Helm to make process more efficent
+
+  1. Deploy MongoDB in Linode Cluster using Helm 
+  2. Create replicated MongoDB using Statefulset . Also Configure data Persistence for DB using Linode Clould Storage
+  3. Deploy UI client Mongo Express in order to access it from Browser
+  4. For this Client I will configure Niginx Ingress -> Deploy Ingress controller in the cluster and configure Ingress rule in order to demonstrate handling browser request in the cluster
+
+  !!! Almost 100% of this whole setup is what I properly will always need to do when I set up my Kubernetes Cluster 
+```
 
 
 
