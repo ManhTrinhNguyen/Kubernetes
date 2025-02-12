@@ -871,8 +871,21 @@ so to make it more efficent the solution is Storage Class
         - Save time and effort and cost 
 ```
 
-**Process**
+**Process of Managed K8 CLuster**
+```
+  1. Spin up my K8s cluster on cloud
+    - I created Cluster with 3 Worker Node to Deploy my Application 
+    - Choose Work Node and their resources
+    - Select Region/Data center where Worker Node will run
+    - Connect using Kubectl
 
+  2. Data Peristence for my Cluster
+    - If I need 3 replicas DB PV I need Storage for all 3
+    - I need to create physical Storage and make it available for cluster like Database
+    - I need to create Peristence Volume with storage backend
+    - Then I need to attach Volume to DB pod 
+     
+```
 
 
 
