@@ -883,9 +883,71 @@ so to make it more efficent the solution is Storage Class
     - If I need 3 replicas DB PV I need Storage for all 3
     - I need to create physical Storage and make it available for cluster like Database
     - I need to create Peristence Volume with storage backend
-    - Then I need to attach Volume to DB pod 
-     
+    - Then I need to attach Volume to DB pod
+    - If I Use Linode Block Storage I don't need to Create physical storage, create PV ...
+    - I just use Linode's Storage Class and Linode will create the persistent volume with a respective physical storage in the background automatically
+    - And When I deploy my DB Applications the storage will get attach to DB pod
+
+  3. Load balancing K8 cluster
+    - So my Apps.js is running with MongoDB and storaged configured
+    - Now we need Services access from Browser through Ingress
+      - Ingress manage routing of incoming request
+      - Need to install and run Ingress controller in K8 cluster
+      - And configure Ingress routing rules
+
+    ----How does Ingress get incoming request?----
+      - It happen through Linode load balancer which is entrypoint of my cluster
+
+      ----How Load Balancer work?----
+      - Linode load balancer is a load balancer for Worker Node where Nodes are the Linode Server Instances
+      - When I have 2 server Nodes 1 run App.js 1 run MongoDB . and I expose web server using IP address -> So Browser can send request directly to the server -> But it can't scale when I have a lot of traffic to come into App -> Also my app will become unavailable when I need to fix or reboot or reconfigure it
+      - Instead I add the NodeBalancer in front that take incoming request and direct it to the web server -> So NodeBalancer will get public IP address and Web server will be hidden away and accessible only at private IP from the load balancer itself -> Now I can add multiple Balancer Under that NodeBlanacer. Balancer can forward the request to .
+      - So I can scale up and down without user notice anything
+      - Setup only once
+
+    ----Session Stickiness with LoadBalancer----
+    - Which mean  If user authenticated on 1 Server that keep sessions in the memory meaning only that web server instance has session information and knows the clients You can configure the Balancer to forward the next request from that client to the same web server instead of randomly picky and passing the request to any of server
+
+    ----Secure connection with SSL certificate----
+    - I can configure the NodeBalancer with SSL certificate
+    - In Linode I can do it with Cert Manager plugin which help managing TLS, SSL certificate
+    - Then I can get this certificate and store it into Secret and use it to secure the connection to my cluster
+
+  4. Data center for K8s Cluster
+    - Can Move Application closer to my users by using Availablity Zone of Cloud Platform
+
+  5. Move App to othet Cloud Platform
+    - Migrate part to Private Cloud
+    - Migrate part of my App to another Cloud Platform
+    - When I using a cloud provider, I use services specific to that cloud provider
+    - My App will get closely tied up to that cloud provider and I can't migrate easily
+    - I may need to re-program or re-configure . That's call Vendor-lockin
+
+  6. Automate Task
+    - Setup grow inside .
+    - My Infrastructure get more complex
+    - Automate creating, Automate configuring
+    - Automate Deploy App and Service
+    - And I can do that using Automation tools: Teraform 
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
