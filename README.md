@@ -1172,6 +1172,7 @@ so to make it more efficent the solution is Storage Class
         targetPort: 8081 # This is the port that will be forwarded to the pods
   ```
 
-
+  2. Once Yaml file Created I will create it in the Cluster : `kubectl apply -f [yamlfile]`
+  3. I use to check that Mongo express run correctly : `kubectl logs [pod name]`
 
 
