@@ -1114,7 +1114,15 @@ so to make it more efficent the solution is Storage Class
       - What happen is that when Statefulset was created for each pod one, a physical storage was created for each of three pods
       - And for each physical storage , a persistence volume was created and that is now attached to the Node where the Pod is running 
 
+**Deploy Mongo Express - UI for MongoDB**
 
+  - I will create my own Configuration file for 1 Pod and 1 Service for Mongo Express
+
+  1. Create helm-mongo-express.yaml
+
+  ```
+    
+  ```
 
 
 
