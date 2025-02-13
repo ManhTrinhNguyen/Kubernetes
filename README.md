@@ -1088,7 +1088,17 @@ so to make it more efficent the solution is Storage Class
   1. Install helm on mac : `brew install helm`
   2. Bitnami maintain MongoDB Helm Chart . I will install the Bitnami repo : `helm repo add bitnami https://charts.bitnami.com/bitnami` 
   3. To search bitnami repo : `helm search repo bitnami` -- Search for mongodb helm chart in bitnami : `helm search repo bitnami/mongodb`
-  !!! Note : When I execute helm command It is going to execute it against the Cluster that I am connected to 
+  !!! Note : When I execute helm command It is going to execute it against the Cluster that I am connected to
+
+  ----Installing the Chart----
+  - When I am installing the chart there might be some value that I want to overide -> Chart provide some default value and I want to check what Parameter or Value I can override:
+
+  - Example Yaml file that I want to overwrite some value
+  <img width="526" alt="Screenshot 2025-02-13 at 13 11 24" src="https://github.com/user-attachments/assets/adc9494b-1866-4751-a71f-9ccd50be8ecb" />
+
+  1. Define to run Statefulset with : `architecture`
+  2. Set root password : `auth.rootPassword`
+  3. Configure Volume -> Helm Chart should use the StorageClass of Linode Cloud Storage 
   
 
 
