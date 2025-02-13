@@ -1094,12 +1094,15 @@ so to make it more efficent the solution is Storage Class
   - When I am installing the chart there might be some value that I want to overide -> Chart provide some default value and I want to check what Parameter or Value I can override:
 
   - Example Yaml file that I want to overwrite some value
-  <img width="526" alt="Screenshot 2025-02-13 at 13 11 24" src="https://github.com/user-attachments/assets/adc9494b-1866-4751-a71f-9ccd50be8ecb" />
+  <img width="400" alt="Screenshot 2025-02-13 at 13 11 24" src="https://github.com/user-attachments/assets/adc9494b-1866-4751-a71f-9ccd50be8ecb" />
 
   1. Define to run Statefulset with : `architecture`
   2. Set root password : `auth.rootPassword`
-  3. Configure Volume -> Helm Chart should use the StorageClass of Linode Cloud Storage 
-  
+  3. Configure Volume -> Helm Chart should use the StorageClass of Linode Cloud Storage
+  4. Install the MongoDB chart : `helm install mongodb --values helm-mongodb.yaml bitnami/mongodb`
+
+  <img width="400" alt="Screenshot 2025-02-13 at 13 17 37" src="https://github.com/user-attachments/assets/9e724a72-6991-4999-b393-7cc37845543f" />
+
 
 
 
