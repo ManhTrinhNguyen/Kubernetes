@@ -1094,14 +1094,25 @@ so to make it more efficent the solution is Storage Class
   - When I am installing the chart there might be some value that I want to overide -> Chart provide some default value and I want to check what Parameter or Value I can override:
 
   - Example Yaml file that I want to overwrite some value
-  <img width="400" alt="Screenshot 2025-02-13 at 13 11 24" src="https://github.com/user-attachments/assets/adc9494b-1866-4751-a71f-9ccd50be8ecb" />
+  <img width="300" alt="Screenshot 2025-02-13 at 13 11 24" src="https://github.com/user-attachments/assets/adc9494b-1866-4751-a71f-9ccd50be8ecb" />
 
   1. Define to run Statefulset with : `architecture`
   2. Set root password : `auth.rootPassword`
   3. Configure Volume -> Helm Chart should use the StorageClass of Linode Cloud Storage
   4. Install the MongoDB chart : `helm install mongodb --values helm-mongodb.yaml bitnami/mongodb`
+  <img width="300" alt="Screenshot 2025-02-13 at 13 17 37" src="https://github.com/user-attachments/assets/9e724a72-6991-4999-b393-7cc37845543f" />
+  
+  - When I execute this . It will install that mongoDB chart in my cluster
 
-  <img width="400" alt="Screenshot 2025-02-13 at 13 17 37" src="https://github.com/user-attachments/assets/9e724a72-6991-4999-b393-7cc37845543f" />
+  ----Check my Cluster----
+  - Check pod: `kubectl get pod`
+  - Check all: `kubectl get all`
+  - Check secret: `kubectl get secret`
+    - This contain root password I provided in the yaml file
+    - Persistence Storage :
+      - The configuration Linode block storage defined as storage class
+      - What happen is that when Statefulset was created for each pod one, a physical storage was created for each of three pods
+      - And for each physical storage , a persistence volume was created and that is now attached to the Node where the Pod is running 
 
 
 
