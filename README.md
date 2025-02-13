@@ -1071,7 +1071,24 @@ so to make it more efficent the solution is Storage Class
      2. Region
      3. Kubernetes Version
      4. Choose Node : Worker Node (Linode Already has taken care of Control Plane . I don't need to set up Control Plane)
-       1. Choose  
+       1. Choose Share CPU
+       2. Choose Capacity
+   3. While Nodes are running :
+      1. I need access credentials to access from my local machine so I download Kubeconfig credentials that Linode provided
+      2. Change Permission to only my user can read from the file: `chmod 400 Kubeconfig`
+      3. Set Kubeconfig.yaml as ENV `export KUBECONFIG=kubeconfig.yaml` -> Then my local machine connected to Nodes
+
+**Deploy MongoDB Statefulset in the cluster**
+
+  ----2 ways to deploy StatefulSet----
+  1. Create all Configuration file myself
+  2. Use Bundle of those Configuration files | Helm Chart
+
+  ----Using Helm Chart----
+  1. Install helm on mac : `brew install helm`
+  2. Bitnami maintain MongoDB Helm Chart . I will install the Bitnami repo : `helm repo add bitnami https://charts.bitnami.com/bitnami` 
+
+  
 
 
 
