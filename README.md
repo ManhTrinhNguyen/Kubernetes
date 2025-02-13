@@ -1063,6 +1063,15 @@ so to make it more efficent the solution is Storage Class
   !!! Almost 100% of this whole setup is what I properly will always need to do when I set up my Kubernetes Cluster 
 ```
 
+**Create K8s Cluster on LKE Linode**
+  
+  1. Sign Up for Linode
+  2. After Sign Up -> In the UI Choose Kubernetes
+     1. Choose Label
+     2. Region
+     3. Kubernetes Version
+     4. Choose Node : Worker Node (Linode Already has taken care of Control Plane . I don't need to set up Control Plane)
+       1. Choose  
 
 
 
