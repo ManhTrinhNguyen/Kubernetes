@@ -1087,7 +1087,8 @@ so to make it more efficent the solution is Storage Class
   ----Using Helm Chart----
   1. Install helm on mac : `brew install helm`
   2. Bitnami maintain MongoDB Helm Chart . I will install the Bitnami repo : `helm repo add bitnami https://charts.bitnami.com/bitnami` 
-
+  3. To search bitnami repo : `helm search repo bitnami` -- Search for mongodb helm chart in bitnami : `helm search repo bitnami/mongodb`
+  !!! Note : When I execute helm command It is going to execute it against the Cluster that I am connected to 
   
 
 
