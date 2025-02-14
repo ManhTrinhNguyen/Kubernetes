@@ -1191,7 +1191,24 @@ so to make it more efficent the solution is Storage Class
   - NodeBalancer is an Entry Point of K8 Cluster -> This NodeBalancer give me External IP, Ports -> and NodeBlancer will forward the request coming in into CLuster to the Ingress Controller and to the Internal Services base on the Ingress Rule I create
 
   ```
-    
+  apiVersion: networking.k8s.io/v1
+  kind: Ingress
+  metadata:
+    annotations: # this is the annotation that will be used by the Ingress Controller
+      kubernetes.io/ingress.class: nginx
+    name: mongo-express
+  spec: 
+    rules:
+    - host: 23-239-6-26.ip.linodeusercontent.com # Hostname that will be used to access the application
+      http: # Define the HTTP forwarding of request coming from host
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: mongo-express-service
+                port:
+                  number: 8081
   ```
 
   - Browser : hostname configure in Ingress Rule
