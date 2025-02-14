@@ -1261,7 +1261,22 @@ so to make it more efficent the solution is Storage Class
     1. I execute this command `aws ecr get-login-password` to get Login password (A token use to login into AWS)
     2. Then I ssh to Minikube `minikube ssh`
     3. In /home/docker I execute `docker login --username AWS --p <AWS token> <URL to my AWS Repo>`
-    4. 
+    4. Inside minikube I will use .docker/config.json to create Secrect Component
+
+    ----Create Secret component----
+
+    <img width="400" alt="Screenshot 2025-02-14 at 14 43 34" src="https://github.com/user-attachments/assets/2328e9de-2e7a-4379-b575-d1cb854891bd" />
+
+    1. Copy config.json file inside minikube to my Local Machine : `minikube cp minikube:/home/docker/.docker/config.json /users/trinhnguyen/.docker/config.json`
+    2. Turn config.sjon file into base 64 then put it into .dockerconfigjson : `cat .docker/config.json | base64`
+    3. I also can configure secret using kubectl : `kubectl create secret generic my-generic-key --from-file-.dockerconfigjson=.docker/config.json --type=kubernetes.io/dockerconfigjson`
+    4. Use `kubectl get secret` to check secret is running
+       
+   <img width="400" alt="Screenshot 2025-02-14 at 14 52 05" src="https://github.com/user-attachments/assets/80486ecc-509d-4ac3-b29f-1d547f8b3d08" />
+
+    - Another the way to create Secret with 1 step `kubectl create secret docker-registry my-registry-key-two --docker-server=<aws-server-endpoint> --docker-username=AWS --docker-password=<AWS access Token>`
+      
+    !!! NOTE: Directly having authentication inside the config.json file is not secure as having CRED Store 
 
 
 
