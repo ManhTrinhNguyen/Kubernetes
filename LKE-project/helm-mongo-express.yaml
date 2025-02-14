@@ -24,7 +24,7 @@ spec:
         env: # This is the environment variables that will be used by the container
         - name: ME_CONFIG_MONGODB_ADMINUSERNAME # This is the name of MongoDB root username
           value: root
-        - name: ME_CONFIG_MONGODB_SERVER # This 
+        - name: ME_CONFIG_MONGODB_SERVER 
           value: mongodb-0.mongodb-headless # This is a value of MongoDB server
           # This is a endpoint where Mongo Express will connect to the MongoDB Pod . 
           # mongdb-0 is the name of the MongoDB Pod and mongodb-headless is the name of the service that expose the MongoDB Pod
@@ -33,7 +33,8 @@ spec:
           valueFrom:
             secretKeyRef:
               name: mongodb
-              key: mongo-root-password
+              key: mongodb-root-password
+        
 ---
 # This is a Internal Service . Only accessible within the cluster
 apiVersion: v1
@@ -44,6 +45,6 @@ spec:
   selector: # This is the selector that will be used to match the labels of the pods
     app: mongo-express
   ports: # This is the port that will be exposed by the service
-    - protocal: TCP
+    - protocol: TCP
       port: 8081 # This is the port that will be exposed by the service
       targetPort: 8081 # This is the port that will be forwarded to the pods
