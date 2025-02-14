@@ -1176,3 +1176,43 @@ so to make it more efficent the solution is Storage Class
   3. I use to check that Mongo express run correctly : `kubectl logs [pod name]`
 
 
+**Deploy Ingress Controller & Create Ingress rule**
+
+**Deploy Ingress Controller**
+  1. User Helm Chart for Ingress Controller (Nginx controller)
+  2. Add NGINX repo : `helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx`
+  3. Installing the Helm Chart : `helm install [RELEASE_NAME] ingress-nginx/ingress-nginx --set controller.publishService.enabled=true`
+     - `--set controller.publishService.enabled=true` : This attribute to make sure that we are automatically allocated the Public IP for my Ingress Address to use with Nginx
+  4. `kubectl get pods`: To check Ingress Controller running or not
+
+**Create Ingress rule**
+  - Ingress Controller uses some cloud native load balancer in the background
+  - Linode'own Node Balancer or Worker Node Balancer, that was dynamically created and privisioned as I created the Ingress Controller
+  - NodeBalancer is an Entry Point of K8 Cluster -> This NodeBalancer give me External IP, Ports -> and NodeBlancer will forward the request coming in into CLuster to the Ingress Controller and to the Internal Services base on the Ingress Rule I create
+
+  ```
+    
+  ```
+
+  - Browser : hostname configure in Ingress Rule
+  - Hostname get resolved to extetnal IP of NodeBalancer
+  - Ingress Controller resolved the rule and forwared request to internal MongoExpress Service 
+
+  ----Test UI : MongoExpress connected to MongoDB----
+  - I added some data to the MongoDB
+  - Then I delete the pod and restart them : `kubectl scale --replicas=0 statefulset/mongodb` - But the data still be there bcs I have configured PV - Then I scale back to 3
+  - To see my charts : `helm ls`
+  - If I done with the chart or reinstall or update I can use : `helm uninstall mongodb`
+
+
+
+
+
+
+
+
+
+
+
+
+
