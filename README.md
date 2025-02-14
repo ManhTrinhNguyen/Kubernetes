@@ -49,8 +49,9 @@
       - For only insde connection like (DB or ...)
 
   Ingress:
+    - Ingress is a API object manage external access to Service within Cluster . Provide routing rule to manage how request redirect to which service within Cluster
     - Instead of services the request first go to Ingress and then service
-    - DNS 
+    - DNS
 ```
 
 ### External Configuration 
