@@ -1222,11 +1222,43 @@ so to make it more efficent the solution is Storage Class
   - To see my charts : `helm ls`
   - If I done with the chart or reinstall or update I can use : `helm uninstall mongodb`
 
+## Deploy Images in K8s from Prive Docker Repo 
 
+**Common Workflow**
 
+<img width="600" alt="Screenshot 2025-02-14 at 13 19 02" src="https://github.com/user-attachments/assets/c30e746d-0a44-4106-bbd9-dbcc91704ab9" />
 
+- Commit my code to Git --> Trigger CI build (Jenkins) . Package My app with its Environment configuration into Docker Image --> Then Docker Images get push to Docker Registry (Docker Hub, Nexus, AWS container...) .
+- Now When I have Docker Image in Repo . How to get Docker Image on K8's Cluster
+- From Private Repo : I need explicit access
 
+**Steps to pull Image from Private registry**
+  1. Create Secret Component : contain access token or credentials to my docker registry
+  2. Configure Deployment/Pod : To use that Secret using Attribute called imagePullSecrets
 
+**Setup**
+  1. Docker Image in ECR (Nodejs Application)
+  2. Inside the Repo I have 3 Images with 3 different version tag
+  3. Locally I have Minikube cluster setup (It's empty)
+
+**Create Secret Component**
+  - This Secret Component need to have credentials to Private Repository (ECR) which will allow Docker to pull that Image
+
+  ----First thing I need to Login to Docker Repo----
+  - Create config.json file for Secret
+  - Login into Docker Private Repo : `aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin .....`
+  - After Login Succeeded -> In the background it automatically created `config.json` (in .docker/config.json) file that hold the authentication to my Private Repo
+  - There is 2 ways that this Config.json will store Authentication
+    1. Is in .docker/config.json
+    2. Or in externally "credsStore": "desktop" -> More secure bcs access token will store in Credentials Store
+  - Now Whenever Docker tries to pull the Images from my Private Repo. It will use those credentials in config.json for this Private Registry to pull that Image to authenticate itself and pull that Image
+  - However I am running cluster in Minikube and Minikube doesn't have access to CRED Store bcs it is running in Virtual Box . When the Docker which is packaged in the Minikube . So Minikube has its own Docker so when Docker inside Minikube tries to pull that Image from this private Repo, It will see the CRED Store and it won't be able to access that
+    
+    ----Diffent method to authenticate to my Private Repo via Minikube----
+    1. I execute this command `aws ecr get-login-password` to get Login password (A token use to login into AWS)
+    2. Then I ssh to Minikube `minikube ssh`
+    3. In /home/docker I execute `docker login --username AWS --p <AWS token> <URL to my AWS Repo>`
+    4. 
 
 
 
