@@ -1255,6 +1255,9 @@ so to make it more efficent the solution is Storage Class
   - However I am running cluster in Minikube and Minikube doesn't have access to CRED Store bcs it is running in Virtual Box . When the Docker which is packaged in the Minikube . So Minikube has its own Docker so when Docker inside Minikube tries to pull that Image from this private Repo, It will see the CRED Store and it won't be able to access that
     
     ----Diffent method to authenticate to my Private Repo via Minikube----
+    
+    <img width="400" alt="Screenshot 2025-02-14 at 14 30 42" src="https://github.com/user-attachments/assets/6ed34749-e58b-4db1-8fee-6540417c9e1d" />
+
     1. I execute this command `aws ecr get-login-password` to get Login password (A token use to login into AWS)
     2. Then I ssh to Minikube `minikube ssh`
     3. In /home/docker I execute `docker login --username AWS --p <AWS token> <URL to my AWS Repo>`
