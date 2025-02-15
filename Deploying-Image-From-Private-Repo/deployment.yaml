@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-app
+  name: js-app
   labels:
-    app: my-app
+    app: js-app
 spec:
-  replicas:
+  replicas: 1
   selector:
     matchLabels:
-      app: my-app
+      app: js-app
   template:
     metadata:
       labels:
-        app: my-app
+        app: js-app
     spec:
-      imagePullSecrets:
+      imagePullSecrets: # This is the secret that I created in the previous step
       - name: my-registry-key
       containers:
-      - name: my-app
-        image: IMAGE_NAME_HERE
+      - name: js-app
+        image: 565393037799.dkr.ecr.us-west-1.amazonaws.com/js-app:1.0 # This is the image from the private repository
         imagePullPolicy: Always
         ports:
         - containerPort: 3000

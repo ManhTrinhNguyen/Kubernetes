@@ -152,8 +152,32 @@ Step 2: Create and Start Minikube Cluster : `minikube start --driver docker`
 **Create Deployment Component**
 
 1. Create Deployment Configuration
-```
-```
+    ```
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+    name: js-app
+    labels:
+        app: js-app
+    spec:
+    replicas: 1
+    selector:
+        matchLabels:
+        app: js-app
+    template:
+        metadata:
+        labels:
+            app: js-app
+        spec:
+        imagePullSecrets: # This is the secret that I created in the previous step
+        - name: my-registry-key
+        containers:
+        - name: js-app
+            image: 565393037799.dkr.ecr.us-west-1.amazonaws.com/js-app:1.0 # This is the image from the private repository
+            imagePullPolicy: Always
+            ports:
+            - containerPort: 3000
+    ```
 
 2. Pull Docker Image from Private Repo : `imagePullPolicy: always`
 3. Configure Deployment with Secret : In the Pod's Specification same level as container
