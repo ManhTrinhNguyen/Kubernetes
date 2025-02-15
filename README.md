@@ -1357,7 +1357,12 @@ so to make it more efficent the solution is Storage Class
 
 ```
   - Operator basically replaces this human operator with a software operator
-  - All the manually tasks that Devops team person would do 
+
+  - All the manually tasks that Devops team person would do to operate stateful Application now packed into program that has knowlege and intelligent about how to deploy that specific Application
+
+    - Like How to create cluster of replicas | or How to recover if 1 failed
+
+    - Task automate and reuseable 
 ```
 
 
