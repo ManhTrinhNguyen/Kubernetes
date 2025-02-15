@@ -1289,8 +1289,11 @@ so to make it more efficent the solution is Storage Class
   ```
     imagePullSecrets :
     - name: my-registry-key
+
+    # This 2 lines will configure deployment with access to the secret that contains docker registry access
   ```
 
+  !!! NOTE: Secret has to be in the same namespace as Deployment 
 
 
 
