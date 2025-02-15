@@ -81,7 +81,17 @@ Step 3 : Push Docker Image : `docker push 565393037799.dkr.ecr.us-west-1.amazona
 
 ## Minikube 
 
-Step 1: Start Minikube : `minikube start`
+Step 1: Install Minikube : ( https://minikube.sigs.k8s.io/docs/start/ )
+
+-- Minikube is 1 Node cluster where Control Plane Processes and Worker Processes both run in 1 Node
+
+Step 2: Create and Start Minikube Cluster : `minikube start --driver docker`
+
+-- To interact with Minikube I use kubectl 
+
+-- Minikube Create a cluster 
+
+-- Kubectl interact with a cluster
     
 ## Deploy Images in K8s from Private Docker Repo 
 
