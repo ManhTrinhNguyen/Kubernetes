@@ -1408,12 +1408,9 @@ so to make it more efficent the solution is Storage Class
   - I have K8s Cluster that Admin and User use to Administer and Deploy into
 
   ----How to manage permission for a cluster ?----
-
-  - Admin and Developer have different access
-
-  - Developer should be limited what they can do in the Cluster so they don't accidently break stuff . Admin should administer the Cluster
-
-  - In Security best practice we have the Least Privilege rule which mean we give user only the Permission they need 
+    - Admin and Developer have different access
+    - Developer should be limited what they can do in the Cluster so they don't accidently break stuff . Admin should administer the Cluster
+    - In Security best practice we have the Least Privilege rule which mean we give user only the Permission they need 
 ```
 
 **Developers : Role and Role Binding**
@@ -1421,10 +1418,10 @@ so to make it more efficent the solution is Storage Class
   - Let's say I have multiple Namespaces in the Cluster and each Developer team deploy Apps in the different Namepsaces
 
   ---How to restrict access to only that Namespaces ?---
-
   - For that K8s has RBAC = Role Based Access Control
-
     -- With RBAC I can define permission to each Namespace by using Role Component
+    -- Role bound to specific Namespace
+    -- Define what resources in that Namespace I could access 
 ```
 
 
