@@ -65,7 +65,7 @@ Step 5: access the nodejs application from browser
 
     http://localhost:3000
 
-## Build and Push a docker image to ECRfrom the application
+## Build and Push a docker image to ECR from the application
 
 - Before login I need to configure as a admin user that has permission to execute this command `aws configure`
 
@@ -78,6 +78,10 @@ Step 2 : Build Docker Image with Repo tag : `docker build -t 565393037799.dkr.ec
      -- The dot "." at the end of the command denotes location of the Dockerfile.   
 
 Step 3 : Push Docker Image : `docker push 565393037799.dkr.ecr.us-west-1.amazonaws.com/js-app:1.0`
+
+## Minikube 
+
+Step 1: Start Minikube : `minikube start`
     
 ## Deploy Images in K8s from Private Docker Repo 
 
