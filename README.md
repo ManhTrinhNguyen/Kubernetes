@@ -1278,7 +1278,7 @@ so to make it more efficent the solution is Storage Class
       
     !!! NOTE: Directly having authentication inside the config.json file is not secure as having CRED Store 
 
-## Create Deployment Component 
+**Create Deployment Component**
 
 1. Create Deployment Configuration
 ```
