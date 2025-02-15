@@ -65,8 +65,18 @@ Step 5: access the nodejs application from browser
 
     http://localhost:3000
 
-#### To build a docker image from the application
+#### To build and push a docker image to ECRfrom the application
 
-    docker build -t my-app:1.0 .       
+- Before login I need to configure as a admin user that has permission to execute this command `aws configure`
+
+Step 1: Login to ECR Private repo `aws ecr get-login-password --region us-west-1 | docker login --username AWS --password-stdin 565393037799.dkr.ecr.us-west-1.amazonaws.com`    
+
+    -- When login command executed . In the background it will automatically generate the .docker/config.js . This file hold aws token and CRED store to authenticate to private repo
+
+Step 2 : Build Docker Image with Repo tag : `docker build -t 565393037799.dkr.ecr.us-west-1.amazonaws.com/js-app:1.0 .`
+
+     -- The dot "." at the end of the command denotes location of the Dockerfile.   
+
+Step 3 : Push Docker Image : `docker push 565393037799.dkr.ecr.us-west-1.amazonaws.com/js-app:1.0`
     
-The dot "." at the end of the command denotes location of the Dockerfile.
+
