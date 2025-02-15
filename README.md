@@ -1355,6 +1355,8 @@ so to make it more efficent the solution is Storage Class
 
 **Stateful Application with Operator**
 
+<img width="600" alt="Screenshot 2025-02-15 at 11 21 50" src="https://github.com/user-attachments/assets/d6b2072f-6b2e-4aa3-9afb-7b80ed41a1b7" />
+
 ```
   - Operator basically replaces this human operator with a software operator
 
@@ -1362,7 +1364,27 @@ so to make it more efficent the solution is Storage Class
 
     - Like How to create cluster of replicas | or How to recover if 1 failed
 
-    - Task automate and reuseable 
+    - Task automate and reuseable
+
+    - If I have 2 K8s Cluster with the same set up I don't have to manually configure and then maintain these Apps on both Environments . But rather you have 1 standard automated tool
+```
+
+**How does Operator work?**
+
+```
+  - As it core . It has the same Control Loop mechanism
+
+  - What is Control Loop does
+    - Watch for change Applcation State 
+    - If Relica died then it created new one
+    - If configuration change then it will updated
+    - If Image version get updated it will restart with new version
+
+  - Make use of CRD (Custom Resources Definition) :
+    - It is a custom K8s Component (extends K8s API)
+    - By default I have Deployment, Stateful set, Config map, etc ...
+    - So Operator take the basics resources and its controller concept as a foundation to build upon
+    - And on top of that it included the domain or application specific knowledge to automate the entire lifecycle of the application it manage or operate 
 ```
 
 
