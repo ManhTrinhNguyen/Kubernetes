@@ -1414,14 +1414,29 @@ so to make it more efficent the solution is Storage Class
 ```
 
 **Developers : Role and Role Binding**
+
+<img width="600" alt="Screenshot 2025-02-15 at 14 04 10" src="https://github.com/user-attachments/assets/c9673960-e79e-4438-b0d5-1d0c65757fbb" />
+
 ```
   - Let's say I have multiple Namespaces in the Cluster and each Developer team deploy Apps in the different Namepsaces
 
   ---How to restrict access to only that Namespaces ?---
-  - For that K8s has RBAC = Role Based Access Control
-    -- With RBAC I can define permission to each Namespace by using Role Component
-    -- Role bound to specific Namespace
-    -- Define what resources in that Namespace I could access 
+    - For that K8s has RBAC = Role Based Access Control
+      -- With RBAC I can define permission to each Namespace by using Role Component 
+      -- Role bound to specific Namespace
+      -- Define what resources in that Namespace I could access like : Pod, Deployment, Secret etc...
+      -- What action I can do with these Resources like : list, delete, update, get etc...
+      -- Role only Define resources and access Permission | No infomation WHO get access
+
+  ---How to attach Role defined into Developer Team ?---
+    - For that K8s has RoleBinding Component
+    - Link ("Bind") a Role to a User or Group
+    - All members of Group get permissions defined in the Role 
+```
+
+**Administrator : Cluster Role and Cluster Role Binding**
+
+```
 ```
 
 
