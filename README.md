@@ -1278,6 +1278,27 @@ so to make it more efficent the solution is Storage Class
       
     !!! NOTE: Directly having authentication inside the config.json file is not secure as having CRED Store 
 
+## Create Deployment Component 
+
+1. Create Deployment Configuration
+```
+```
+
+2. Pull Docker Image from Private Repo : `imagePullPolicy: always`
+3. Configure Deployment with Secret : In the Pod's Specification same level as container
+  ```
+    imagePullSecrets :
+    - name: my-registry-key
+  ```
+
+
+
+
+
+
+
+
+
 
 
 
