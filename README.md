@@ -1319,6 +1319,53 @@ so to make it more efficent the solution is Storage Class
 
   !!! NOTE: Secret has to be in the same namespace as Deployment 
 
+## K8s Operator 
+
+**What is K8s Operator | Why Operators used ? | When to use Operators ?**
+
+**Overview**
+```
+  - Operators use mainly for Stateful Application 
+```
+
+**Stateless Apps in K8**
+
+<img width="600" alt="Screenshot 2025-02-15 at 10 56 15" src="https://github.com/user-attachments/assets/4456efeb-a6d5-4940-ad64-e52472c8f75d" />
+
+```
+  - Let's say I deploy Web Apps in K8s
+  - So I will create Deployment, ConfigMap, Service and Application start
+  - I will scale My App to 3 Replicas . If 1 died K8s built in Control Loop Mechanism will regenerate it for me | If I release new version I adjust a deployment configuration and replicas get restart with new version 
+```
+
+**Stateful Application without Operator**
+
+```
+  - Stateful App like Database .... I need data persistence
+  - K8s can not do automation with Stateful Apps
+  - Bcs When I create Replicas for Stateful Apps . All 3 Replicas is different and have different Identity and State | They need to Update and Destroy in certain order
+  - There must be constant communication between these replica and synchronization so that data stay consistent
+
+  That's why Statefull Apps required manually intervention
+
+  Stateful Apps need in K8s : Promethues Monitoring, etcd store
+
+  So I use Operator to Manage Stateful Apps ( https://operatorhub.io/ )
+```
+
+**Stateful Application with Operator**
+
+```
+  - Operator basically replaces this human operator with a software operator
+  - All the manually tasks that Devops team person would do 
+```
+
+
+
+
+
+
+
 
 
 
