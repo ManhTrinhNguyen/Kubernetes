@@ -1387,13 +1387,18 @@ so to make it more efficent the solution is Storage Class
     - And on top of that it included the domain or application specific knowledge to automate the entire lifecycle of the application it manage or operate 
 ```
 
+## Secure Cluster - Authentication with RBAC 
 
-
-
-
-
-
-
+**Overview**
+```
+  How Authenication and Authorization work in K8 ?
+  
+  How to configure users, groups, their permission ?
+  
+  Authentication with Role Based Access Control (RBAC) ?
+  
+  Which K8s resources to use to define permissions in the Cluster ?
+````
 
 
 
