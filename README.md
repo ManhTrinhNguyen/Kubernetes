@@ -1552,13 +1552,29 @@ so to make it more efficent the solution is Storage Class
 
 <img width="400" alt="Screenshot 2025-02-16 at 11 35 04" src="https://github.com/user-attachments/assets/8beb7050-d0ad-4ebe-9514-c5878b6117f6" />
 <img width="400" alt="Screenshot 2025-02-16 at 11 37 21" src="https://github.com/user-attachments/assets/a356d0f6-d1b2-465d-820e-9fd87ad6dc8c" />
-
+<img width="400" alt="Screenshot 2025-02-16 at 11 42 07" src="https://github.com/user-attachments/assets/ad25dda3-fbdf-4785-895a-039a95e781de" />
 
 ```
-  - ClusterRole for Nodes : What priviledges they have on that Worker Node 
+  - ClusterRole for Nodes : What priviledges they have on that Worker Node
+
+  - Or I can define Cluster role for namespace management Since NameSpace is Also a cluster Wide resources
+
+    - But In a Addition to defining permission for cluster wide resources for cluster role
+    -I can also defined cluster role for namespace like Pods, Services etc ... Just like in the role
+
+  - And if I define a cluster role with Pod access, it will mean access to Pod in all Namespaces, not just one specific one as in the role
+
+  - And in Cluster Role binding I will then link that Cluster Role again to a user group, or service account 
 ```
 
+**ClusterRole Binding**
 
+<img width="500" alt="Screenshot 2025-02-16 at 11 47 05" src="https://github.com/user-attachments/assets/67079c84-a067-4e3d-9f3c-cde70714c1d3" />
+
+**Create And Viewing RBAC Resources**
+
+```
+```
 
 
 
