@@ -1440,14 +1440,55 @@ so to make it more efficent the solution is Storage Class
 
 ```
   - Managing all the Namespaces
+
   - Configuring Volume for the Developer team are available Cluster-wide Volumes
+
   - They are doing Cluster Wide operation
 
   ---How to define Admin Permission in K8s ?---
   - For that K8s has ClusterRole
   - Define Resources and Permission Cluster Wide
-  - For Admin I would define a ClusterRole and Admin Group and then attach the cluster role to the Admin group using a cluster role binding 
+  - For Admin I would define a ClusterRole and Admin Group and then attach the cluster role to the Admin group using a ClusterRoleBinding 
 ```
+
+**User and Groups in Kubernetes**
+
+<img width="400" alt="Screenshot 2025-02-16 at 09 47 17" src="https://github.com/user-attachments/assets/e68e3331-3e48-4a90-baf0-680efb7e656e" />
+<img width="400" alt="Screenshot 2025-02-16 at 09 50 02" src="https://github.com/user-attachments/assets/69e4afaa-9ab3-4d87-bdaf-5b0b30314fd3" />
+
+```
+  - Kubernetes doesn't manage Users natively
+
+  - Admins can choose from different authentication strategies
+
+  - No Kubernetes Objects exist for representing normal user account
+
+  - It relies on External Sources for Authentication
+
+  ---External Source---
+  - Could be a Static Token file : username, uid , token ....
+  - Could also be certificate design by Kubernetes itself
+  - Or third party identity service, like LDEP
+
+  - So Admin configurs external source so Kubernetes has access to the information and then API server which is one of the control plane components of Kubernetes and which is the one handling authentication of all the requests coming in K8s Cluster.
+
+  - K8s Cluster will try to authenticate any user trying to connect to a Cluster using configure resoruces provided
+
+  - I can pass these file to API Server so that API Server knows where to look up to Authenticate Users, when they try to connect to the Cluster
+
+  - If I want to define Group that User belong to , I can simply add the Group Column in this users file, in the Static file
+```
+
+
+
+
+
+
+
+
+
+
+
 
 
 
