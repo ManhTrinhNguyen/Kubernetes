@@ -1573,11 +1573,17 @@ so to make it more efficent the solution is Storage Class
 
 **Create And Viewing RBAC Resources**
 
+<img width="500" alt="Screenshot 2025-02-16 at 11 50 28" src="https://github.com/user-attachments/assets/f71cc370-c069-4c5a-924e-fe149cdba4d7" />
+
+**Check API access**
+
+<img width="500" alt="Screenshot 2025-02-16 at 11 52 20" src="https://github.com/user-attachments/assets/71c78985-9604-4c78-8c1f-68dcecd84b5f" />
+
 ```
+  - I can check access , priviledges, and permission of current user
+
+  - To see what Permission that user has in any Namespace
 ```
-
-
-
 
 
 
