@@ -1436,10 +1436,17 @@ so to make it more efficent the solution is Storage Class
 
 **Administrator : Cluster Role and Cluster Role Binding**
 
+<img width="600" alt="Screenshot 2025-02-16 at 09 31 40" src="https://github.com/user-attachments/assets/3cfd6f0b-d594-4e08-af23-acbb655589aa" />
+
 ```
   - Managing all the Namespaces
   - Configuring Volume for the Developer team are available Cluster-wide Volumes
-  - They are doing Cluster Wide operation 
+  - They are doing Cluster Wide operation
+
+  ---How to define Admin Permission in K8s ?---
+  - For that K8s has ClusterRole
+  - Define Resources and Permission Cluster Wide
+  - For Admin I would define a ClusterRole and Admin Group and then attach the cluster role to the Admin group using a cluster role binding 
 ```
 
 
