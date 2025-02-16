@@ -1541,10 +1541,22 @@ so to make it more efficent the solution is Storage Class
 ```
 
 **And then I have RoleBinding**
+
+<img width="600" alt="Screenshot 2025-02-16 at 11 31 49" src="https://github.com/user-attachments/assets/6f411d8f-d4d5-458a-bd7b-6b17a7c3a59f" />
+
 ```
-  
+  - RoleBinding to attach it to a User, Group or Service Account 
 ```
 
+**ClusterRole**
+
+<img width="400" alt="Screenshot 2025-02-16 at 11 35 04" src="https://github.com/user-attachments/assets/8beb7050-d0ad-4ebe-9514-c5878b6117f6" />
+<img width="400" alt="Screenshot 2025-02-16 at 11 37 21" src="https://github.com/user-attachments/assets/a356d0f6-d1b2-465d-820e-9fd87ad6dc8c" />
+
+
+```
+  - ClusterRole for Nodes : What priviledges they have on that Worker Node 
+```
 
 
 
