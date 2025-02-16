@@ -1477,6 +1477,62 @@ so to make it more efficent the solution is Storage Class
   - I can pass these file to API Server so that API Server knows where to look up to Authenticate Users, when they try to connect to the Cluster
 
   - If I want to define Group that User belong to , I can simply add the Group Column in this users file, in the Static file
+
+  - For Certificate, As a Admin will have to manually creare Certificate for different User
+
+  - OR Configure LDAP as a authentication source for API server
+
+  - K8s allow me to configure those external sources but I have to manage them myself 
+```
+
+**Service Account**
+
+<img width="600" alt="Screenshot 2025-02-16 at 10 21 53" src="https://github.com/user-attachments/assets/f28a1217-62c8-4fa5-b350-1b970e590437" />
+
+```
+  - Service Account is Applications User
+
+  - These Applications can be internal inside the cluster or outside the cluster
+
+  - For example : Inside the cluster I might have a Mornitoring Application, like Promesthus that need access to all other Apps to collect metrics from them And We also have microservice applications that only need resources and access to resources within their specific namespace
+
+  - These Applications are running inside the cluster and are talking to other Applications or using resources in the cluster .
+
+  - And We also have External Applications like Jenkins that deploy Application to a Cluster | OR Terreform that configure the Cluster itself
+
+  - With the Least Privilege Rule We also want Applications have the only need permission , not more .
+
+  ---How to define Applications User---
+  - K8s component that represent an Application User call ServiceAccount 
+
+  - Instead of User or Group for human user , I create a Service Component for Application User : kubectl create serviceaccount sa1
+
+  - So my Applications like Metric Server (Prometheus) or external CI/CD (Jenkins) will get Service Account Component inside the cluster as a representation of that application user
+
+  - As the same way for human user I can link service account to Role or ClusterRole with RoleBinding or ClusterRoleBinding . And with binding service account or the application that is behind that service account will get permission that are defined in the Role or Cluster Role 
+```
+
+**Example Configuration File**
+
+<img width="400" alt="Screenshot 2025-02-16 at 10 33 13" src="https://github.com/user-attachments/assets/d867866c-183b-4c87-80f1-412c9e6bcda7" />
+<img width="400" alt="Screenshot 2025-02-16 at 10 35 23" src="https://github.com/user-attachments/assets/30b59b56-5a97-4d82-abf3-7d9832a33ec9" />
+
+```
+  - Define what resources have what kind of access ?
+
+  - In each Role we have 3 Section:
+    - apiGroup : indicate the core API group
+    - The Default one is the core API group
+    - When using the core API group I can leave it empty 
+    - For other, I have to specify
+
+  - Within the API group we have Resources :
+    - K8 component like Pods, Deployment, etc....
+
+  - Then third part access Verbs :
+    - Action on the resources
+
+  - If I want to give access to the defined resources for Namespace like 'My-app', I will add namespace: my-app in metadata
 ```
 
 
