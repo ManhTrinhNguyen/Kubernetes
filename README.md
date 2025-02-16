@@ -1516,6 +1516,7 @@ so to make it more efficent the solution is Storage Class
 
 <img width="400" alt="Screenshot 2025-02-16 at 10 33 13" src="https://github.com/user-attachments/assets/d867866c-183b-4c87-80f1-412c9e6bcda7" />
 <img width="400" alt="Screenshot 2025-02-16 at 10 35 23" src="https://github.com/user-attachments/assets/30b59b56-5a97-4d82-abf3-7d9832a33ec9" />
+<img width="400" alt="Screenshot 2025-02-16 at 11 29 28" src="https://github.com/user-attachments/assets/961edbf0-223c-4b73-a36f-6056efbc512f" />
 
 ```
   - Define what resources have what kind of access ?
@@ -1533,8 +1534,16 @@ so to make it more efficent the solution is Storage Class
     - Action on the resources
 
   - If I want to give access to the defined resources for Namespace like 'My-app', I will add namespace: my-app in metadata
+
+  - To set more grangular access
+    - Instead giving access to all the Pod in that Namespace, I can define to only certain Pod in that Namespace using resources name Attribute
+    - For example If in the same NameSpace I have my own application and maybe a database and I want to basiccally define seperate role in the same NameSpace, but for my own Application and for Database, basically seperately at different role I can target these specific Pods and Applications using the resources name attribute and then define different privellege on resources 
 ```
 
+**And then I have RoleBinding**
+```
+  
+```
 
 
 
