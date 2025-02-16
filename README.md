@@ -1437,6 +1437,9 @@ so to make it more efficent the solution is Storage Class
 **Administrator : Cluster Role and Cluster Role Binding**
 
 ```
+  - Managing all the Namespaces
+  - Configuring Volume for the Developer team are available Cluster-wide Volumes
+  - They are doing Cluster Wide operation 
 ```
 
 
