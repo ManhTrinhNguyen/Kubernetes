@@ -1595,9 +1595,67 @@ so to make it more efficent the solution is Storage Class
   - For example, Jenkins send a request to API server , Request to Create new Service in default namespace
 
     -- First Level API will authenticate the Application User  or Human User in the Cluster to see Application user is allow to connect to the cluster
+
     -- I can enable multiple authentication at once
+
     -- If authenticated as a second step K8s will check Authorization which is RBAC . Check Role or ClusterRole that user has and based on the permission defined there does User has permission to perform specific task that it is trying to perform 
 ```
+
+## MicroServices 
+
+**Overiew**
+```
+  - Main Benefit of Microservices Application
+
+  - What I need to know to depkoy MicroServices Application in K8 ?
+```
+
+**Introduction**
+
+<img width="500" alt="Screenshot 2025-02-17 at 12 53 41" src="https://github.com/user-attachments/assets/7e4adf7d-4a31-47e8-8a85-855e640fa74b" />
+
+```
+  - Microservices emerged as a Platform for Microservices Applications
+
+  - From Monolith (1 Big Applications) to Microservice (Many Small App)
+
+  - Can be developed, deployed, and managed independently
+
+  - For example Big Company like Linked I might have 1 Microservices for User Account, 1 Microservices for Message, ect...
+
+    -- Each business functionality escapsulated into own Microservices
+    -- Smaller independent applications that developer manage
+    -- Each Microservices can be develope, packaged and released independently
+    -- 1 Changes of Microservices without effect to other 
+```
+
+**How do Microservice communicate?**
+
+<img width="400" alt="Screenshot 2025-02-17 at 13 03 38" src="https://github.com/user-attachments/assets/9dbe6b56-0e8c-458b-af7b-0dee4f703511" />
+
+
+```
+  ----Through API----
+
+    -- Microservice communicate through Interfaces or API is basically a code with a bunch of function inside the Application itself . Which is responsible for handling communication with other service which is responsible for handling commnunication with other service.
+  
+    -- The logic of communication inside of Micro itself
+
+  ----Through Message Broker Apps----
+
+    -- Instead of each Service sending request to all the others, all Micro talk to Message Broker
+
+    -- Less code complexity inside Microservices
+```
+
+
+
+
+
+
+
+
+
 
 
 
