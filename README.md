@@ -1703,13 +1703,7 @@ so to make it more efficent the solution is Storage Class
 
     -- Which Service is accessible from outside the cluster ? Which one get entrypoint request from a Browser ?
 
-    
-
     -- Using those Information about how Microservices talk to each other, what other Services they are depending on and which is the entry point microservice and I will create the connection grapse and visualize all of this
-
-  ----The Developer also tell this is a Load Generator----
-    -- Optional Development
-    -- It only serve to test the Load . It just send a bunch of request to a Front end
 
   ----How Application connect to each other?----
     -- Images Name for each Microservices 
@@ -1717,11 +1711,17 @@ so to make it more efficent the solution is Storage Class
     -- Which Port Service start ? Bcs we have to define that in the configuration file for Deployment but also for Service to be able to connect infomation inside the Pod 
     -- All Microservices will deploy into the same Namespace
 
+  ----If The Developer also tell this is a Load Generator----
+    -- Optional Development
+    -- It only serve to test the Load . It just send a bunch of request to a Front end
+
+
   - Now Create Deployment Config and Service Config for each Micro Services
 
  !!!  Redis is a Message Broker and also the In-Memory Database
 ```
 
+**Create Development and Service Config**
 
 
 
