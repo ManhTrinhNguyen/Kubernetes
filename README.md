@@ -1707,8 +1707,6 @@ so to make it more efficent the solution is Storage Class
 
     -- Using those Information about how Microservices talk to each other, what other Services they are depending on and which is the entry point microservice and I will create the connection grapse and visualize all of this
 
-  - Redis is a Message Broker and also the In-Memory Database
-
   ----The Developer also tell this is a Load Generator----
     -- Optional Development
     -- It only serve to test the Load . It just send a bunch of request to a Front end
@@ -1720,6 +1718,8 @@ so to make it more efficent the solution is Storage Class
     -- All Microservices will deploy into the same Namespace
 
   - Now Create Deployment Config and Service Config for each Micro Services
+
+ !!!  Redis is a Message Broker and also the In-Memory Database
 ```
 
 
