@@ -1631,8 +1631,7 @@ so to make it more efficent the solution is Storage Class
 
 **How do Microservice communicate?**
 
-<img width="400" alt="Screenshot 2025-02-17 at 13 03 38" src="https://github.com/user-attachments/assets/9dbe6b56-0e8c-458b-af7b-0dee4f703511" />
-
+<img width="400" alt="Screenshot 2025-02-17 at 13 03 38" src="https://github.com/user-attachments/assets/9dbe6b56-0e8c-458b-af7b-0dee4f703511" /><img width="400" alt="Screenshot 2025-02-17 at 13 07 30" src="https://github.com/user-attachments/assets/0c25986d-41fb-4454-9712-b5acf134c82a" />
 
 ```
   ----Through API----
@@ -1646,6 +1645,10 @@ so to make it more efficent the solution is Storage Class
     -- Instead of each Service sending request to all the others, all Micro talk to Message Broker
 
     -- Less code complexity inside Microservices
+
+  ----Service Mesh----
+
+    -- Instead of 1 big Central Broker handle all communication . Each Microservices have its own helper program that handle the communication for that specific microservice 
 ```
 
 
