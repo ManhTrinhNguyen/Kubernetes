@@ -1688,7 +1688,21 @@ so to make it more efficent the solution is Storage Class
 ## Deploy Microservices Apps : Demo Project 
 
 **Overview**
+
+<img width="600" alt="Screenshot 2025-02-17 at 14 14 45" src="https://github.com/user-attachments/assets/f4beb078-8dc4-477a-b2ca-0c1cc8a77079" />
+
 ```
+  - Need couple of key Infomation
+
+    -- What Micro Services I am deploy ?
+
+    -- How Micro Services Connect to each other ?
+
+    -- Micro Service need any 3rd party Services or Database ?
+
+    -- Which Service is accessible from outside the cluster ? Which one get entrypoint request from a Browser ? 
+
+    -- Using those Information about how Microservices talk to each other, what other Services they are depending on and which is the entry point microservice and I will create the connection grapse and visualize all of this 
 ```
 
 
