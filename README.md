@@ -1631,7 +1631,7 @@ so to make it more efficent the solution is Storage Class
 
 **How do Microservice communicate?**
 
-<img width="400" alt="Screenshot 2025-02-17 at 13 03 38" src="https://github.com/user-attachments/assets/9dbe6b56-0e8c-458b-af7b-0dee4f703511" />
+<img width="400" alt="Screenshot 2025-02-17 at 13 24 45" src="https://github.com/user-attachments/assets/fd32bb92-47c3-404e-be8a-988c88cefcc4" />
 <img width="400" alt="Screenshot 2025-02-17 at 13 07 30" src="https://github.com/user-attachments/assets/0c25986d-41fb-4454-9712-b5acf134c82a" />
 
 ```
