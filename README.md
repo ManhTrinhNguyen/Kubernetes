@@ -1689,7 +1689,8 @@ so to make it more efficent the solution is Storage Class
 
 **Overview**
 
-<img width="600" alt="Screenshot 2025-02-17 at 14 14 45" src="https://github.com/user-attachments/assets/f4beb078-8dc4-477a-b2ca-0c1cc8a77079" />
+<img width="600" alt="Screenshot 2025-02-17 at 14 19 15" src="https://github.com/user-attachments/assets/4bdebd17-9ce1-4328-8b6d-fc01d5548943" />
+<img width="600" alt="Screenshot 2025-02-17 at 14 36 17" src="https://github.com/user-attachments/assets/672c5bd8-d481-4bde-aa8b-65fe41943d8d" />
 
 ```
   - Need couple of key Infomation
@@ -1700,9 +1701,25 @@ so to make it more efficent the solution is Storage Class
 
     -- Micro Service need any 3rd party Services or Database ?
 
-    -- Which Service is accessible from outside the cluster ? Which one get entrypoint request from a Browser ? 
+    -- Which Service is accessible from outside the cluster ? Which one get entrypoint request from a Browser ?
 
-    -- Using those Information about how Microservices talk to each other, what other Services they are depending on and which is the entry point microservice and I will create the connection grapse and visualize all of this 
+    
+
+    -- Using those Information about how Microservices talk to each other, what other Services they are depending on and which is the entry point microservice and I will create the connection grapse and visualize all of this
+
+  - Redis is a Message Broker and also the In-Memory Database
+
+  ----The Developer also tell this is a Load Generator----
+    -- Optional Development
+    -- It only serve to test the Load . It just send a bunch of request to a Front end
+
+  ----How Application connect to each other?----
+    -- Images Name for each Microservices 
+    -- What ENV each Mircroservices expected ?
+    -- Which Port Service start ? Bcs we have to define that in the configuration file for Deployment but also for Service to be able to connect infomation inside the Pod 
+    -- All Microservices will deploy into the same Namespace
+
+  - Now Create Deployment Config and Service Config for each Micro Services
 ```
 
 
