@@ -1631,7 +1631,8 @@ so to make it more efficent the solution is Storage Class
 
 **How do Microservice communicate?**
 
-<img width="400" alt="Screenshot 2025-02-17 at 13 03 38" src="https://github.com/user-attachments/assets/9dbe6b56-0e8c-458b-af7b-0dee4f703511" /><img width="400" alt="Screenshot 2025-02-17 at 13 07 30" src="https://github.com/user-attachments/assets/0c25986d-41fb-4454-9712-b5acf134c82a" />
+<img width="400" alt="Screenshot 2025-02-17 at 13 03 38" src="https://github.com/user-attachments/assets/9dbe6b56-0e8c-458b-af7b-0dee4f703511" />
+<img width="400" alt="Screenshot 2025-02-17 at 13 07 30" src="https://github.com/user-attachments/assets/0c25986d-41fb-4454-9712-b5acf134c82a" />
 
 ```
   ----Through API----
@@ -1651,10 +1652,38 @@ so to make it more efficent the solution is Storage Class
     -- Instead of 1 big Central Broker handle all communication . Each Microservices have its own helper program that handle the communication for that specific microservice 
 ```
 
+**What do I need to know as Devops?**
 
+<img width="400" alt="Screenshot 2025-02-17 at 13 23 28" src="https://github.com/user-attachments/assets/4afaea2a-25d7-4503-b9e7-ed10407ff54e" />
+<img width="400" alt="Screenshot 2025-02-17 at 13 22 39" src="https://github.com/user-attachments/assets/ec49b947-6c9e-405e-94b6-d358a8bef6dc" />
 
+```
+  - Task : To Deploy existing Microservice Application in the K8s Cluster . So developer has already created and developed these microservices and asking Devops to take these Microservices and deploy it into Cluster
 
+  - At this point what infomation do I need to know from Developer about these Micro to be able to deploy them in the cluster
 
+  1. What are Mircos I need to deploy ?
+
+  2. Which Micro talking to which Micro ?
+
+  3. How are they communicate ? API | Message Broker | Service Mesh ?
+
+  4. Which Database they are using ? 3rd party Services
+
+  5. On which Port does it Microservice run ?
+
+  - Using these Infomation now I can go and Prepare the K8 Environment
+
+    -- Deploy any 3rd Party apps
+
+    -- Or creating Secret and Configmap for Microservices
+
+  - Then Once Environment is Prepare
+
+    -- Create Deployment and Service for each Microservice
+
+    -- And I also can define Micro run on the same Namepsace or each Micro has its own Namespace 
+```
 
 
 
