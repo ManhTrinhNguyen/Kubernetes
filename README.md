@@ -1587,7 +1587,16 @@ so to make it more efficent the solution is Storage Class
 
 **Wrap up**
 
+<img width="600" alt="Screenshot 2025-02-17 at 12 40 06" src="https://github.com/user-attachments/assets/b7f2e7c9-f279-4225-a4c2-3f73cc801c86" />
+
 ```
+  ----Layer of Security----
+
+  - For example, Jenkins send a request to API server , Request to Create new Service in default namespace
+
+    -- First Level API will authenticate the Application User  or Human User in the Cluster to see Application user is allow to connect to the cluster
+    -- I can enable multiple authentication at once
+    -- If authenticated as a second step K8s will check Authorization which is RBAC . Check Role or ClusterRole that user has and based on the permission defined there does User has permission to perform specific task that it is trying to perform 
 ```
 
 
