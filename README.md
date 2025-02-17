@@ -1654,7 +1654,7 @@ so to make it more efficent the solution is Storage Class
 
 **What do I need to know as Devops?**
 
-<img width="400" alt="Screenshot 2025-02-17 at 13 23 28" src="https://github.com/user-attachments/assets/4afaea2a-25d7-4503-b9e7-ed10407ff54e" />
+<img width="400" alt="Screenshot 2025-02-17 at 13 26 04" src="https://github.com/user-attachments/assets/fb109f4d-429a-4509-9e46-25739e958102" />
 <img width="400" alt="Screenshot 2025-02-17 at 13 22 39" src="https://github.com/user-attachments/assets/ec49b947-6c9e-405e-94b6-d358a8bef6dc" />
 
 ```
