@@ -1585,9 +1585,10 @@ so to make it more efficent the solution is Storage Class
   - To see what Permission that user has in any Namespace
 ```
 
+**Wrap up**
 
-
-
+```
+```
 
 
 
