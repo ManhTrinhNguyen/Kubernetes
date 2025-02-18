@@ -1727,7 +1727,7 @@ so to make it more efficent the solution is Storage Class
 
 Step 1 : Minimum Require Configuration File for Development and Service . Since I have 11 Microservices I will have 11 Development and Service in that File 
 
-<img width="311" height="350" alt="Screenshot 2025-02-17 at 14 41 11" src="https://github.com/user-attachments/assets/71f1e270-0c70-4c45-bfa8-6607c2d57128" />
+<img width="311" alt="Screenshot 2025-02-17 at 14 41 11" src="https://github.com/user-attachments/assets/71f1e270-0c70-4c45-bfa8-6607c2d57128" />
 
 Step 2 : Configure Development and Service 
   
