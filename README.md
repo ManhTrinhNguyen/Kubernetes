@@ -1723,6 +1723,8 @@ so to make it more efficent the solution is Storage Class
 
 **Create Development and Service Config**
 
+<img width="500" alt="Screenshot 2025-02-18 at 09 43 19" src="https://github.com/user-attachments/assets/9a0655e4-f0e9-459c-89af-a9d70a246c2a" />
+
 Step 1 : Minimum Require Configuration File for Development and Service . Since I have 11 Microservices I will have 11 Development and Service in that File 
 
 <img width="311" height="350" alt="Screenshot 2025-02-17 at 14 41 11" src="https://github.com/user-attachments/assets/71f1e270-0c70-4c45-bfa8-6607c2d57128" />
@@ -1730,16 +1732,118 @@ Step 1 : Minimum Require Configuration File for Development and Service . Since 
 Step 2 : Configure Development and Service 
   
   1. Email Service :
-      - Container Port: 8080
-      - name : emailservice
-      - Image : xxx
-      - Service Port : 5000 (Can be the same Target Port or can be different)
-      - Environment Var : env :
-         - name: PORT 
-         - value : "8080"
+  ```
+  - Container Port: 8080
+  - name : emailservice
+  - Image : xxx
+  - Service Port : 5000 (Can be the same Target Port or can be different)
+  - Environment Var : env :
+     - name: PORT 
+     - value : "8080"
+  ```
 
-  3. Recommendation Service :
-    - Recommendation Service talk to Catalog Service : I need to tell the Recommendtation Service the endpoint or the service name of the Product Catalog service, where it can connect to it  
+  2. Recommendation Service :
+  ```
+    - Recommendation Service talk to Catalog Service : I need to tell the Recommendtation Service the endpoint or the service name of the Product Catalog service, where it can connect to it
+  - Container Port: 8080
+  - name : recommendationservice
+  - Image : xxx
+  - Service Port : 5000 (Can be the same Target Port or can be different)
+  - Environment Var :
+    - env :
+      - name: PORT 
+     value : "8080"
+      - name: PRODUCT_CATALOG_SERVICE_ADDR
+      value : "productcatalogservice:3550"
+  ```
+
+  3. Product Catalog Service :
+  ```
+  - Container Port: 3550
+  - name : productcatalogservice
+  - Image : xxx
+  - Service Port : 3550 (Can be the same Target Port or can be different)
+  - Environment Var :
+    - env :
+      - name: PORT 
+     value : "3550"
+  ```
+
+4. Payment Service :
+  ```
+  - Container Port: 50051
+  - name : paymentservice
+  - Image : xxx
+  - Service Port : 50051 (Can be the same Target Port or can be different)
+  - Environment Var :
+    - env :
+      - name: PORT 
+     value : "3550"
+  ```
+
+5. Cart Service
+  ```
+  - Container Port: 7070
+  - name : paymentservice
+  - Image : xxx
+  - Service Port : 7070 (Can be the same Target Port or can be different)
+  - Environment Var :
+    - env :
+      - name: PORT 
+      value : "3550"
+      - name: REDIS_ADDR
+      value : "redis-cart:6739"
+  ```
+
+6. Redis
+  ```
+  - Container Port: 6379
+  - name : redis-cart
+  - Image : redis:alpine
+  - Service Port : 7070 (Can be the same Target Port or can be different)
+
+  - I need to provide Volume for Redis -> Bcs Redis persist data
+    - volumes:
+      - name : redis-data
+        emptyDir: {}
+
+    - volumeMounts:
+      - name : redis-data
+        mountPath: /data -> This is where redis will store Temporary data 
+
+  - Volume type:
+
+    -- Persistence Type : Exist beyond lifetime of Pod
+
+    -- Ephemeral Volume Type : K8s destroy when pod ceases to exist -> emptyDir
+
+      --- Empty Dir start as empty Dir  .
+      --- Empty Dir gets created when a pod that reference that empty directory volume start on a Node
+      --- Exist as long as that the Pod is running on that specific Node
+      --- If the Pod died and restart EmptyDir will be deleted permantly and start new EmptyDir with another Pod just restart
+      --- If the container inside the Pod crashed but not itself . It doesn't acctually remove the emptyDir content or data
+  ```
+
+7. Checkout Service
+
+<img width="600" alt="Screenshot 2025-02-18 at 10 24 05" src="https://github.com/user-attachments/assets/e80631bf-0d55-468f-9641-d5bede431b13" />
+<img width="561" alt="Screenshot 2025-02-18 at 10 25 17" src="https://github.com/user-attachments/assets/487d0b8b-53d6-47aa-b3b3-ac73b77e709b" />
+
+
+!!! NOTE : 2 Of services are trying to initiate a profiler , when they start up. And by setting these ENV we tell the Application to ignore the Profiler Service, as we don't have them in the cluster
+      --- In PaymentService: Add new ENV -> DISABLE_PROFILER = 1
+      --- In Currency Service: Add new ENV -> DISABLE_PROFILER = 1
+
+8. The Frontend
+
+<img width="499" alt="Screenshot 2025-02-18 at 10 50 18" src="https://github.com/user-attachments/assets/a911c4fd-dde5-4d2f-9dc6-498f967c421f" />
+
+  ```
+    - Front end Micro talk to all these other microservices to distribute the request that its get to whoever responsible for the request. So I need to set the endpoint of all those Microservices
+  ```
+
+
+
 
 
 
