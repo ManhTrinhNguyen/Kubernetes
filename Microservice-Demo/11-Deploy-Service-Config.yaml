@@ -12,14 +12,14 @@ spec:
       labels:
         app: emailservice
     spec: 
-      container:
+      containers:
       - name: service
         image: gcr.io/google-samples/microservices-demo/emailservice:v0.8.0
         ports:
         - containerPort: 8080
-      env:
-      - name: PORT
-        value: "8080"
+        env:
+        - name: PORT
+          value: "8080"
 ---
 apiVersion: v1
 kind: Service
@@ -49,16 +49,16 @@ spec:
       labels:
         app: recommendationservice
     spec: 
-      container:
+      containers:
       - name: service
         image: gcr.io/google-samples/microservices-demo/recommendationservice:v0.8.0
         ports:
         - containerPort: 8080
-      env:
-      - name: PORT
-        value: "8080"
-      - name: PRODUCT_CATALOG_SERVICE_ADDR
-        value: "productcatalogservice:3550"
+        env:
+        - name: PORT
+          value: "8080"
+        - name: PRODUCT_CATALOG_SERVICE_ADDR
+          value: "productcatalogservice:3550"
 ---
 apiVersion: v1
 kind: Service
@@ -89,14 +89,14 @@ spec:
       labels:
         app: productcatalogservice
     spec: 
-      container:
+      containers:
       - name: service
         image: gcr.io/google-samples/microservices-demo/productcatalogservice:v0.8.0
         ports:
         - containerPort: 3550
-      env: 
-      - name: PORT
-        value: "3550"
+        env: 
+        - name: PORT
+          value: "3550"
 ---
 apiVersion: v1
 kind: Service
@@ -127,16 +127,16 @@ spec:
       labels:
         app: cartservice
     spec: 
-      container:
+      containers:
       - name: service
         image: gcr.io/google-samples/microservices-demo/cartservice:v0.8.0
         ports:
         - containerPort: 7070
-      env:
-      - name: PORT
-        value: "7070"
-      - name: REDIS_ADDR
-        value: "redis-cart:6739"
+        env:
+        - name: PORT
+          value: "7070"
+        - name: REDIS_ADDR
+          value: "redis-cart:6379"
 ---
 apiVersion: v1
 kind: Service
@@ -167,7 +167,7 @@ spec:
       labels:
         app: redis-cart
     spec: 
-      container:
+      containers:
       - name: redis
         image: redis:alpine
         ports:
@@ -208,14 +208,14 @@ spec:
       labels:
         app: adservice
     spec: 
-      container:
+      containers:
       - name: service
         image: gcr.io/google-samples/microservices-demo/adservice:v0.8.0
         ports:
         - containerPort: 9555
-      env:
-      - name: PORT
-        value: "9555"
+        env:
+        - name: PORT
+          value: "9555"
 ---
 apiVersion: v1
 kind: Service
@@ -246,16 +246,16 @@ spec:
       labels:
         app: paymentservice
     spec: 
-      container:
+      containers:
       - name: service
         image: gcr.io/google-samples/microservices-demo/paymentservice:v0.8.0
         ports:
         - containerPort: 50051
-      env:
-      - name: PORT
-        value: "50051"
-      - name: DISABLE_PROFILER
-        value: "1"
+        env:
+        - name: PORT
+          value: "50051"
+        - name: DISABLE_PROFILER
+          value: "1"
 ---
 apiVersion: v1
 kind: Service
@@ -286,14 +286,14 @@ spec:
       labels:
         app: shippingservice
     spec: 
-      container:
+      containers:
       - name: service
         image: gcr.io/google-samples/microservices-demo/shippingservice:v0.8.0
         ports:
         - containerPort: 50051
-      env: 
-      - name: PORT
-        value: "50051"
+        env: 
+        - name: PORT
+          value: "50051"
 ---
 apiVersion: v1
 kind: Service
@@ -323,16 +323,16 @@ spec:
       labels:
         app: currencyservice
     spec: 
-      container:
+      containers:
       - name: service
         image: gcr.io/google-samples/microservices-demo/currencyservice:v0.8.0
         ports:
         - containerPort: 7000
-      env: 
-      - name: PORT
-        value: "7000"
-      - name: DISABLE_PROFILER
-        value: "1"
+        env: 
+        - name: PORT
+          value: "7000"
+        - name: DISABLE_PROFILER
+          value: "1"
 ---
 apiVersion: v1
 kind: Service
@@ -362,26 +362,26 @@ spec:
       labels:
         app: checkoutservice
     spec: 
-      container:
+      containers:
       - name: service
         image: gcr.io/google-samples/microservices-demo/checkoutservice:v0.8.0
         ports:
         - containerPort: 5050
-      env: 
-      - name: PORT
-        value: "5050"
-      - name: PAYMENT_SERVICE_ADDR
-        value: "paymentservice:50051"
-      - name: SHIPPING_SERVICE_ADDR
-        value: "shippingservice:50051"
-      - name: CART_SERVICE_ADDR
-        value: "cartservice:7070"
-      - name: CURRENCY_SERVICE_ADDR
-        value: "currencyservice:7000"
-      - name: PRODUCT_CATALOG_SERVICE_ADDR
-        value: "productcatalogservice:3550"
-      - name: EMAIL_SERVICE_ADDR
-        value: "emailservice:8080"
+        env: 
+        - name: PORT
+          value: "5050"
+        - name: PAYMENT_SERVICE_ADDR
+          value: "paymentservice:50051"
+        - name: SHIPPING_SERVICE_ADDR
+          value: "shippingservice:50051"
+        - name: CART_SERVICE_ADDR
+          value: "cartservice:7070"
+        - name: CURRENCY_SERVICE_ADDR
+          value: "currencyservice:7000"
+        - name: PRODUCT_CATALOG_SERVICE_ADDR
+          value: "productcatalogservice:3550"
+        - name: EMAIL_SERVICE_ADDR
+          value: "emailservice:8080"
 ---
 apiVersion: v1
 kind: Service
@@ -411,28 +411,28 @@ spec:
       labels:
         app: frontend
     spec: 
-      container:
+      containers:
       - name: service
         image: gcr.io/google-samples/microservices-demo/frontend:v0.8.0
         ports:
         - containerPort: 8080
-      env:
-      - name: PORT
-        value: "8080"
-      - name: CART_SERVICE_ADDR
-        value: "cartservice:7070"
-      - name: RECOMMENDATION_SERVICE_ADDR
-        value: "recommendationservice:8080"
-      - name: PRODUCT_CATALOG_SERVICE_ADDR
-        value: "productcatalogservice:3550"
-      - name: AD_SERVICE_ADDR
-        value: "adservice:9555"
-      - name: CHECKOUT_SERVICE_ADDR
-        value: "checkoutservice:5050"
-      - name: CURRENCY_SERVICE_ADDR
-        value: "currencyservice:7000"
-      - name: SHIPPING_SERVICE_ADDR
-        value: "shippingservice:50051"
+        env:
+        - name: PORT
+          value: "8080"
+        - name: CART_SERVICE_ADDR
+          value: "cartservice:7070"
+        - name: RECOMMENDATION_SERVICE_ADDR
+          value: "recommendationservice:8080"
+        - name: PRODUCT_CATALOG_SERVICE_ADDR
+          value: "productcatalogservice:3550"
+        - name: AD_SERVICE_ADDR
+          value: "adservice:9555"
+        - name: CHECKOUT_SERVICE_ADDR
+          value: "checkoutservice:5050"
+        - name: CURRENCY_SERVICE_ADDR
+          value: "currencyservice:7000"
+        - name: SHIPPING_SERVICE_ADDR
+          value: "shippingservice:50051"
    
 ---
 apiVersion: v1
