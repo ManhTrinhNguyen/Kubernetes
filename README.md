@@ -1840,10 +1840,25 @@ Step 2 : Configure Development and Service
 
   ```
     - Front end Micro talk to all these other microservices to distribute the request that its get to whoever responsible for the request. So I need to set the endpoint of all those Microservices
+
+    - Front end Micro has to be available or accessible externally from a Browser 
   ```
 
+**Deploy Micros to a Cluster**
 
+  Step 1: Create Linode cluster 
+  
+  Step 2: Add 3 small Node running on the shared CPU 
+  
+  Step 3 : Download Kubeconfig file So we can connect to a Cluster -> Before I use kubeconfig I have to set perrmission to more stricter permission bcs this file contain credentials to my Kubernetes cluster . Also I need to securely store this file
+  
+  Step 4 : `export KUBECONFIG=<absolute path to my project>`
 
+  Step 5 : Instead of set up everything on the Default Namespace . I will create Namespace : `kubectl create ns microservices`
+
+  Step 6 : Deploy my micro service into my NameSpace : `kubectl -f config.yaml -n microservices`
+
+  Step 7 : Get Pods : `kubectl get pods -n microservices`
 
 
 
