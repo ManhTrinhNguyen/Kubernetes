@@ -1728,8 +1728,18 @@ Step 1 : Minimum Require Configuration File for Development and Service . Since 
 <img width="311" height="350" alt="Screenshot 2025-02-17 at 14 41 11" src="https://github.com/user-attachments/assets/71f1e270-0c70-4c45-bfa8-6607c2d57128" />
 
 Step 2 : Configure Development and Service 
+  
+  1. Email Service :
+    - Container Port: 8080
+    - name : emailservice
+    - Image : xxx
+    - Service Port : 5000 (Can be the same Target Port or can be different)
+    - Environment Var : env :
+       - name: PORT 
+       - value : "8080"
 
-   1. Email service : Port 8080 
+  3. Recommendation Service :
+    - Recommendation Service talk to Catalog Service : I need to tell the Recommendtation Service the endpoint or the service name of the Product Catalog service, where it can connect to it  
 
 
 
