@@ -1776,7 +1776,10 @@ Step 2 : Configure Development and Service
 
   2. Recommendation Service :
   ```
-    - Recommendation Service talk to Catalog Service : I need to tell the Recommendtation Service the endpoint or the service name of the Product Catalog service, where it can connect to it
+  - Recommendation Service talk to Catalog Service : I need to tell the Recommendtation Service the endpoint or the service name of the Product Catalog service, where it can connect to it
+  - The way it work is Recommendation microservice take the enpoint or the service name of the Product Catalog microservice so Recommendation microservice can connect to Product Catalog microservice (I defined the Product Catalog service enpoint in the Cofiguration yaml file)
+  - My Recommendation Service communicate with my Product Catalog Service through the K8 DNS-based service discovery mechanism
+
   - Container Port: 8080
   - name : recommendationservice
   - Image : xxx
