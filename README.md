@@ -1727,7 +1727,39 @@ so to make it more efficent the solution is Storage Class
 
 Step 1 : Minimum Require Configuration File for Development and Service . Since I have 11 Microservices I will have 11 Development and Service in that File 
 
-<img width="311" alt="Screenshot 2025-02-17 at 14 41 11" src="https://github.com/user-attachments/assets/71f1e270-0c70-4c45-bfa8-6607c2d57128" />
+```
+apiVersion: v1
+kind: Deployment
+metadata:
+  name: xxxx
+spec
+  selector:
+    matchLabels:
+      app: xxxx
+  template:
+    metadata:
+      labels:
+        app: xxxx
+    spec: 
+      container:
+      - name: xxxx
+        image: xxxx
+        ports:
+        - containerPort: xxxx
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: xxxx
+spec: 
+  type: ClusterIP
+  selector:
+    app: xxxx
+  ports:
+  - protocol: TCP
+    port: xxxx
+    targetPort: xxxx
+```
 
 Step 2 : Configure Development and Service 
   
