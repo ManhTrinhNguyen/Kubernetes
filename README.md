@@ -1885,7 +1885,7 @@ Step 2 : Configure Development and Service
   
   Step 2: Add 3 small Node running on the shared CPU 
   
-  Step 3 : Download Kubeconfig file So we can connect to a Cluster -> Before I use kubeconfig I have to set perrmission to more stricter permission bcs this file contain credentials to my Kubernetes cluster . Also I need to securely store this file
+  Step 3 : Download Kubeconfig file So we can connect to a Cluster -> Before I use kubeconfig I have to set perrmission to more stricter permission bcs this file contain credentials to my Kubernetes cluster . Also I need to securely store this file : `chmod 400 kubeconfigcredentials.yaml`
   
   Step 4 : `export KUBECONFIG=<absolute path to my project>`
 
