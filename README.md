@@ -1857,6 +1857,8 @@ Step 2 : Configure Development and Service
       --- Exist as long as that the Pod is running on that specific Node
       --- If the Pod died and restart EmptyDir will be deleted permantly and start new EmptyDir with another Pod just restart
       --- If the container inside the Pod crashed but not itself . It doesn't acctually remove the emptyDir content or data
+
+  !!! NOTE: Use a Deployment if you’re running Redis as a cache and don’t need persistent data. However, if you plan to run Redis with persistence (e.g., AOF, RDB snapshots), go with a StatefulSet and configure persistent volumes instead of emptyDir.
   ```
 
 7. Checkout Service
@@ -1990,11 +1992,48 @@ Step 2 : Configure Development and Service
   !!! NOTE : If I put values larger than my biggest Node resources, my Pod will never be schedule
   ```
 
+  Best Practice 6: Don't Expose NodePort 
+  
+<img width="400" alt="Screenshot 2025-02-20 at 12 35 16" src="https://github.com/user-attachments/assets/6f09468d-1c1f-40cc-899c-1687eb6f668a" />
+<img width="400" alt="Screenshot 2025-02-20 at 12 36 48" src="https://github.com/user-attachments/assets/73d69694-f898-444a-a4cf-63a57c8a7a4e" />
 
+  ```
+    - Even Though using NodePort super easy bcs it expose Cluster Security Risk . Bcs it opened ports on each Worker Node . So have multiple entry point in the cluster . So 
+I increase the attack surface
 
+    - The Best Pratice is only use Internal Services (Cluster IP) and have 1 only 1 entry point to that Service . And ideally that entry point should be sit outside the cluster on a seperate server
 
+    - Intead of using NodePort I can use LoadBalancer Type which use the CLoud platform's Load balancer to create an external single entry point for the cluster
 
+    - So Load Balancer will get all the request from Browser or from external resources to Application
 
+    - And the Alternative I can use Ingress Controller to direct traffice to internal Services 
+  ```
+
+  Best Practice 7: More than 1 Replica for Deployment 
+
+  ```
+    - If 1 Pod crashes, my application is not accessible until new Pods restart !
+
+    - By Increasing Replicas, make sure even if 1 replica die Application alway remain available
+
+    - Always Available | No downtime for users
+  ```
+
+  Best Practice 8: More than 1 Worker Node in the Cluster 
+
+  ```
+    - Alway use more than 1 Worker Node
+    - If something happen to a Node all my Application are gone, stopped and not accessible
+
+    - Especially if i want to run multiple Replica of my Pods, ideally I want each replica to run on the different Node and not all the Replicas run on the same Node . That doesn't give me that much backup if something happen to Node itself
+
+    ----Some reason it happen----
+    - Server crashes
+    - Server reboot bcs of an update
+    - Server maintance
+    - Server Broken 
+  ```
 
 
 
