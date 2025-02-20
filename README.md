@@ -1960,6 +1960,36 @@ Step 2 : Configure Development and Service
   !!! Note: Generally for readiness and liveness probes, no matter if it's a command execution or TCP socker, we can actually execute initial delay seconds in case we know that Application take longer to start 
   ```
 
+  Best Practice 4 : Resources Request for each container
+
+  <img width="500" alt="Screenshot 2025-02-20 at 11 38 23" src="https://github.com/user-attachments/assets/1862d904-cbc3-4c55-87f6-faa402f9d229" />
+
+  ```
+    - I need to define for each container something called resource requests . Some Application may need more CPU or RAM than other
+
+    - To make sure my Application Container has enough resources to run inside the Pod , I should define Resources Request for that Container
+
+    - m = milicores
+
+    - Mi = mebibyte
+  ```
+
+  Best Practice 5 : Resources Limit for each container 
+  
+  <img width="500" alt="Screenshot 2025-02-20 at 12 09 55" src="https://github.com/user-attachments/assets/66148408-4ba6-4e98-b85c-bb09763062f3" />
+
+  ```
+    - Why Resources Limit important ?
+
+    - What if Applications need more Resources ? What if when the Application is running need more Resources than Requested ? Bcs if 1 Application can have too much data that it need to load into memory or Application has a bug inside with some infinite loop and start consuming all the CPU available on that Node
+
+    - If not limited , container could take all the Resources of that Node
+
+    ----Configure resources limits for each container----
+
+  !!! NOTE : If I put values larger than my biggest Node resources, my Pod will never be schedule
+  ```
+
 
 
 
