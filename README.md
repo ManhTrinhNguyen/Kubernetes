@@ -2035,6 +2035,85 @@ I increase the attack surface
     - Server Broken 
   ```
 
+  Best Practice 9 : Using Labe 
+  
+<img width="400" alt="Screenshot 2025-02-20 at 13 12 50" src="https://github.com/user-attachments/assets/ac47ee9a-9d2a-4b7b-a5a4-7b25faffbb07" />
+<img width="400" alt="Screenshot 2025-02-20 at 13 16 05" src="https://github.com/user-attachments/assets/8dc77cfd-8591-40c1-96bb-6d85e02b6dfb" />
+
+  ```
+    - Use labels for all Resources
+    - Labeling all my Kubernetes Component
+
+    - Labels are key value pair
+
+    - Attach to K8 component like Pod, Service, Deployment ...
+
+    - Labeling Component is custom identifier for my Component .
+    - Should be meaningful and relevant to user
+
+    - Label to Group Pods base on Application they belong to and then refencing them in Service Component
+
+    - Best Practice is to label all Resources 
+  ```
+
+  Best Practice 10 : User Namepsaces to isolate resources 
+
+    ```
+      - Logicly grouping Application and other component into namespace make manging my cluster way easier compared to just throwing the Pod and Service everywhere in the Cluster 
+
+      - Also For defining diffent priviledges inside the cluster base on the Namespace | I can have multiple team working on the same cluster but each one working on different Namspace
+
+      ----Namespace Permission----
+      - Role 
+      - RoleBinding 
+
+      - And This totally up to the team how they decide to group and separate application in namespaces . I can have 1 Microservice per Namespace as well 
+    ```
+
+**3 Security Best practices**
+
+  Best Practice 1 : Ensure Image are free vulnerablility
+  
+  <img width="400" alt="Screenshot 2025-02-20 at 13 26 58" src="https://github.com/user-attachments/assets/eb5d3579-0df8-4c21-8375-d7f0ec1d8e87" />
+
+  ```
+    - This can happen when I useing library or tools that have some vulnerabilti for my Application inside the container
+
+    - Mannually scan vulnerability on Images
+
+    - Or Automated scan on the Build Pipelines
+  ```
+
+  Best Practice 2 : No Root access for Container 
+
+  ```
+    - Making sure that I don't have container running in my Cluster that have root access capability
+
+    - This exposed security risk bcs a container with root access can access more resources and do much more on the host where it is running
+
+    - If the container is hacked, much more damage can be done
+
+    - So best practice is having none Root user in the container
+
+    - Most of officical Images Do Not use root user however if I use non-official third party Images . Alway a good practice to check
+
+  ```
+
+  Best Practice 3 : Update K8 to latest version 
+
+  ```
+    - Important Security Fixed
+
+    - Bug fixed
+
+    ----Update K8 Version Node by Node----
+    - To avoild Application downtime 
+  ```
+
+
+
+
+
 
 
 
