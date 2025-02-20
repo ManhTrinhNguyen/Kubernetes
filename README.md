@@ -1931,8 +1931,28 @@ Step 2 : Configure Development and Service
       -- Next I need to define how often the Application should be check for its health : periodSeconds: 5
   ```
 
+  Best Practice 3 : Readness Probe for each container 
 
+  <img width="500" alt="Screenshot 2025-02-20 at 09 34 09" src="https://github.com/user-attachments/assets/e2bf168e-fea1-4385-8783-0da4a8ce7219" />
+  <img width="500" alt="Screenshot 2025-02-20 at 10 26 00" src="https://github.com/user-attachments/assets/57711691-4b6b-44eb-89ec-cbcf76290e28" />
 
+  ```
+    - K8s know the Pod state but it doesn't know the Application State inside the Pod . And I solved this problem with LivenessProbe
+
+    - But LivenessProbe help K8s see that Application is running successfully only After the Application started
+
+    - What about the starting up itself Application ?
+
+    ----How does K8s know the Apps is fully intiated and started and ready to receive the request ?----
+    - Peform Health Check with Readiness Probe
+    - Let's K8 know if Application is ready to recevice traffic
+    - Without Readiness Probe, K8s assume the app is ready to receive traffic as soon as container start
+
+    ----How to configure Rediness Probe----
+    - Similar to LivenessProbe
+
+  !!! Note: These mircoservices Application are using grpc protocol and that's why I have use grpc attribute but other Application may use other protocol -> There are 2 alternative to this : TCP socket
+  ```
 
 
 
