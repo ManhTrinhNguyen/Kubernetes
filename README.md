@@ -1933,8 +1933,10 @@ Step 2 : Configure Development and Service
 
   Best Practice 3 : Readness Probe for each container 
 
-  <img width="500" alt="Screenshot 2025-02-20 at 09 34 09" src="https://github.com/user-attachments/assets/e2bf168e-fea1-4385-8783-0da4a8ce7219" />
-  <img width="500" alt="Screenshot 2025-02-20 at 10 26 00" src="https://github.com/user-attachments/assets/57711691-4b6b-44eb-89ec-cbcf76290e28" />
+  <img width="400" alt="Screenshot 2025-02-20 at 09 34 09" src="https://github.com/user-attachments/assets/e2bf168e-fea1-4385-8783-0da4a8ce7219" />
+  <img width="400" alt="Screenshot 2025-02-20 at 10 26 00" src="https://github.com/user-attachments/assets/57711691-4b6b-44eb-89ec-cbcf76290e28" />
+  <img width="400" alt="Screenshot 2025-02-20 at 10 41 34" src="https://github.com/user-attachments/assets/cbc5f93e-f77e-44e2-94e6-f2ca0afe0fc6" />
+  <img width="400" alt="Screenshot 2025-02-20 at 10 41 34" src="https://github.com/user-attachments/assets/7d1f65a4-3fff-4acd-b22a-bff51cea1fd3" />
 
   ```
     - K8s know the Pod state but it doesn't know the Application State inside the Pod . And I solved this problem with LivenessProbe
@@ -1951,7 +1953,11 @@ Step 2 : Configure Development and Service
     ----How to configure Rediness Probe----
     - Similar to LivenessProbe
 
-  !!! Note: These mircoservices Application are using grpc protocol and that's why I have use grpc attribute but other Application may use other protocol -> There are 2 alternative to this : TCP socket
+  !!! Note: These mircoservices Application are using grpc protocol and that's why I have use grpc attribute but other Application may use other protocol -> There are 2 alternative to this :
+      1. TCPsocket: With this protocol The kubelet will attempt to open a socket to my container on that container Port . If it succeeds to establish a connection on this Port the container is considered to be heathy
+      2. HTTPs: If application has endpoint inside Application that expose bacsically the health status of Application itself, we could hit that endpoint to check whether application is healthy or not . This configuration will tell Kubelet there is an HTTP endpoint on the Application on this Port and this URL you can check wheather the URL is healthy or not
+
+  !!! Note: Generally for readiness and liveness probes, no matter if it's a command execution or TCP socker, we can actually execute initial delay seconds in case we know that Application take longer to start 
   ```
 
 
