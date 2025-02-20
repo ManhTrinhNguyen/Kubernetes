@@ -1936,7 +1936,7 @@ Step 2 : Configure Development and Service
   <img width="400" alt="Screenshot 2025-02-20 at 09 34 09" src="https://github.com/user-attachments/assets/e2bf168e-fea1-4385-8783-0da4a8ce7219" />
   <img width="400" alt="Screenshot 2025-02-20 at 10 26 00" src="https://github.com/user-attachments/assets/57711691-4b6b-44eb-89ec-cbcf76290e28" />
   <img width="400" alt="Screenshot 2025-02-20 at 10 41 34" src="https://github.com/user-attachments/assets/cbc5f93e-f77e-44e2-94e6-f2ca0afe0fc6" />
-  <img width="400" alt="Screenshot 2025-02-20 at 10 48 15" src="https://github.com/user-attachments/assets/7621f4a3-4810-425c-9b01-ca5a06ba2a5e" />
+  <img width="300" alt="Screenshot 2025-02-20 at 10 48 15" src="https://github.com/user-attachments/assets/7621f4a3-4810-425c-9b01-ca5a06ba2a5e" />
 
   ```
     - K8s know the Pod state but it doesn't know the Application State inside the Pod . And I solved this problem with LivenessProbe
