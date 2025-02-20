@@ -1895,6 +1895,52 @@ Step 2 : Configure Development and Service
 
   Step 7 : Get Pods : `kubectl get pods -n microservices`
 
+**Security and Production Best Practice**
+
+  Best Practice 1: Pinned (Tag) Version for each Container Image 
+  
+  <img width="500" alt="Screenshot 2025-02-20 at 09 26 49" src="https://github.com/user-attachments/assets/8fd0bb9c-5c49-4845-b293-63f2a3b2832e" />
+    
+  ```
+    - Define specific version for Image that I use inside the Pod
+
+    - If I don't specify the version tag . K8s automatically pulled the latest version . That mean the new Image get built and push to the Repo the Pod will restart and pull the latest version . It might cause break current App, unpridictable, Don't know what version running on my Cluster 
+  ```
+
+  Best Practice 2: Liveness Probe for each container 
+
+  <img width="500" alt="Screenshot 2025-02-20 at 09 34 09" src="https://github.com/user-attachments/assets/d8795879-ec0b-4689-aa03-7c3b200377c0" />
+
+  ```
+    - K8s has intelligent managing its resources
+
+    - Restart Pod When it Crash
+
+    - But what if the Application inside the Pod (container) ? Pod is running K8 think everything fine but in reality the container crashed or stuck in the loop then the Apps is not accessible . How to let K8s know wheather the Applications inside the Pod is running ?
+
+    ----Perform Health check with Liveness Probe----
+    - With Liveness Probe K8s will restart the Pod if the Application crash, or has issue
+
+    ----How to define a liveness Probe in the Container ?----
+    - The program that ping the Application endpoint every 5 or 10 second to check Application Response
+    - In this Application the developer has added small program can be check wheather Application healthy or accessible . So I can use that in the Liveness Probe
+
+    - Inisde the container attribute same level as name, image etc ...:
+      -- I defined the attribute depending on what protocol the Application use it. Could be : TCP, HTTP, gRPC ...
+      -- Once I defined Liveness Probe protocal I should tell what port should send that grpc request to
+      -- Next I need to define how often the Application should be check for its health : periodSeconds: 5
+  ```
+
+
+
+
+
+
+
+
+
+
+
 
 
 
