@@ -2143,20 +2143,22 @@ I increase the attack surface
     - **charts folder** : Chart folder hold any dependencies charts that these chart might have
    
     - **.helmignore** :
-    ```
       - File I don't want to include in my helm chart .
-
       - Basically this file tell Helm to ignore all of these folder and files when building a Package Archive from this chart . Helm Chart can build and packaged and distributed just like any other artifacts
-   ```
 
     - **Template folder**:
-
-    ```
       - This a Core of a Helm Chart
-
       - This is where the acutal K8s YAML file Created
-    ``` 
+
+      - Inside Template Folder:
+        - **service.yaml** :
+          - The atrribute same as in the K8s Service configuration yaml file.
+          - Instead of the hardcode value I have placeholder defined as {{}}
   
+
+
+
+
 
 
 
