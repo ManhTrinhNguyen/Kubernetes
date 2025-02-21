@@ -2226,7 +2226,14 @@ spec:
 
   - What if I want to set multiple ENV and I want to make them configurable?
   - For Working with a List of something . In this case List of ENV , I have a built-in function template file called Range
-
+  - Range is basically loop through over the list of variable or object and let me access each element one by one
+  - Syntax for range : This way I can access the key value pair that I define in the container Env var List
+  ```
+    {{-range .Values.containerEnvVars}}
+    - name: {{ .key }}
+      value: {{ .value }}
+  ```
+ 
 
 
 
