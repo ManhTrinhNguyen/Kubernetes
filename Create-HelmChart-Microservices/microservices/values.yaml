@@ -10,4 +10,4 @@ containerEnvVars:
   value: "valuetwo"
 
 servicePort: 8080
-serviceTyope: ClusterIP
+serviceType: ClusterIP
