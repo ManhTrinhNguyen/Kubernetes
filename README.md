@@ -2261,8 +2261,15 @@ spec:
 
   - Another the way to Validate values yamle file : `helm lint <value-file> <Chart-name>`
     
-  
-
+**Deploy Email Services**
+  ----How to deploy Email microservice using Helm Chart----
+  Step 1 : Install Chart 
+    - `helm install -f email-services-value.yaml emailservice microservices --namespace mircorservices`
+      - `helm isntall` : To install Chart
+      - `-f email-services-value.yaml` : override values from a file 
+      - `emailservice`: Which is basically the application name that I deploy into a Cluster . In Helm World this called creating new release
+      - `microservice` : Chart name
+      - `--namespace microservices`: In specific name space
 
 
 
