@@ -2134,9 +2134,29 @@ I increase the attack surface
 
 **Basic Structure of Helm Chart**
 
-  ```
-    
-  ```
+  - Create Helm chart `helm create <helm-chart-name>`
+
+  - Inside Helm Chart Folder: 
+
+    - **Chart.yaml** : Describe Chart metadata (Chart name, Description, Version, Application Version)
+   
+    - **charts folder** : Chart folder hold any dependencies charts that these chart might have
+   
+    - **.helmignore** :
+    ```
+      - File I don't want to include in my helm chart .
+
+      - Basically this file tell Helm to ignore all of these folder and files when building a Package Archive from this chart . Helm Chart can build and packaged and distributed just like any other artifacts
+   ```
+
+    - **Template folder**:
+
+    ```
+      - This a Core of a Helm Chart
+
+      - This is where the acutal K8s YAML file Created
+    ``` 
+  
 
 
 
