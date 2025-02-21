@@ -2248,12 +2248,18 @@ spec:
 
   - What if I want to set the actual valid value instead of default one ? I will using the custom value file
     - I will create my own values.yaml file usally outside the Chart itself
-    - For example : for emailService Mircro I will create emailservce-values.yaml 
-   
+    - For example : for emailService Mircro I will create emailservce-values.yaml
+    - From Default values file to valid emailservice value file
+     <img width="300" alt="Screenshot 2025-02-21 at 12 34 10" src="https://github.com/user-attachments/assets/0060745f-14f5-4e4a-9ee3-858c4135c8c2" />
+
   - How do I validate that my template Yaml file and the values that I define are correct ?
     - Using : `helm template -f <value-file> <name-of-helm-chart>` | This give me a nice preview from all the values sources of that value-file
    
-  - The way it work in the background is : When Helm evaluate a Chart, It will send all the template files that are defined in the templates Directory through Helm's template rendering engine, Engine will then replace all the Variable or Placeholder in those Template File with the actual Values from the Values resources which are User Provided Values File or --set option (For singular value), Helm will then collect the result of those templates and send those file to Kubernetes when I execute `helm install` command 
+  - The way it work in the background is : When Helm evaluate a Chart, It will send all the template files that are defined in the templates Directory through Helm's template rendering engine, Engine will then replace all the Variable or Placeholder in those Template File with the actual Values from the Values resources which are User Provided Values File or --set option (For singular value), Helm will then collect the result of those templates and send those file to Kubernetes when I execute `helm install` command
+    
+<img width="300" alt="Screenshot 2025-02-21 at 12 32 41" src="https://github.com/user-attachments/assets/1c3512f2-503b-472d-9049-47524c7a976c" />
+
+  - Another the way to Validate values yamle file : `helm lint <value-file> <Chart-name>`
     
   
 
