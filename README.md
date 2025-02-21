@@ -2246,6 +2246,14 @@ spec:
   - This could be generic Bcs this is something we will override for each individual microservice Bcs every microservices has its own configuration that I will override 
   - If I have 10 different service yaml file I will still define the value in 1 file which is values.yaml
 
+  - What if I want to set the actual valid value instead of default one ? I will using the custom value file
+    - I will create my own values.yaml file usally outside the Chart itself
+    - For example : for emailService Mircro I will create emailservce-values.yaml 
+   
+  - How do I validate that my template Yaml file and the values that I define are correct ?
+    - Using : `helm template -f <value-file> <name-of-helm-chart>` | This give me a nice preview from all the values sources
+    
+  
 
 
 
