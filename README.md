@@ -2110,11 +2110,33 @@ I increase the attack surface
     - To avoild Application downtime 
   ```
 
+## Create Helm Chart for Microservices 
 
+  ```
+    - I have 10 Deployment and Services for my Microservices . I have almost the same attribute but just different value . I will create 1 blueprint for both Deployment and Service for all Microservices and ser value for these individual Services by using Helm Chart
 
+    ----Helm Chart Benefit----
+    - Resuable K8s cofiguration
+  ```
 
+**2 Ways to Create Helm Charts for Microservices**
 
+  ```
+    1. Create separate Helm Chart for each Microservices
+       - When configuration very different
+  
+    2. Create 1 Helm for all Services
 
+    3. Combination of both Options
+      - If I have a bunch of Application very similar , so I can use 1 single chart so they can shared and then pass different value for each individual Service 
+      - If I have a handful of Application that are different, and have different configuration, for those I can create seperate chart to avoid overcomplicating to a main Helm Chart
+  ```
+
+**Basic Structure of Helm Chart**
+
+  ```
+    
+  ```
 
 
 
