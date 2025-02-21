@@ -2171,7 +2171,61 @@ I increase the attack surface
       - By default Value is empty
       - But when Value is defined in the values.yaml or in User Provided value.yaml or pass onto helm using the --set option on the Commandline . So all of these value get injected into a Value Object . That is how I can access anything defined in values.yaml in the custom values.yaml that I create in addition or value that I set using --set flag
       - Helm's using couple built-in Object . By standard name start with capital Letter
-  
+
+**Deployment**
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.appName }} # This is a placeholder for the name of the deployment
+  labels:
+    app: {{ .Values.appName }}
+spec: 
+  replicas: {{ .Values.appReplica }} # This is a placeholder for the number of replicas
+  selector:
+    matchLabels:
+      app: {{ .Values.appName }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.appName }}
+    spec:
+      containers:
+      - name: {{ .Values.appName }}
+        image: "{{ .Values.appImage }}:{{.Values.appVersion}}" # This is how I can reference 2 variable for the same value attribute with "" and : separator
+        ports: 
+        - containerPort: {{ .Values.containerPort }}
+```
+
+**Services**
+```
+apiVersion: v1
+kind: Service
+metadata: 
+  name: {{ .Values.appName }}
+spec: 
+  type: {{ .Values.serviceType }}
+  selector:
+    app: {{ .Values.appName }}
+  ports:
+  - protocol: TCP
+    port: {{ .Values.servicePort }}
+    targetPort: {{ .Values.containerPort }}
+```
+
+**Dynamic ENV**
+
+  - For a single ENV we can have container ENV var like this:
+  ```
+    env: 
+    - name: {{ .Values.containerEnvVar.key }}
+      value: {{ .Values.containerEnvVar.value }}
+  ```
+
+  <img width="300" alt="Screenshot 2025-02-21 at 10 45 17" src="https://github.com/user-attachments/assets/dc624918-fd83-44f5-b629-485977f3c741" />
+
+  - What if I want to set multiple ENV and I want to make them configurable?
+  - For Working with a List of something . In this case List of ENV , I have a built-in function template file called Range
 
 
 
@@ -2179,5 +2233,10 @@ I increase the attack surface
 
 
 
+
+
+
+
+ 
 
 
