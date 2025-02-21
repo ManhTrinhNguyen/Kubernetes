@@ -2281,6 +2281,15 @@ Step 1 : Install Chart
 
 **Create Redis Helm Chart**
 
+  Step 1 : Create Redis Chart `helm create redis`
+  
+  Step 2 : Inside the template folder . Create deployment.yaml file and service.yaml file 
+
+  Step 3 : Validate my Redis Chart : `helm template <redis-values-fike> <chart-file>`
+
+  Step 4 : Another way to reviewing my manifest file is : `helm install --dry-run <redis-values-file> <release-name> <chart-file>` : Check generated manifest without install the chart
+
+  <img width="400" alt="Screenshot 2025-02-21 at 14 03 28" src="https://github.com/user-attachments/assets/3057a30b-833e-48c2-bbd8-ff179bfc61f3" />
 
 
 
