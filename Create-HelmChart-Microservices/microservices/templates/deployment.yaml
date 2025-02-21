@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.appName }} # This is a placeholder for the name of the deployment
+  labels:
+    app: {{ .Values.appName }}
+spec: 
+  replicas: {{ .Values.appReplicas }} # This is a placeholder for the number of replicas
+  selector:
+    matchLabels:
+      app: {{ .Values.appName }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.appName }}
+    spec:
+      containers:
+      - name: {{ .Values.appName }}
+        image: "{{ .Values.appImage }}:{{.Values.appVersion}}" # This is how I can reference 2 variable for the same value attribute with "" and : separator
+        ports: 
+        - containerPort: {{ .Values.containerPort }}
+        env: 
+        {{-range .Values.containerEnvVars }}
+        - name: {{ .name }}
+          value: {{ .value }}
+        {{-end}}
