@@ -2150,11 +2150,29 @@ I increase the attack surface
       - This a Core of a Helm Chart
       - This is where the acutal K8s YAML file Created
 
-      - Inside Template Folder:
-        - **service.yaml** :
+      - **Inside Template Folder**:
+        - **service.yaml and deployment.yaml** :
           - The atrribute same as in the K8s Service configuration yaml file.
-          - Instead of the hardcode value I have placeholder defined as {{}}
+          - Instead of the hardcode value I have placeholder defined as {{}} . The value with this syntax are actually the placeholder to actual Value
+
+    - **values.yaml**
+      - This is a place where the actual value are set will be then substituted in the template file
+
+**Create Basic Template File**
+
+<img width="400" alt="Screenshot 2025-02-21 at 10 19 10" src="https://github.com/user-attachments/assets/3794cccc-5bcf-4b0e-a701-112a20eba975" />
+<img width="400" alt="Screenshot 2025-02-21 at 10 20 33" src="https://github.com/user-attachments/assets/5b05b078-cc38-47e8-a51e-6e57d369ece9" />
+<img width="400" alt="Screenshot 2025-02-21 at 10 22 56" src="https://github.com/user-attachments/assets/96bad35f-36a2-438f-9990-5efa32768947" />
+
+  - To set a Variable in Template file I use this syntax : `{{ .Values.varName }}`
+    - varName: Is anyname I can define myself
+    - .Values :
+      - Is a built-in Object
+      - By default Value is empty
+      - But when Value is defined in the values.yaml or in User Provided value.yaml or pass onto helm using the --set option on the Commandline . So all of these value get injected into a Value Object . That is how I can access anything defined in values.yaml in the custom values.yaml that I create in addition or value that I set using --set flag
+      - Helm's using couple built-in Object . By standard name start with capital Letter
   
+
 
 
 
