@@ -2251,7 +2251,9 @@ spec:
     - For example : for emailService Mircro I will create emailservce-values.yaml 
    
   - How do I validate that my template Yaml file and the values that I define are correct ?
-    - Using : `helm template -f <value-file> <name-of-helm-chart>` | This give me a nice preview from all the values sources
+    - Using : `helm template -f <value-file> <name-of-helm-chart>` | This give me a nice preview from all the values sources of that value-file
+   
+  - The way it work in the background is : When Helm evaluate a Chart, It will send all the template files that are defined in the templates Directory through Helm's template rendering engine, Engine will then replace all the Variable or Placeholder in those Template File with the actual Values from the Values resources which are User Provided Values File or --set option (For singular value), Helm will then collect the result of those templates and send those file to Kubernetes when I execute `helm install` command 
     
   
 
