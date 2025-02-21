@@ -2229,10 +2229,16 @@ spec:
   - Range is basically loop through over the list of variable or object and let me access each element one by one
   - Syntax for range : This way I can access the key value pair that I define in the container Env var List
   ```
+    env:
     {{-range .Values.containerEnvVars}}
     - name: {{ .key }}
-      value: {{ .value }}
-  ```
+      value: {{ .value | quote }}
+    {{-end}}
+
+    Note: Value ENV variable alway interpreted as strings . So I use a built-in function called quote and will use piping syntax |
+
+    - Piping syntax in Linux : is the way to pass Output of 1 command to other Input of other command
+  ``` 
  
 
 
