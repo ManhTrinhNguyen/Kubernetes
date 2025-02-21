@@ -2273,6 +2273,15 @@ Step 1 : Install Chart
     - `microservice` : Chart name
     - `--namespace microservices`: In specific name space
 
+**Create values file for all microservices**
+
+<img width="400" alt="Screenshot 2025-02-21 at 13 29 55" src="https://github.com/user-attachments/assets/a21a39c8-207b-4578-bf18-327179855ed5" />
+
+  - I created a value folder and put all the value services files in there
+
+**Create Redis Helm Chart**
+
+
 
 
 
