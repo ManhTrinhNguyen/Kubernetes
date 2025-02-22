@@ -1,5 +1,5 @@
 appName: frontend
-appImage: gcr.io/google-samples/microservices-demo/emailservice
+appImage: gcr.io/google-samples/microservices-demo/frontend
 appVersion: v0.8.0
 appReplicas: 2
 containerPort: 8080
