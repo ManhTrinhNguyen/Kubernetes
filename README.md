@@ -2326,6 +2326,9 @@ Step 1 : Install Chart
         # values: the values file to use
         values:
           - values/redis-values.yaml
+           # I can also overide the values in the values file
+          - appReplicas: "1"
+          - volumeName: "redis-cart-data"
         # namespace: the namespace to deploy to
         namespace: microservices
     
@@ -2401,12 +2404,48 @@ Step 1 : Install Chart
 
   ```
 
+**Install Helmfile**
 
+  - Using brew for MacOs: `brew install helmfile`
 
+**Deploy HelmChart**
 
+  - After helmfile install I can use helmfile command to update the cluster or sync the cluster with whatever I have declare in our Helmfile
 
+  - `helmfile sync` : What does `helmfile sync` do ?
+    - Preparing all the releases
+    - It will then compare the actual State in the cluster with the desired state that I configured in the Helmfile
+    - Base on that it will plan what need to be install and deployed in the cluster to give me a desired State
+   
+  - `helmfile list`: Which show me at any point the currently installed released that Helmfile manage for me
 
+  - I can validate my app is running by taking the Load Balancer IP address bcs Load Balancer is a Type I configure for the Front end service with Cloud native Load balancer
 
+**Uninstall Release**:  `helmfile destroy`
+
+**Wrap up**
+
+```
+  1. Configured Shared Helm Chart for all Microservices
+
+  2. Deploy Declarative using Helmfile
+
+  ----Where to host my HelmChart?----
+  - Host it into a Git Repo
+  - Just like Application code, This is a part of the Infrastructure or configuration as code and this is need to be in the Code Repo
+
+  - 2 Options of where should I host it
+
+    -- One of them actually packaging it and host it with Application Code
+
+    -- Another Option (Preferred way to do it) : Seperate Git Repo only for Helm Chart . I would take it whole project . So I would take this whole project I would create Git Repo out of it and have a seperate repository from the Application Code .
+
+  - Each one has Advandtages and Disadvandtages . So in Practice base on my Applications Specific and base on how my development practice look like the team should usally decide to the best option to architect this
+
+  ----How does it fit into CI/CD the Devops Workflow ?----
+  - In practice the way it would work is . Me as a Devops engineer who knows K8s and Helm would create Charts for developers . I can create blueprint for the Microservices Deployment, create seperate Repo for that and hand it over to Developers. Once I have configure all of this . I will be creator of the Chart and the Developer is a User of Helm chart
+  - As User they can simply tweak the configuration values there. And use it to Deploy Micro Services Applications into the Cluster usually by interating this into CI/CD pipeline 
+``` 
 
 
 
