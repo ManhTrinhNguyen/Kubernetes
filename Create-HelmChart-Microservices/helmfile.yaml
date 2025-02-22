@@ -1,0 +1,86 @@
+# Top Level is Releases attribute
+# Under release I can define a lists of all the releases I want to deploy
+# Each release has a name, chart, values, and namespace
+releases: 
+  # - name: the release name
+  - name: rediscart
+    # chart: the chart folder itself
+    chart: charts/redis
+    # values: the values file to use
+    values:
+      - values/redis-values.yaml
+      # I can also overide the values in the values file
+      - appReplicas: "1"
+      - volumeName: "redis-cart-data"
+    # namespace: the namespace to deploy to
+    namespace: microservices
+
+  # Email Service
+  - name: emailservice
+    chart: charts/microservices
+    values:
+      - values/email-service-values.yaml
+    namespace: microservices
+
+  # Ad Service 
+  - name: adservice
+    chart: charts/microservices
+    values:
+      - values/ad-service-values.yaml
+    namespace: microservices
+
+  # Cart Service
+  - name: cartservice
+    chart: charts/microservices
+    values:
+      - values/cart-service-values.yaml
+    namespace: microservices
+
+  # Checkout Service
+  - name : checkoutservice
+    chart: charts/microservices
+    values:
+      - values/checkout-service-values.yaml
+    namespace: microservices
+
+  # Currency Service
+  - name: currencyservice
+    chart: charts/microservices
+    values:
+      - values/currency-service-values.yaml
+    namespace: microservices
+
+  # Frontend Service
+  - name: frontend
+    chart: charts/microservices
+    values:
+      - values/frontend-service-values.yaml
+    namespace: microservices
+  
+  # Payment Service
+  - name: paymentservice
+    chart: charts/microservices
+    values:
+      - values/payment-service-values.yaml
+    namespace: microservices
+
+  # Product Catalog Service
+  - name: productcatalogservice
+    chart: charts/microservices
+    values:
+      - values/productcatalog-service-values.yaml
+    namespace: microservices
+
+  # Recommendation Service
+  - name: recommendationservice
+    chart: charts/microservices
+    values:
+      - values/recommendation-service-values.yaml
+    namespace: microservices
+
+  # Shipping Service
+  - name: shippingservice
+    chart: charts/microservices
+    values:
+      - values/shipping-service-values.yaml
+    namespace: microservices

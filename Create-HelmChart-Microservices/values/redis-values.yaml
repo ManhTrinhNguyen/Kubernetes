@@ -1,0 +1,2 @@
+appName: redis-cart # overide from default redis value
+appReplicas: 2
