@@ -2291,9 +2291,132 @@ Step 1 : Install Chart
 
   <img width="400" alt="Screenshot 2025-02-21 at 14 03 28" src="https://github.com/user-attachments/assets/3057a30b-833e-48c2-bbd8-ff179bfc61f3" />
 
+**Deplploy Microservices with Helmfile**
+
+    - There is 2 Options to Deploy 
+
+      - Option 1 : Using `helm install` to install one by one  
+        - For example : To Install emailservice micro : `helm install -f email-services-value.yaml emailservice microservices --namespace mircorservices`
+        - Or I can write the script file 
+
+      - Option 2 : Better way to Deploy is using Helmfile 
+
+**What is Helmfile ?**
+
+<img width="400" alt="Screenshot 2025-02-22 at 10 33 09" src="https://github.com/user-attachments/assets/7ab07649-bf09-4a6b-8cab-e13d79a4aa02" />
+
+  ```
+    - Helmfile is a declarative way to tell Helm , I want these releases to run on my CLuster with these Configuration
+
+    - Helmfile allow us to declare a definiton of entire Kubernetes in a Single Yaml File
+
+    - I can define multiple Helm releases and then change specification of each release depending on the Application itself  or type of Environment like : Testing, Production ...
+  ```
+
+**Create Helmfile**
+  ```
+    # Top Level is Releases attribute
+    # Under release I can define a lists of all the releases I want to deploy
+    # Each release has a name, chart, values, and namespace
+    releases: 
+      # - name: the release name
+      - name: rediscart
+        # chart: the chart folder itself
+        chart: charts/redis
+        # values: the values file to use
+        values:
+          - values/redis-values.yaml
+        # namespace: the namespace to deploy to
+        namespace: microservices
+    
+      # Email Service
+      - name: emailservice
+        chart: charts/microservices
+        values:
+          - values/email-service-values.yaml
+        namespace: microservices
+    
+      # Ad Service 
+      - name: adservice
+        chart: charts/microservices
+        values:
+          - values/ad-service-values.yaml
+        namespace: microservices
+    
+      # Cart Service
+      - name: cartservice
+        chart: charts/microservices
+        values:
+          - values/cart-service-values.yaml
+        namespace: microservices
+    
+      # Checkout Service
+      - name : checkoutservice
+        chart: charts/microservices
+        values:
+          - values/checkout-service-values.yaml
+        namespace: microservices
+    
+      # Currency Service
+      - name: currencyservice
+        chart: charts/microservices
+        values:
+          - values/currency-service-values.yaml
+        namespace: microservices
+    
+      # Frontend Service
+      - name: frontend
+        chart: charts/microservices
+        values:
+          - values/frontend-service-values.yaml
+        namespace: microservices
+      
+      # Payment Service
+      - name: paymentservice
+        chart: charts/microservices
+        values:
+          - values/payment-service-values.yaml
+        namespace: microservices
+    
+      # Product Catalog Service
+      - name: productcatalogservice
+        chart: charts/microservices
+        values:
+          - values/productcatalog-service-values.yaml
+        namespace: microservices
+    
+      # Recommendation Service
+      - name: recommendationservice
+        chart: charts/microservices
+        values:
+          - values/recommendation-service-values.yaml
+        namespace: microservices
+    
+      # Shipping Service
+      - name: shippingservice
+        chart: charts/microservices
+        values:
+          - values/shipping-service-values.yaml
+        namespace: microservices
+
+  ```
 
 
 
- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
 
 
