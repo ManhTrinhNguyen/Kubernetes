@@ -42,6 +42,8 @@
 
 - [Deplploy Microservices with Helmfile](#Deplploy-Microservices-with-Helmfile)
 
+- [Security and Production Best Practice](#Security-and-Production-Best-Practice)
+
 # Kubernetes 
 
 ## Big Picture 
@@ -1172,11 +1174,9 @@ Step 4 : After execute Mosquitto yaml with Volume
 
 <img width="600" alt="Screenshot 2025-02-12 at 12 57 12" src="https://github.com/user-attachments/assets/69034734-a811-4e42-8cd5-00c425e9a3b8" />
 
-```
   - When I deploy the same Applications accross different Kubernetes Cluster
   - Consider use Case when I have my MicroService Applications that I want to Deploy on Development, Staging, and Production Cluster
   - Intead of Deploy the individual yaml files separately in each cluster, you can package them up to make your own application chart, that will have all the necessary yaml files that particular deployment needs. And then to can use them to redeploy the same environment in Kubernetes Cluster 
-```
 
 ## Helm Chart Structure 
 
@@ -1502,23 +1502,19 @@ Step 4 : After execute Mosquitto yaml with Volume
 **What is K8s Operator | Why Operators used ? | When to use Operators ?**
 
 **Overview**
-```
+
   - Operators use mainly for Stateful Application 
-```
 
 **Stateless Apps in K8**
 
 <img width="600" alt="Screenshot 2025-02-15 at 10 56 15" src="https://github.com/user-attachments/assets/4456efeb-a6d5-4940-ad64-e52472c8f75d" />
 
-```
   - Let's say I deploy Web Apps in K8s
   - So I will create Deployment, ConfigMap, Service and Application start
   - I will scale My App to 3 Replicas . If 1 died K8s built in Control Loop Mechanism will regenerate it for me | If I release new version I adjust a deployment configuration and replicas get restart with new version 
-```
 
 **Stateful Application without Operator**
 
-```
   - Stateful App like Database .... I need data persistence
   - K8s can not do automation with Stateful Apps
   - Bcs When I create Replicas for Stateful Apps . All 3 Replicas is different and have different Identity and State | They need to Update and Destroy in certain order
@@ -1529,13 +1525,11 @@ Step 4 : After execute Mosquitto yaml with Volume
   Stateful Apps need in K8s : Promethues Monitoring, etcd store
 
   So I use Operator to Manage Stateful Apps ( https://operatorhub.io/ )
-```
 
 **Stateful Application with Operator**
 
 <img width="600" alt="Screenshot 2025-02-15 at 11 21 50" src="https://github.com/user-attachments/assets/d6b2072f-6b2e-4aa3-9afb-7b80ed41a1b7" />
 
-```
   - Operator basically replaces this human operator with a software operator
 
   - All the manually tasks that Devops team person would do to operate stateful Application now packed into program that has knowlege and intelligent about how to deploy that specific Application
@@ -1545,11 +1539,10 @@ Step 4 : After execute Mosquitto yaml with Volume
     - Task automate and reuseable
 
     - If I have 2 K8s Cluster with the same set up I don't have to manually configure and then maintain these Apps on both Environments . But rather you have 1 standard automated tool
-```
+
 
 **How does Operator work?**
 
-```
   - As it core . It has the same Control Loop mechanism
 
   - What is Control Loop does
@@ -1563,12 +1556,12 @@ Step 4 : After execute Mosquitto yaml with Volume
     - By default I have Deployment, Stateful set, Config map, etc ...
     - So Operator take the basics resources and its controller concept as a foundation to build upon
     - And on top of that it included the domain or application specific knowledge to automate the entire lifecycle of the application it manage or operate 
-```
+
 
 ## Secure Cluster Authentication with RBAC 
 
 **Overview**
-```
+
   How Authenication and Authorization work in K8 ?
   
   How to configure users, groups, their permission ?
@@ -1576,26 +1569,22 @@ Step 4 : After execute Mosquitto yaml with Volume
   Authentication with Role Based Access Control (RBAC) ?
   
   Which K8s resources to use to define permissions in the Cluster ?
-````
 
 **Why Do I need to manage permission in K8s Cluster in the first place?**
 
 <img width="600" alt="Screenshot 2025-02-15 at 13 54 47" src="https://github.com/user-attachments/assets/deb25806-b8dd-46c0-91db-e0bb985e664d" />
 
-```
   - I have K8s Cluster that Admin and User use to Administer and Deploy into
 
   ----How to manage permission for a cluster ?----
     - Admin and Developer have different access
     - Developer should be limited what they can do in the Cluster so they don't accidently break stuff . Admin should administer the Cluster
     - In Security best practice we have the Least Privilege rule which mean we give user only the Permission they need 
-```
 
 **Developers : Role and Role Binding**
 
 <img width="600" alt="Screenshot 2025-02-15 at 14 04 10" src="https://github.com/user-attachments/assets/c9673960-e79e-4438-b0d5-1d0c65757fbb" />
 
-```
   - Let's say I have multiple Namespaces in the Cluster and each Developer team deploy Apps in the different Namepsaces
 
   ---How to restrict access to only that Namespaces ?---
@@ -1610,13 +1599,11 @@ Step 4 : After execute Mosquitto yaml with Volume
     - For that K8s has RoleBinding Component
     - Link ("Bind") a Role to a User or Group
     - All members of Group get permissions defined in the Role 
-```
 
 **Administrator : Cluster Role and Cluster Role Binding**
 
 <img width="600" alt="Screenshot 2025-02-16 at 09 31 40" src="https://github.com/user-attachments/assets/3cfd6f0b-d594-4e08-af23-acbb655589aa" />
 
-```
   - Managing all the Namespaces
 
   - Configuring Volume for the Developer team are available Cluster-wide Volumes
@@ -1627,14 +1614,12 @@ Step 4 : After execute Mosquitto yaml with Volume
   - For that K8s has ClusterRole
   - Define Resources and Permission Cluster Wide
   - For Admin I would define a ClusterRole and Admin Group and then attach the cluster role to the Admin group using a ClusterRoleBinding 
-```
 
 **User and Groups in Kubernetes**
 
 <img width="400" alt="Screenshot 2025-02-16 at 09 47 17" src="https://github.com/user-attachments/assets/e68e3331-3e48-4a90-baf0-680efb7e656e" />
 <img width="400" alt="Screenshot 2025-02-16 at 09 50 02" src="https://github.com/user-attachments/assets/69e4afaa-9ab3-4d87-bdaf-5b0b30314fd3" />
 
-```
   - Kubernetes doesn't manage Users natively
 
   - Admins can choose from different authentication strategies
@@ -1661,13 +1646,11 @@ Step 4 : After execute Mosquitto yaml with Volume
   - OR Configure LDAP as a authentication source for API server
 
   - K8s allow me to configure those external sources but I have to manage them myself 
-```
 
 **Service Account**
 
 <img width="600" alt="Screenshot 2025-02-16 at 10 21 53" src="https://github.com/user-attachments/assets/f28a1217-62c8-4fa5-b350-1b970e590437" />
 
-```
   - Service Account is Applications User
 
   - These Applications can be internal inside the cluster or outside the cluster
@@ -1688,7 +1671,7 @@ Step 4 : After execute Mosquitto yaml with Volume
   - So my Applications like Metric Server (Prometheus) or external CI/CD (Jenkins) will get Service Account Component inside the cluster as a representation of that application user
 
   - As the same way for human user I can link service account to Role or ClusterRole with RoleBinding or ClusterRoleBinding . And with binding service account or the application that is behind that service account will get permission that are defined in the Role or Cluster Role 
-```
+
 
 **Example Configuration File**
 
@@ -1696,7 +1679,6 @@ Step 4 : After execute Mosquitto yaml with Volume
 <img width="400" alt="Screenshot 2025-02-16 at 10 35 23" src="https://github.com/user-attachments/assets/30b59b56-5a97-4d82-abf3-7d9832a33ec9" />
 <img width="400" alt="Screenshot 2025-02-16 at 11 29 28" src="https://github.com/user-attachments/assets/961edbf0-223c-4b73-a36f-6056efbc512f" />
 
-```
   - Define what resources have what kind of access ?
 
   - In each Role we have 3 Section:
@@ -1716,15 +1698,12 @@ Step 4 : After execute Mosquitto yaml with Volume
   - To set more grangular access
     - Instead giving access to all the Pod in that Namespace, I can define to only certain Pod in that Namespace using resources name Attribute
     - For example If in the same NameSpace I have my own application and maybe a database and I want to basiccally define seperate role in the same NameSpace, but for my own Application and for Database, basically seperately at different role I can target these specific Pods and Applications using the resources name attribute and then define different privellege on resources 
-```
 
 **And then I have RoleBinding**
 
 <img width="600" alt="Screenshot 2025-02-16 at 11 31 49" src="https://github.com/user-attachments/assets/6f411d8f-d4d5-458a-bd7b-6b17a7c3a59f" />
 
-```
   - RoleBinding to attach it to a User, Group or Service Account 
-```
 
 **ClusterRole**
 
@@ -1732,7 +1711,6 @@ Step 4 : After execute Mosquitto yaml with Volume
 <img width="400" alt="Screenshot 2025-02-16 at 11 37 21" src="https://github.com/user-attachments/assets/a356d0f6-d1b2-465d-820e-9fd87ad6dc8c" />
 <img width="400" alt="Screenshot 2025-02-16 at 11 42 07" src="https://github.com/user-attachments/assets/ad25dda3-fbdf-4785-895a-039a95e781de" />
 
-```
   - ClusterRole for Nodes : What priviledges they have on that Worker Node
 
   - Or I can define Cluster role for namespace management Since NameSpace is Also a cluster Wide resources
@@ -1743,7 +1721,6 @@ Step 4 : After execute Mosquitto yaml with Volume
   - And if I define a cluster role with Pod access, it will mean access to Pod in all Namespaces, not just one specific one as in the role
 
   - And in Cluster Role binding I will then link that Cluster Role again to a user group, or service account 
-```
 
 **ClusterRole Binding**
 
@@ -1757,17 +1734,14 @@ Step 4 : After execute Mosquitto yaml with Volume
 
 <img width="500" alt="Screenshot 2025-02-16 at 11 52 20" src="https://github.com/user-attachments/assets/71c78985-9604-4c78-8c1f-68dcecd84b5f" />
 
-```
   - I can check access , priviledges, and permission of current user
 
   - To see what Permission that user has in any Namespace
-```
 
 **Wrap up**
 
 <img width="600" alt="Screenshot 2025-02-17 at 12 40 06" src="https://github.com/user-attachments/assets/b7f2e7c9-f279-4225-a4c2-3f73cc801c86" />
 
-```
   ----Layer of Security----
 
   - For example, Jenkins send a request to API server , Request to Create new Service in default namespace
@@ -1777,22 +1751,19 @@ Step 4 : After execute Mosquitto yaml with Volume
     -- I can enable multiple authentication at once
 
     -- If authenticated as a second step K8s will check Authorization which is RBAC . Check Role or ClusterRole that user has and based on the permission defined there does User has permission to perform specific task that it is trying to perform 
-```
 
 ## MicroServices 
 
 **Overiew**
-```
+
   - Main Benefit of Microservices Application
 
   - What I need to know to depkoy MicroServices Application in K8 ?
-```
 
 **Introduction**
 
 <img width="500" alt="Screenshot 2025-02-17 at 12 53 41" src="https://github.com/user-attachments/assets/7e4adf7d-4a31-47e8-8a85-855e640fa74b" />
 
-```
   - Microservices emerged as a Platform for Microservices Applications
 
   - From Monolith (1 Big Applications) to Microservice (Many Small App)
@@ -1805,14 +1776,12 @@ Step 4 : After execute Mosquitto yaml with Volume
     -- Smaller independent applications that developer manage
     -- Each Microservices can be develope, packaged and released independently
     -- 1 Changes of Microservices without effect to other 
-```
 
 **How do Microservice communicate?**
 
 <img width="400" alt="Screenshot 2025-02-17 at 13 24 45" src="https://github.com/user-attachments/assets/fd32bb92-47c3-404e-be8a-988c88cefcc4" />
 <img width="400" alt="Screenshot 2025-02-17 at 13 07 30" src="https://github.com/user-attachments/assets/0c25986d-41fb-4454-9712-b5acf134c82a" />
 
-```
   ----Through API----
 
     -- Microservice communicate through Interfaces or API is basically a code with a bunch of function inside the Application itself . Which is responsible for handling communication with other service which is responsible for handling commnunication with other service.
@@ -1828,14 +1797,12 @@ Step 4 : After execute Mosquitto yaml with Volume
   ----Service Mesh----
 
     -- Instead of 1 big Central Broker handle all communication . Each Microservices have its own helper program that handle the communication for that specific microservice 
-```
 
 **What do I need to know as Devops?**
 
 <img width="400" alt="Screenshot 2025-02-17 at 13 26 04" src="https://github.com/user-attachments/assets/fb109f4d-429a-4509-9e46-25739e958102" />
 <img width="400" alt="Screenshot 2025-02-17 at 13 22 39" src="https://github.com/user-attachments/assets/ec49b947-6c9e-405e-94b6-d358a8bef6dc" />
 
-```
   - Task : To Deploy existing Microservice Application in the K8s Cluster . So developer has already created and developed these microservices and asking Devops to take these Microservices and deploy it into Cluster
 
   - At this point what infomation do I need to know from Developer about these Micro to be able to deploy them in the cluster
@@ -1861,7 +1828,7 @@ Step 4 : After execute Mosquitto yaml with Volume
     -- Create Deployment and Service for each Microservice
 
     -- And I also can define Micro run on the same Namepsace or each Micro has its own Namespace 
-```
+
 
 ## Deploy Microservices Apps Demo Project
 
@@ -1870,7 +1837,6 @@ Step 4 : After execute Mosquitto yaml with Volume
 <img width="600" alt="Screenshot 2025-02-17 at 14 19 15" src="https://github.com/user-attachments/assets/4bdebd17-9ce1-4328-8b6d-fc01d5548943" />
 <img width="600" alt="Screenshot 2025-02-17 at 14 36 17" src="https://github.com/user-attachments/assets/672c5bd8-d481-4bde-aa8b-65fe41943d8d" />
 
-```
   - Need couple of key Infomation
 
     -- What Micro Services I am deploy ?
@@ -1897,7 +1863,6 @@ Step 4 : After execute Mosquitto yaml with Volume
   - Now Create Deployment Config and Service Config for each Micro Services
 
  !!!  Redis is a Message Broker and also the In-Memory Database
-```
 
 **Create Development and Service Config**
 
@@ -1953,11 +1918,11 @@ Step 2 : Configure Development and Service
   ```
 
   2. Recommendation Service :
-  ```
+
   - Recommendation Service talk to Catalog Service : I need to tell the Recommendtation Service the endpoint or the service name of the Product Catalog service, where it can connect to it
   - The way it work is Recommendation microservice take the enpoint or the service name of the Product Catalog microservice so Recommendation microservice can connect to Product Catalog microservice (I defined the Product Catalog service enpoint in the Cofiguration yaml file)
   - My Recommendation Service communicate with my Product Catalog Service through the K8 DNS-based service discovery mechanism
-
+```
   - Container Port: 8080
   - name : recommendationservice
   - Image : xxx
@@ -1968,7 +1933,7 @@ Step 2 : Configure Development and Service
      value : "8080"
       - name: PRODUCT_CATALOG_SERVICE_ADDR
       value : "productcatalogservice:3550"
-  ```
+```
 
   3. Product Catalog Service :
   ```
@@ -2053,11 +2018,9 @@ Step 2 : Configure Development and Service
 
 <img width="499" alt="Screenshot 2025-02-18 at 10 50 18" src="https://github.com/user-attachments/assets/a911c4fd-dde5-4d2f-9dc6-498f967c421f" />
 
-  ```
     - Front end Micro talk to all these other microservices to distribute the request that its get to whoever responsible for the request. So I need to set the endpoint of all those Microservices
 
     - Front end Micro has to be available or accessible externally from a Browser 
-  ```
 
 **Deploy Micros to a Cluster**
 
@@ -2075,23 +2038,20 @@ Step 2 : Configure Development and Service
 
   Step 7 : Get Pods : `kubectl get pods -n microservices`
 
-**Security and Production Best Practice**
+## Security and Production Best Practice
 
-  Best Practice 1: Pinned (Tag) Version for each Container Image 
+  **Best Practice 1**: Pinned (Tag) Version for each Container Image 
   
   <img width="500" alt="Screenshot 2025-02-20 at 09 26 49" src="https://github.com/user-attachments/assets/8fd0bb9c-5c49-4845-b293-63f2a3b2832e" />
     
-  ```
     - Define specific version for Image that I use inside the Pod
 
     - If I don't specify the version tag . K8s automatically pulled the latest version . That mean the new Image get built and push to the Repo the Pod will restart and pull the latest version . It might cause break current App, unpridictable, Don't know what version running on my Cluster 
-  ```
 
-  Best Practice 2: Liveness Probe for each container 
+  **Best Practice 2**: Liveness Probe for each container 
 
   <img width="500" alt="Screenshot 2025-02-20 at 09 34 09" src="https://github.com/user-attachments/assets/d8795879-ec0b-4689-aa03-7c3b200377c0" />
 
-  ```
     - K8s has intelligent managing its resources
 
     - Restart Pod When it Crash
@@ -2109,16 +2069,14 @@ Step 2 : Configure Development and Service
       -- I defined the attribute depending on what protocol the Application use it. Could be : TCP, HTTP, gRPC ...
       -- Once I defined Liveness Probe protocal I should tell what port should send that grpc request to
       -- Next I need to define how often the Application should be check for its health : periodSeconds: 5
-  ```
 
-  Best Practice 3 : Readness Probe for each container 
+  **Best Practice 3** : Readness Probe for each container 
 
   <img width="400" alt="Screenshot 2025-02-20 at 09 34 09" src="https://github.com/user-attachments/assets/e2bf168e-fea1-4385-8783-0da4a8ce7219" />
   <img width="400" alt="Screenshot 2025-02-20 at 10 26 00" src="https://github.com/user-attachments/assets/57711691-4b6b-44eb-89ec-cbcf76290e28" />
   <img width="400" alt="Screenshot 2025-02-20 at 10 41 34" src="https://github.com/user-attachments/assets/cbc5f93e-f77e-44e2-94e6-f2ca0afe0fc6" />
   <img width="400" alt="Screenshot 2025-02-20 at 11 07 42" src="https://github.com/user-attachments/assets/ce5b7c3d-a688-42f5-b62d-8e4334878618" />
 
-  ```
     - K8s know the Pod state but it doesn't know the Application State inside the Pod . And I solved this problem with LivenessProbe
 
     - But LivenessProbe help K8s see that Application is running successfully only After the Application started
@@ -2138,13 +2096,11 @@ Step 2 : Configure Development and Service
       2. HTTPs: If application has endpoint inside Application that expose bacsically the health status of Application itself, we could hit that endpoint to check whether application is healthy or not . This configuration will tell Kubelet there is an HTTP endpoint on the Application on this Port and this URL you can check wheather the URL is healthy or not
 
   !!! Note: Generally for readiness and liveness probes, no matter if it's a command execution or TCP socker, we can actually execute initial delay seconds in case we know that Application take longer to start 
-  ```
 
-  Best Practice 4 : Resources Request for each container
+  **Best Practice 4** : Resources Request for each container
 
   <img width="500" alt="Screenshot 2025-02-20 at 11 38 23" src="https://github.com/user-attachments/assets/1862d904-cbc3-4c55-87f6-faa402f9d229" />
 
-  ```
     - I need to define for each container something called resource requests . Some Application may need more CPU or RAM than other
 
     - To make sure my Application Container has enough resources to run inside the Pod , I should define Resources Request for that Container
@@ -2152,13 +2108,11 @@ Step 2 : Configure Development and Service
     - m = milicores
 
     - Mi = mebibyte
-  ```
 
-  Best Practice 5 : Resources Limit for each container 
+  **Best Practice 5** : Resources Limit for each container 
   
   <img width="500" alt="Screenshot 2025-02-20 at 12 09 55" src="https://github.com/user-attachments/assets/66148408-4ba6-4e98-b85c-bb09763062f3" />
 
-  ```
     - Why Resources Limit important ?
 
     - What if Applications need more Resources ? What if when the Application is running need more Resources than Requested ? Bcs if 1 Application can have too much data that it need to load into memory or Application has a bug inside with some infinite loop and start consuming all the CPU available on that Node
@@ -2168,14 +2122,12 @@ Step 2 : Configure Development and Service
     ----Configure resources limits for each container----
 
   !!! NOTE : If I put values larger than my biggest Node resources, my Pod will never be schedule
-  ```
 
-  Best Practice 6: Don't Expose NodePort 
+  **Best Practice 6**: Don't Expose NodePort 
   
 <img width="400" alt="Screenshot 2025-02-20 at 12 35 16" src="https://github.com/user-attachments/assets/6f09468d-1c1f-40cc-899c-1687eb6f668a" />
 <img width="400" alt="Screenshot 2025-02-20 at 12 36 48" src="https://github.com/user-attachments/assets/73d69694-f898-444a-a4cf-63a57c8a7a4e" />
 
-  ```
     - Even Though using NodePort super easy bcs it expose Cluster Security Risk . Bcs it opened ports on each Worker Node . So have multiple entry point in the cluster . So 
 I increase the attack surface
 
@@ -2185,22 +2137,18 @@ I increase the attack surface
 
     - So Load Balancer will get all the request from Browser or from external resources to Application
 
-    - And the Alternative I can use Ingress Controller to direct traffice to internal Services 
-  ```
+    - And the Alternative I can use Ingress Controller to direct traffice to internal Services
 
-  Best Practice 7: More than 1 Replica for Deployment 
+  **Best Practice 7**: More than 1 Replica for Deployment 
 
-  ```
     - If 1 Pod crashes, my application is not accessible until new Pods restart !
 
     - By Increasing Replicas, make sure even if 1 replica die Application alway remain available
 
     - Always Available | No downtime for users
-  ```
 
-  Best Practice 8: More than 1 Worker Node in the Cluster 
+  **Best Practice 8**: More than 1 Worker Node in the Cluster 
 
-  ```
     - Alway use more than 1 Worker Node
     - If something happen to a Node all my Application are gone, stopped and not accessible
 
@@ -2211,14 +2159,12 @@ I increase the attack surface
     - Server reboot bcs of an update
     - Server maintance
     - Server Broken 
-  ```
 
-  Best Practice 9 : Using Labe 
+  **Best Practice 9** : Using Labe 
   
 <img width="400" alt="Screenshot 2025-02-20 at 13 12 50" src="https://github.com/user-attachments/assets/ac47ee9a-9d2a-4b7b-a5a4-7b25faffbb07" />
 <img width="400" alt="Screenshot 2025-02-20 at 13 16 05" src="https://github.com/user-attachments/assets/8dc77cfd-8591-40c1-96bb-6d85e02b6dfb" />
 
-  ```
     - Use labels for all Resources
     - Labeling all my Kubernetes Component
 
@@ -2232,11 +2178,9 @@ I increase the attack surface
     - Label to Group Pods base on Application they belong to and then refencing them in Service Component
 
     - Best Practice is to label all Resources 
-  ```
 
   Best Practice 10 : User Namepsaces to isolate resources 
 
-    ```
       - Logicly grouping Application and other component into namespace make manging my cluster way easier compared to just throwing the Pod and Service everywhere in the Cluster 
 
       - Also For defining diffent priviledges inside the cluster base on the Namespace | I can have multiple team working on the same cluster but each one working on different Namspace
@@ -2246,7 +2190,6 @@ I increase the attack surface
       - RoleBinding 
 
       - And This totally up to the team how they decide to group and separate application in namespaces . I can have 1 Microservice per Namespace as well 
-    ```
 
 **3 Security Best practices**
 
@@ -2254,17 +2197,14 @@ I increase the attack surface
   
   <img width="400" alt="Screenshot 2025-02-20 at 13 26 58" src="https://github.com/user-attachments/assets/eb5d3579-0df8-4c21-8375-d7f0ec1d8e87" />
 
-  ```
     - This can happen when I useing library or tools that have some vulnerabilti for my Application inside the container
 
     - Mannually scan vulnerability on Images
 
     - Or Automated scan on the Build Pipelines
-  ```
 
   Best Practice 2 : No Root access for Container 
 
-  ```
     - Making sure that I don't have container running in my Cluster that have root access capability
 
     - This exposed security risk bcs a container with root access can access more resources and do much more on the host where it is running
@@ -2275,31 +2215,25 @@ I increase the attack surface
 
     - Most of officical Images Do Not use root user however if I use non-official third party Images . Alway a good practice to check
 
-  ```
 
   Best Practice 3 : Update K8 to latest version 
 
-  ```
     - Important Security Fixed
 
     - Bug fixed
 
     ----Update K8 Version Node by Node----
     - To avoild Application downtime 
-  ```
 
 ## Create Helm Chart for Microservices 
 
-  ```
     - I have 10 Deployment and Services for my Microservices . I have almost the same attribute but just different value . I will create 1 blueprint for both Deployment and Service for all Microservices and ser value for these individual Services by using Helm Chart
 
     ----Helm Chart Benefit----
     - Resuable K8s cofiguration
-  ```
 
 **2 Ways to Create Helm Charts for Microservices**
 
-  ```
     1. Create separate Helm Chart for each Microservices
        - When configuration very different
   
@@ -2308,7 +2242,6 @@ I increase the attack surface
     3. Combination of both Options
       - If I have a bunch of Application very similar , so I can use 1 single chart so they can shared and then pass different value for each individual Service 
       - If I have a handful of Application that are different, and have different configuration, for those I can create seperate chart to avoid overcomplicating to a main Helm Chart
-  ```
 
 **Basic Structure of Helm Chart**
 
@@ -2406,6 +2339,7 @@ spec:
   - For Working with a List of something . In this case List of ENV , I have a built-in function template file called Range
   - Range is basically loop through over the list of variable or object and let me access each element one by one
   - Syntax for range : This way I can access the key value pair that I define in the container Env var List
+    
   ```
     env:
     {{-range .Values.containerEnvVars}}
@@ -2483,13 +2417,11 @@ Step 1 : Install Chart
 
 <img width="400" alt="Screenshot 2025-02-22 at 10 33 09" src="https://github.com/user-attachments/assets/7ab07649-bf09-4a6b-8cab-e13d79a4aa02" />
 
-  ```
     - Helmfile is a declarative way to tell Helm , I want these releases to run on my CLuster with these Configuration
 
     - Helmfile allow us to declare a definiton of entire Kubernetes in a Single Yaml File
 
     - I can define multiple Helm releases and then change specification of each release depending on the Application itself  or type of Environment like : Testing, Production ...
-  ```
 
 **Create Helmfile**
   ```
@@ -2603,7 +2535,6 @@ Step 1 : Install Chart
 
 **Wrap up**
 
-```
   1. Configured Shared Helm Chart for all Microservices
 
   2. Deploy Declarative using Helmfile
@@ -2623,7 +2554,7 @@ Step 1 : Install Chart
   ----How does it fit into CI/CD the Devops Workflow ?----
   - In practice the way it would work is . Me as a Devops engineer who knows K8s and Helm would create Charts for developers . I can create blueprint for the Microservices Deployment, create seperate Repo for that and hand it over to Developers. Once I have configure all of this . I will be creator of the Chart and the Developer is a User of Helm chart
   - As User they can simply tweak the configuration values there. And use it to Deploy Micro Services Applications into the Cluster usually by interating this into CI/CD pipeline 
-``` 
+
 
 
 
