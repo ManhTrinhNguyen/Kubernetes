@@ -1,3 +1,47 @@
+- [Main component](#Main-component)
+
+- [Kubernetes Architecture](#Kubernetes-Architecture)
+
+- [Minikube and kubectl](#Minikube-and-kubectl)
+
+- [Kubernetes Namespaces](#Kubernetes-Namespaces)
+
+- [Services](#Services)
+
+- [Ingress](#Ingress)
+
+- [Kubernetes Volumes](#Kubernetes-Volumes)
+
+- [ConfigMap and Secret Volumn Type](#ConfigMap-and-Secret-Volumn-Type)
+
+- [Demo Project for ConfigMap and Volume Type in K8](#Demo-Project-for-ConfigMap-and-Volume-Type-in-K8)
+
+- [Mosquitto Application Demo](#Mosquitto-Application-Demo)
+
+- [Stateful set](#Stateful-set)
+
+- [Manage K8 Service](#Manage-K8-Service)
+
+- [Helm Package Manager for K8](#Helm-Package-Manager-for-K8)
+
+- [Helm Chart Structure](#Helm-Chart-Structure)
+
+- [Helm Demo Project Managed K8 Cluster](#Helm-Demo-Project-Managed-K8-Cluster)
+
+- [Deploy Images in K8s from Prive Docker Repo](#Deploy-Images-in-K8s-from-Prive-Docker-Repo)
+
+- [K8s Operator](#K8s-Operator)
+
+- [Secure Cluster Authentication with RBAC](#Secure-Cluster-Authentication-with-RBAC)
+
+- [MicroServices](#MicroServices)
+
+- [Deploy Microservices Apps Demo Project](#Deploy-Microservices-Apps-Demo-Project)
+
+- [Create Helm Chart for Microservices](#Create-Helm-Chart-for-Microservices)
+
+- [Deplploy Microservices with Helmfile](#Deplploy-Microservices-with-Helmfile)
+
 # Kubernetes 
 
 ## Big Picture 
@@ -21,7 +65,7 @@
 ### Commnucation between Pods
 
 **Node and Pod**
-```
+
   - Node = Server, Virtual or Physic Machine
   - Pod : Basic component or smallest unit of Kubernetes
     - Pod is a abstraction over container
@@ -31,13 +75,13 @@
   - Each Pod get its own IP address
   - Pod are ephemeral which mean they can die very easily
   - Bcs Pod easy to die and everytime it died the new Pod create with new IP . So inconvinient that when My app talk to DB via IP so I have Service and Ingress
-```
+
 
 **Service and Ingress**
 
 <img width="749" alt="Screenshot 2025-02-07 at 09 59 08" src="https://github.com/user-attachments/assets/36dc3565-2569-4dac-8311-590978d46ded" />
 
-```
+
   Service:
     - Service is Static IP address or permanent IP can be attach to each Pod
     - Lifecyle of Pod and Service not connected
@@ -52,12 +96,11 @@
     - Ingress is a API object manage external access to Service within Cluster . Provide routing rule to manage how request redirect to which service within Cluster
     - Instead of services the request first go to Ingress and then service
     - DNS
-```
 
 ### External Configuration 
 
 **ConigMap and Secrect**
-```
+
   So Pod Communicate with each other using Service . So my App will have database endpoint let's say MongoDB service that uses to communicate with DB but where do I configure DB URL . Usually I would do it in Application properties files , or inside of built Image of Application . For example if the endpoint of the service name changed. The solution for that is ConfigMap .
 
   ConfigMap:
@@ -72,12 +115,11 @@
     - But base 64 encoded format not secure so I use third party tools (tools from cloud provider or kubernetes)
     - All the data that i don't want to expose will go in Secret
     - Then i use this secrect to connect with my App . My app can get data from secrect as ENV 
-```
 
 ### Data Persistence
 
 **Volumes**
-```
+
   Data Storage:
     - Need the way to persisted data when a database a gone or down
   How is it work ?
@@ -86,12 +128,12 @@
 
   The Different between the Kubernetes cluster and all of its components and the storage
     - Regardless of whether it is a local or remote storage, think of the storage as a external hard drive plugged in into the Kubernetes cluster 
-```
+
 
 ### Pod Blueprint | Replication Mechanism 
 
 **Deployment and Stateful Set**
-```
+
   - When everything work and Application can access through a browser but what if my Application Pod died ? That mean downtime happen and I don't want this happen . I take advantage of distributed system and container .
   - So instead of relying on just one application pod and one database etc ... I replicate everthing on multiple server with also connected to service
 
@@ -107,14 +149,14 @@ Statefull set:
   - And Statefull set is just like Deployment would take care of replicating the pods and scaling them up or scaling them down, but make sure the database read and write are synchronized so that no database inconsistencies are offered 
   - However Deploy DB application using Statefull Set in Kubernetes cluster can be so hard . Common practice to host DB outside of the Kubenetes cluster and just have a deployment or Stateless Application that replicate and scale with no problem inside of Kubernetes cluster 
 !!! Deployment = Stateless App | Statefull set = Statefull App or Database
-```
+
 
 **Daemon Set:** 
-```
+
   - Daemon Set is Kubernetes Component, just like a deployment or stateful Set with the different that it automatically calculate how many replica of Apps it should deploy depending on how many Node .
   - It is also deploy just one Pod or 1 Replica on each Node in the cluster
   - So when I added new Node it will automatically Pod replica there and when I remove Node it will remove Replica pod
-```
+
 
 ## Kubernetes Architecture 
 
@@ -123,7 +165,7 @@ Statefull set:
 #### How Kubernetes does, What it does, and how cluster is self-managed and self-healing and automated ? 
 
 **Worker Node**
-```
+
   Node Processes :
     - 1 Node can have multiple Pods with container running on that Node
 
@@ -139,11 +181,9 @@ Statefull set:
    3. KubeProxy is Responsible for forwarding the Request from Services to Pods
       - Kube Proxy has accutally intelligent forwarding logic inside that makes sure the communication also works in the performant way with low overhead
       - Example : If my Application, my-app replica making the request to DB instead of Service randomly forwarding the request to any Replica it will forward to a Replica that running on the same Node as the Pods that initiated the request. Thus this way avoiding low network overhead
-```
-
 
 **Control Plane** -> **How to interact with Cluster**
-```
+
   How to : Schedule Pod, Monitor, Restart Pods , Join new Node ?
 
   Control Plane proccesses
@@ -174,12 +214,11 @@ Statefull set:
       - What is Not store in etcd cluster is the actual Application data . For example I have DB Applications running inside of cluster, the data will store somewhere else
 
   !!! In Practice a Kubernetes cluster is often made up of multiple control planes where each control plane node run its control plane processes Where API server is load balanced and the etcd store form distributed storage accross all control plane nodes
-```
 
 ## Minikube and kubectl 
 
 **Minikube**
-```
+
   - When I am setting a production cluster .
   - I would have multiple Control Plane Nodes and Worker Node both have their own seprate Responsiblity
   - Separate Virtual or Physical Machine
@@ -187,10 +226,9 @@ Statefull set:
 
   - So Minikube is 1 Node cluster where Control Plane Processes and Worker Processes both run in 1 Node
   - And this Node will have Docker runtime preinstall so I will able to run a container or the pods with container of this node
-```
 
 **kubectl**
-```
+
   Now I have this virtual Node I need the way to interact with that cluster
   The way to create and others Kubernetes componets on that Node
   kubectl help to do that
@@ -202,10 +240,9 @@ Statefull set:
   - One of Control Plane Proccesses called API Server is the main entry point to the Kubenetes cluster -> Create anything, configure anything first have to talk to API Server .
   - And the way to talk to API Server is : UI, API, CLI (Kubectl)
   - So when Kubectl command go through API Server to create, destroy pods or etc ... the worker proccesses on minikube node will actually make it happen they will be executing a command to create, destroy pod ..etc  
-```
 
 **How to install and run Minikube**
-```
+
   To Install ( https://minikube.sigs.k8s.io/docs/start/ )
 
 ----
@@ -223,11 +260,11 @@ Statefull set:
 
   Minikube CLI to start or create a cluster
   kubectl to configure a cluster
-```
 
 ## Kubernetes Namespaces 
+
 **What is Namespaces ?**
-```
+
   - In Kubernetes cluster I can organize resources in namespaces
   - I can have multiple Namespaces in Cluster 
   - I can think of namespaces as a Virtual cluster inside of a Kubernetes Cluster 
@@ -253,10 +290,9 @@ Statefull set:
     - Is the one I will use to create the resources at the beginning if I haven't created a new namespace
     - I can add a new namespace : kubectl create namespace <namespace-name>
     - Using configuration file to create namespace : better way
-```
 
 **What need for Namespace ?**
-```
+
   1. Frist use case is 'Following' 
     - If I create all my resources in that default namespace with my complex Application that have multiple deployment replicas of many pods and I have resources etc ... Very soon my namespace will fill with different component and it will very difficult to have an overview of what is in there 
     - Better way is to group resources into namespace 
@@ -285,10 +321,9 @@ Statefull set:
   !!! NOTE : Live globally in cluster and can't isolate them : Persistence volumne and node 
 
     - I can list components there is not bound to a namespace using : kubectl api-resources --namespaced=false and vice versa kubectl api-resources --namespaced=true
-```
 
 **2 ways to create namepsace**
-```
+
    - kubectl apply -f <yaml file> --namepsace=my-name-space
 
    - In the configuration file : 
@@ -296,10 +331,9 @@ Statefull set:
         - namespace: my-namespace
 
    - Get configuration from namespace is : kubectl get configmap -n <my-namespace> 
-```
 
 **Change Active namespace**
-```
+
   - To change default namepsace to whatever namepsace i choose 
 
   - kubectl config set-context --current --namepsace=my-namepsace
@@ -309,13 +343,11 @@ Statefull set:
   - brew install kubectx 
 
   https://github.com/ahmetb/kubectx
-```
 
 ## Services 
 
 **What is Services and Why do we need it ?**
 
-```
   - Each Pod has its own IP address. But Pod easy to die and everytime it regenerate it will create new IP address which is so inconvinience bcs I have to input that new IP address to connect to other pod
   - Stable IP address : 
     - With Service We have solution of stable or static IP address. That stay even when the pod died
@@ -324,13 +356,11 @@ Statefull set:
     - Service also provide Load Balancing Bcs when I have Pod Replica (let's say 3 Repilica) the Service basically get each request target to those 3 Repilica Pod and forward to one of those Pod so client can call 1 single IP address instead of calling each pod individually
   - Loose Coupling:
     - Service are good abstraction ofr loose coupling communication within a cluster . So within cluster, components or pods inside the cluster also from external services like if I have browser request coming to a cluster or if you talking to external DB 
-```
 
 **ClusterIP Services**
 
 <img width="600" alt="Screenshot 2025-02-07 at 11 04 08" src="https://github.com/user-attachments/assets/2a88c861-5fe9-44a3-82ea-8b96a1025da7" />
 
-```
   - Default type of Service
 
   ----How it is work and where it is used ?----
@@ -342,13 +372,11 @@ Statefull set:
   - So the way it work is I define Ingress rule that forward the request based on the request address to certain services and we define the services by its name and the DNS resolution then map Service name to IP address that this service actually got assigned  So this is how Ingress knows how to talk to a Service
 
   - Once the request hand over Service at this address and then Service will know to forwards this request to one of those pods that register at service endpoint
-```
 
 **How does Service know which Pods to forward the request to and which Ports to forward it to ?**
 
 <img width="600" alt="Screenshot 2025-02-07 at 11 27 25" src="https://github.com/user-attachments/assets/d75e6041-c6e5-43d0-80aa-726af23b0948" />
 
-```
 - Service know which Pods bcs of Seletor :
   - Pod identified via Selector
   - Key-Value pair defined in Selector (Lable of the Pod)
@@ -358,36 +386,31 @@ Statefull set:
 
   ----Service Endpoint----
   - When I create Service K8 create endpoints object that has the same name as Service itself . K8 will use this to keep track of which Pods are members of Services or Which Port are endpoint of the Service 
-```
 
 **Service Communication Example**
 
   <img width="600" alt="Screenshot 2025-02-07 at 11 32 03" src="https://github.com/user-attachments/assets/46dd9ec2-dda7-4f91-8503-5ba18a364086" />
 
-```
   Let's say Microservice Applications using MongoDB
 
   - I have 2 Repilica of MongDB in the cluster which also have Service Endpoint (ClusterIp) and the Service has its own IP address 
   - Now the microservice application inside the pod can talk to the MongoDB also using Service endpoint so the request will come from one of the Pod that get request from the Service to the MongoDB service at Service of MongDB IP address and the Port the Service has open then Service will again select one of those Pod Replica and forward those request to the Selected Pods at the Port 
-```
 
 **Multi Port Service**
 
 <img width="600" alt="Screenshot 2025-02-07 at 12 16 54" src="https://github.com/user-attachments/assets/5f7582c8-4d9f-4bcb-a9b8-8a0089ec3334" />
 
-```
+
   - Inside the MongoDB Pods, there is another container running that select the monitoring metrics for Prometheus that would be MongoDB exporter
   - And that container run at Port 9216
   - In the cluster , We have Prometheus Application that scrapes the metric endpoints from this MongoDB exporter container from this endpoint. That mean that service has to handle two different endpoints request which also mean that service has two of its own port open for handling these two different request -> 1 from client that request to MongoDB and 1 from the client like Prometheus that want to talk to the MongoDB exporter Application . So that is Multi-Port Service
 
   - So when I have Multi-Port in 1 Service . I have to Name those Port 
-```
 
 **Headless Service**
 
 <img width="600" alt="Screenshot 2025-02-07 at 12 27 03" src="https://github.com/user-attachments/assets/7c07a5cc-e0a7-4379-b61b-d4eda7152476" />
 
-```
   - Client  want to communicate with 1 Specific Pod directly
   - Or Pod want to talk directly with specific Pod
   - Not randomly selected
@@ -404,13 +427,11 @@ Statefull set:
   !!! So the way to defined Headless Service is to set ClusterIP : none
 
   !!! When we deploy Stateful Application in the Cluster like MongoDB . We have ClusterIP Service (Do loadbalancing stuff, ...) and along side with Headless Service (Client need to communicate to one of those Pod directly)
-```
 
 **Node Port Services**
 
 <img width="600" alt="Screenshot 2025-02-07 at 13 46 24" src="https://github.com/user-attachments/assets/d33c50a1-a608-4eef-b4a2-610cf7343fd8" />
 
-```
   - When we define Service Configuration , we can specify the type of the Service
   - 3 Type Attribute : ClusterIP, NodePort, Load Balancer
 
@@ -422,13 +443,11 @@ Statefull set:
     - So instead of Ingress Browser will request directly to the Worker Node at the Port that the Service Specification define
     - And the Port that node Port service type expose is defined in the Node Port attributed
     - Nodeport predefine value has range 30000 - 32767
-```
 
 **Load Balancer Services**
 
   <img width="600" alt="Screenshot 2025-02-07 at 13 56 55" src="https://github.com/user-attachments/assets/c85cc99e-f80b-4f06-87e7-5a33de956440" />
 
-```
   - Service become accessible externally through a cloud provider load balancer functionallity
   - Each cloud provider has its own native load balancer implementation and that is created and used whenever we created a load balancer service type
   - Whenever we create Load Balancer service, Nodeport and clusterIP service are created automatically by Kubernetes to which the external load balancer of the cloud platform will route the traffic to
@@ -438,24 +457,22 @@ Statefull set:
   - Port of the Service (Cluster IP Service)
   - nodePort: Port open on Worker Node but it is not directly accessible externally but only through the Load Balancer itself
   - So entry point become the Load Balancer first and it can then direct the traffic to NodePort and ClusterIP
-```
 
 **Wrap Up**
-```
+
   NodePort Service not for external connection
 
   I would have Ingress for external connection OR
 
   I would have Load Balancer for external connection
-```
 
 ## Ingress 
 
 **External Service and Ingress**
-```
+
   - User Ingress instead of external Service I would instead have internal Service
   - I would not open to the Browser through a IP address and Port 
-```
+
 
 **Yaml File syntax**
 ```
@@ -485,18 +502,18 @@ Statefull set:
 ```
 
 **How to configure Ingress in the Cluster**
-```
+
   - Need a Implementation for Ingress call Ingress Controller
   - Step 1 : Install an Ingress Controller : https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/
     - Which is basically another Pod or another set of Pod that run on My Node and does evaluation and processing of Ingress rule
     - Ingress Controller is to evaluate all the rules that I have define in my Cluster, and this way to manage all the redirections -> This will be a Entrypoint for the Cluster request to that domain or subdomain rules that I have configured . And this evaluate all the rule 
-```
+
 
 **Consider Environment on which your cluster run**
 
 <img width="600" alt="Screenshot 2025-02-09 at 13 57 53" src="https://github.com/user-attachments/assets/018d0cef-802a-43c1-ae55-57c6c59d0194" />
 
-```
+
   ---Things need to understand for setting up whole cluster to be able to recive external request---
 
   1. Consider The Eviroment where K8 is running
@@ -508,10 +525,9 @@ Statefull set:
 
   ----Wrap up----
   - External Request -> proxy server or cloud provider load balancer -> Ingress controller -> Decide which Ingress rule to that specific request 
-```
 
 **Ingress Controller in Minikube**
-```
+
   Step 1. Install Ingress controller on Minikube : minikube addons enable ingress
   Step 2: Create Ingress rule that the controll can evaluate
     - Enabling the Minikube dashboard: minikube dashboard -> this will set up dashboard in my environtment and open up in a new browser window for us to access internally when it ready
@@ -525,13 +541,12 @@ Statefull set:
       -- Tunnel specific to Minikube
       -- Minikube tunnel is a process will map this local address to a Service for Ingress 
       -- If I were set up in the Traditional Kubernetes Environment on the cloud platform I just need to put the assign IP address IP address to our host file 
-```
+
 
 **Ingress Default Backend**
 
 <img width="961" alt="Screenshot 2025-02-10 at 11 48 51" src="https://github.com/user-attachments/assets/cf5e73ce-a0f8-4d93-b4dc-2e607123f44b" />
 
-```
   - kubectl describe ingress dashboard-ingress -n kubernetes-dashboard
   - The attribute default backend that map to attribute default backend port 80 -> What is mean is that whenever the request come in to Kubernetes cluster that is not mapped to any backend so no rule for mapping that request to a service then this default backend is used to handle that request . If I don't have this service created or defined in my cluster, Kubernetes will try to forward it to Service, it won't find i will get default error
 
@@ -539,7 +554,6 @@ Statefull set:
   - To define custom error messages when a page isn't find, when request coming in i can handle
 
   - So I have to create a Internal Service, Default backend and port number, and also the pod or application that sends that error custom response 
-```
 
 **Multiple path for the same host**
 
@@ -560,7 +574,7 @@ Statefull set:
 **3 Components of Kubernetes Storage : Persisten Volume, Persisten Volume Claim, Storage Class**
 
 **The needs of Volumes**
-```
+
   - If the Pod died and restart . All the data in that pod will be gone . So I need volumes
 
   ----Storage Requirment----
@@ -570,13 +584,12 @@ Statefull set:
 
   ----Another Use Case is a Directory----
   - Maybe I have Apps that writes and read files from pre-configured directory . This could be session file for Apps or configuration file etc.... 
-```
+
 
 **Persist Volumne**
 
 <img width="600" alt="Screenshot 2025-02-10 at 12 42 38" src="https://github.com/user-attachments/assets/ddf100b0-6f6b-4566-b2d7-571e0fa91f60" />
 
-```
   - Peristent Volume is like cluster Resource like RAM, CPU to store data
   - Create Persistent Volumne by using Kubernetes Yaml file
   - Persitent Volume is just an abstract component . It need physical Storage like : local hardrive, nfs server, or cloud storage ....
@@ -597,19 +610,18 @@ Statefull set:
   - Depend on storage type, Spec attribute will be different
 
   - Peristence Volume are not namespace -> Their accessible to the whole cluster
-```
+    
 <img width="400" alt="Screenshot 2025-02-10 at 13 00 19" src="https://github.com/user-attachments/assets/b20ff559-a96a-478b-b9e4-eb0eb3861086" /> <img width="400" alt="Screenshot 2025-02-10 at 13 00 51" src="https://github.com/user-attachments/assets/05bd1a28-1041-4344-823a-138af6d1602e" /> <img width="400" alt="Screenshot 2025-02-10 at 13 07 31" src="https://github.com/user-attachments/assets/23053794-eb78-4a7d-801f-2f31c65091a3" />
 
 **Local and Remote volumes Type**
-```
+
   - Local volume type is violate 2/ 3/ requirment for data persistence:
     -- Being tied to 1 specificed Node
     -- Not survive when cluster crashed
     -- Should alway use remote storage 
-```
 
 **Who create peristen volume and when?**
-```
+
   - Persistence volumne are Resources need to be there BEFORE then the Pod depend on it created
 
   ----K8s Administator and K8s User----
@@ -620,22 +632,18 @@ Statefull set:
   - K8s User deploy K8s applications directly or through CI/CD pipelines
     - K8s User will configure Applications base on the Storage K8 admin provioned
     - In other words Applications have to claim that Persistence Volume . To do that I use PVC (Persistent Volume Claim)
-```
 
 **Peristence Volume Claim**
 
 <img width="600" alt="Screenshot 2025-02-10 at 13 50 00" src="https://github.com/user-attachments/assets/26632c0f-1c63-4cd4-9dfe-a697519bd945" />
 
-```
   - Created by Yaml configuration
   - PVC claim a volume with certain storage size or capacity which is define in the persistent volume claim . and some additional characteristic like access type like Readonly ReadWrite etc... whatever PV match this criteria or sastisfy this claim will be used for the Application then I have to use that claim in Pod configuration . So in the Pod specification here, I have the volume attribute that references the persistent volume claim with its name so now the pod and all the container inside the pod will have access to Peristent volumne
-```
 
 **Level of Volume Abstractions**
 
 <img width="600" alt="Screenshot 2025-02-10 at 14 22 49" src="https://github.com/user-attachments/assets/de0ff827-906c-4a4f-b619-02f9a464489e" />
 
-```
   - Pod request Volume through PVC (Persistent Volume Claim) -> PVC will try to find a PV (Persistence Volumn) in the cluster that sactify the PVC -> The PC that has the backend Storage that it will create Storage Resources from
 
   !!! NOTE : PVC must be in the same namespace as the Pod using PVC
@@ -645,7 +653,6 @@ Statefull set:
   ----Why so many Abstraction?----
   - The benefits is as a K8 user or developer when I create cluster I don't care where the actual volume is
   - Don't want to setup actual storage 
-```
 
 <img width="600" alt="Screenshot 2025-02-10 at 14 51 26" src="https://github.com/user-attachments/assets/c41a3d09-6bf0-4aec-964f-5aecea823fe1" />
 
@@ -653,13 +660,11 @@ Statefull set:
 
 <img width="600" alt="Screenshot 2025-02-10 at 15 03 44" src="https://github.com/user-attachments/assets/5af710fe-b7c8-4ce2-9771-d10717d084c7" />
 
-```
   - In the volumes : Specify what volume to provide
   - In the container : Where to mount those in the container
       - mouthPath : The path to mount the volume into inside the container
 
   !!! Note : Pod can use multiple Volumne of different Type  
-```
 
 **Different Volunme in 1 Container**
 <img width="600" alt="Screenshot 2025-02-10 at 15 09 34" src="https://github.com/user-attachments/assets/c0405b4b-3006-41b0-ba2e-af81d239a808" />
@@ -668,7 +673,6 @@ Statefull set:
 
 <img width="500" alt="Screenshot 2025-02-11 at 11 52 31" src="https://github.com/user-attachments/assets/7e95a769-1ebe-474c-b070-deb7d8ae66fd" /> <img width="600" alt="Screenshot 2025-02-11 at 11 58 13" src="https://github.com/user-attachments/assets/4adacde4-99da-412d-8320-b1cb95fc65dc" />
 
-```
   - To persist data in Kubernetes, admin need to configure storage for the cluster , created PV so Developer can use PVC to claim that storage
   - But consider cluster where 100 of applications where things get deployed daily and storage is needed for these application so Developer ask Admin to create Volumne they need before deploying them and Admin may have to manually request storage from cloud or storage provider and create 100 of PV for the Apps manually and that can be time consuming, tediuous,
 so to make it more efficent the solution is Storage Class
@@ -688,11 +692,11 @@ so to make it more efficent the solution is Storage Class
 
   ----Storage Class usage----
   - Request or claim by PVC 
-```
 
-## ConfigMap & Secret Volumn Type 
+## ConfigMap and Secret Volumn Type 
+
 **When to use Configmap and Secret Volumn ?**
-```
+
   - Think of Applications that take Configuration as Parameters when they start like Promethus, elastic search, mosquitto ... or Application that have password or sensitive data need to secure
 
   ----How to pass these config files to Kubernetes Pods?----
@@ -700,15 +704,14 @@ so to make it more efficent the solution is Storage Class
   - Individual value are used as value for the environment variable
 
   ----Create files of Configmap and Secrect then mount to the pod and the container----
-```
 
 **Example of Create files of ConfigMap and Secret**
 
 <img width="600" alt="Screenshot 2025-02-11 at 12 17 04" src="https://github.com/user-attachments/assets/5231f362-d997-424b-8456-e54a3ee245ed" />
 
-```
+
   - ConfigMap and Secret must be created and exist before Pod start in the cluster 
-```
+
 
 <img width="600" alt="Screenshot 2025-02-11 at 12 51 33" src="https://github.com/user-attachments/assets/4f23ae5c-d4fb-444f-a8e3-f65840253f48" />
 
@@ -727,10 +730,11 @@ so to make it more efficent the solution is Storage Class
   metadata:
     name: config-file
   data: 
-    database_url: mongodb-service # This is a key-value pair 
+    database_url: mongodb-service # This is a key-value pair
 ```
 
 **Secret Example**
+
 ```
   apiVersion: v1
   kind: Secret
@@ -796,7 +800,7 @@ data:
       cGFzc3dvcmQ= # Value of the file in base64 encoded
 ```
 
-**Mosquitto Application Demo**
+## Mosquitto Application Demo
 
 Step 1 : Create ConfigMap and Secret for external Configuration 
 
@@ -892,36 +896,35 @@ Step 4 : After execute Mosquitto yaml with Volume
 ## Stateful set 
 
 **Stateful Applications**
-```
-  - State Apps like data basis : MongoDb, elasticsearch, MySql ect ... or any applications that store data to keep track of its state .
-  - In other words is the Application that track state by saving that infomation in some storage
-```
+
+- State Apps like data basis : MongoDb, elasticsearch, MySql ect ... or any applications that store data to keep track of its state .
+- In other words is the Application that track state by saving that infomation in some storage
+
 
 **Stateless Applications**
-```
-  - Don't keep record of previous interaction
-  - Each request is completely new | isolated interaction based entirely on the information come with it
-  - Sometime Stateless Apps connect to Statefull Apps to forward those request like 
-```
+
+- Don't keep record of previous interaction
+- Each request is completely new | isolated interaction based entirely on the information come with it
+- Sometime Stateless Apps connect to Statefull Apps to forward those request like 
 
 **Example**
 
 <img width="600" alt="Screenshot 2025-02-11 at 13 17 08" src="https://github.com/user-attachments/assets/803839f5-c6f2-4907-9dc3-b3e731a7dbea" />
 
-```
-  - Nodejs Apps (Stateless )connect to MongoDB database (Statefull)
-  - When request come in Nodejs Apps it doesn't depend on any previous data to handle incoming request
-  - It can handle on the payload of the request itself
-  - Now typical such request will additionally need to update some data in the database or query the data that's where MongoDB comes in
-  - When Nodejs forward the request to mongoDB, mongoDB will update the data based on its previous state or query the data from its storage, for each request it need to handle data and alway depend on data or state to be available
-  - Nodejs is just pass through for data query/update 
-```
+
+- Nodejs Apps (Stateless )connect to MongoDB database (Statefull)
+- When request come in Nodejs Apps it doesn't depend on any previous data to handle incoming request
+- It can handle on the payload of the request itself
+- Now typical such request will additionally need to update some data in the database or query the data that's where MongoDB comes in
+- When Nodejs forward the request to mongoDB, mongoDB will update the data based on its previous state or query the data from its storage, for each request it need to handle data and alway depend on data or state to be available
+- Nodejs is just pass through for data query/update 
+
 
 **Deploy of Stateful and Stateless applications**
 
 <img width="600" alt="Screenshot 2025-02-11 at 13 30 18" src="https://github.com/user-attachments/assets/46e08802-e740-4a39-99af-7622218a9ce4" />
 
-```
+
   - Stateless Apps deploy using Deployment
 
   - Statefull Apps deploy using Statefullset Component
@@ -938,13 +941,13 @@ Step 4 : After execute Mosquitto yaml with Volume
     - Bcs Replica Pods are not Identical
     - Pods have their own identity on top of the blueprint of the Pod that they are created from
     - And giving each pod its own required individual indentity is what StatefulSet does
-```
+
 
 **Pod identity**
 
 <img width="600" alt="Screenshot 2025-02-11 at 13 38 06" src="https://github.com/user-attachments/assets/f1bc29b3-8c9b-4019-a9b3-afebbb053454" />
 
-```
+
   - Sticky identity for each pod
   - Create from same Specication but they Not interchangeable
   - Peristent Identifier accross any re-sheduling : Mean when pod died it get replaced by new Pod with the same Indentity
@@ -978,54 +981,53 @@ Step 4 : After execute Mosquitto yaml with Volume
       - When Pod died or StatefulSet get comepletely wiped out the PV still remain the data Bcs PV lifecycle isn't tied to other component's lifecycle
 
    !!! Note: All this mechanism in place to Protect the Data and its State 
-```
 
 **Pod State**
-```
+
  -----So I have to configuring PV for my StatefulSet----
     - Since each pods has its own Storage meaning it's the own persistent volume that is then backed up by its own physical Storage which include the synchoronized data or replica database but also the State of the Pod
     - So each Pod has its own State which has infomation about whether it a Main Pod or Replica or other individual characteristics and all of this get stored in the Pods own storage -> That mean when a Pod died and get replace the Persistence Pod Identifier make sure that the storage volume get reattched to the replacement Pod
 
     ----For reattachment to work----
     - Use Remote Storage to available on other Nodes can not do that using local volumne Storage 
-```
+
 
 **2 Pod Endpoint**
 
 <img width="600" alt="Screenshot 2025-02-11 at 14 56 27" src="https://github.com/user-attachments/assets/dd07039a-d22b-4c98-a122-c2fd687e119e" /> <img width="400" alt="Screenshot 2025-02-11 at 14 57 21" src="https://github.com/user-attachments/assets/bb90e5cf-e697-43f3-8c1e-3ca9d75070e2" />
 
-```
+
   - To these fixed name: Each pod in the StatefulSet get its own DNS endpoint from a Service
   - There is Service Name for Stateful Apps that will address any Replicas Pod . And in addition to that there is individual DNS name for each Pod which deployment Pods do not have
   - Individual DSN name made up of Pod name
-```
+
 
 **2 Characteristic**
 
 <img width="400" alt="Screenshot 2025-02-11 at 15 00 03" src="https://github.com/user-attachments/assets/a07c2f7c-cbee-4e68-bc5e-f75aca6b57e3" /><img width="400" alt="Screenshot 2025-02-11 at 15 00 59" src="https://github.com/user-attachments/assets/254a4ba9-d904-454d-b4ba-247121fe08c4" />
 
-```
+
   1. Having Fixed name
   2. Fixed DNS name
 
   - When Pod restarted the IP address will change and the name and endpoint will stay the same
   - Sticky identity make sure each Replicas Pod can retain its State and Role
-```
+
 
 **Important**
-```
+
   - Relicate StatefullSet is complex
   - I need to do :
     - Configure Clonging and Data synchornize
     - Setup Remote Storage
 
   Bcs Statefull App not perfect for containerized Environment 
-```
+
 
 ## Manage K8 Service 
 
 **Build a Use Case Web App**
-```
+
   ----Set Up----
     - Web app with DB
     - Available from a Browser https with my domain name
@@ -1033,10 +1035,10 @@ Step 4 : After execute Mosquitto yaml with Volume
     - Data Peristent for DB
     - Have Dev and PRO Environment so I can test new features before release
     - Set up as effecicent as possible 
-```
+
 
 **Managed and UnManaged K8s CLuster**
-```
+
   ----Where will my K8s Cluster will be deploy?----
     - Consider when I want to set up K8s Cluster on cloud platform like Linode . I have 2 options : 
       1 . Set up from sratch : Spin up 6 Server Instances . Set up Control Plane and Node Worker . I need to manage completely myself
@@ -1046,10 +1048,10 @@ Step 4 : After execute Mosquitto yaml with Volume
         - I need to choose how many Worker Node -> Everthing pre-installed included container runtime
         - Control Plane Nodes created and managed by Cloud Provider
         - Save time and effort and cost 
-```
+
 
 **Process of Managed K8 CLuster**
-```
+
   1. Spin up my K8s cluster on cloud
     - I created Cluster with 3 Worker Node to Deploy my Application 
     - Choose Work Node and their resources
@@ -1106,12 +1108,12 @@ Step 4 : After execute Mosquitto yaml with Volume
     - Automate creating, Automate configuring
     - Automate Deploy App and Service
     - And I can do that using Automation tools: Teraform 
-```
 
-## Helm (Package Manager for K8)
+
+## Helm Package Manager for K8
 
 **What is Helm**
-```
+
   - Helm is Package Manager for K8
   - To Package YAML Files and distribute them in public and private Repo
 
@@ -1124,10 +1126,10 @@ Step 4 : After execute Mosquitto yaml with Volume
   ----Commonly Use Deployment Repo----
   - Database Apps: MongoDB, Elastic Search, MySQL, etc ....
   - Mornitoring Apps 
-```
+
 
 **Example**
-```
+
   - I have deployed my App in K8 cluster and I want to deploy Elastic Search additionally -> That my Cluster use to collect its logs
   - To Deploy Elastic Search stack in my K8 Cluster I would need couple of K8 Component like :
     - Statefull Set for Statefull Application
@@ -1142,21 +1144,21 @@ Step 4 : After execute Mosquitto yaml with Volume
   - Now I have a Cluster I need to deploy third Party Application -> I can look it up
     - Using CLI: helm search <keyword>
     - OR Heml'own Public Repo at ArtifactHub
-```
+
 
 **Public and Private Repo Helm**
 
-```
+
   - Public Repo at ArtifactHub
 
   - Private Repo Helm : Shared  in Origanization . Not Public 
-```
+
 
 **Second Feature of Helm**
 
 <img width="400" alt="Screenshot 2025-02-12 at 12 25 24" src="https://github.com/user-attachments/assets/1f9ff2c7-d195-4dd8-9f83-9b19f0ff99f0" /> <img width="400" alt="Screenshot 2025-02-12 at 12 26 21" src="https://github.com/user-attachments/assets/338d1c01-06bb-435d-ac86-7cdc91078765" />
 
-```
+
   - Templating Engine
     - Imagine If I have an Applications that made up of multiple MicroServices in my K8 Cluster
     - And Deployment and Service of each of those microservice are pretty much the same and the different is Application name and verison or docker image name and verison tag
@@ -1164,7 +1166,7 @@ Step 4 : After execute Mosquitto yaml with Volume
       1. To define common blueprint for all MicroServices
       2. Dynamic Value are replaced by placeholders and that would be Template File
     - Practical for CI/CD : In Build I can replace Value on the Fly before deployment
-```
+
 
 **Another Use Case**
 
@@ -1180,7 +1182,7 @@ Step 4 : After execute Mosquitto yaml with Volume
 
 <img width="600" alt="Screenshot 2025-02-12 at 13 07 42" src="https://github.com/user-attachments/assets/071e9d29-170c-4ad5-b3e2-66a84d9c81e3" />
 
-```
+
   - Chart is made up of Dir Structure
   - Top level: name of the chart
   - chart.yaml: metadata infomation
@@ -1192,7 +1194,7 @@ Step 4 : After execute Mosquitto yaml with Volume
   - Install command : helm install <chartname>
     - When command executed Helm install command to actually deploy those yaml
     - Template file will be filled with the values from values.yaml, producing Kubernetes manifests that can be deploy to Kubernetes 
-```
+
 
 **Values Injection**
 
@@ -1200,7 +1202,7 @@ Step 4 : After execute Mosquitto yaml with Volume
 
 <img width="600" alt="Screenshot 2025-02-12 at 14 14 55" src="https://github.com/user-attachments/assets/9e1b38a2-4738-48fc-a573-d9fd299106a2" />
 
-```
+
   ----Default value can be override----
     - Can override when execute : helm install --values=my-values.yaml<chartname>
       --values : with this flag I can provide the alternative value
@@ -1213,7 +1215,7 @@ Step 4 : After execute Mosquitto yaml with Volume
     - If an update to Helm Chart is Release or if need to change Configuration of my Deployment I can run Helm upgrade
     - When helm upgrade <chartname> executed : Any Change since installation of the last Release are going to be applied . Simply Remove it and Create new one
   - If Upgrade go wrong I can rollback with command : helm rollback <chartname>
-```
+
 
 
 ## Helm Demo Project Managed K8 Cluster 
@@ -1228,7 +1230,7 @@ Step 4 : After execute Mosquitto yaml with Volume
 
 <img width="600" alt="Screenshot 2025-02-12 at 14 57 36" src="https://github.com/user-attachments/assets/e79a5741-9612-42f1-8597-d855e41c6c8b" />
 
-```
+
   - I will deploy a replicated DB and configure its PV and make it accessible from UI client Browser using Ingress
   - I will use Helm to make process more efficent
 
@@ -1238,7 +1240,7 @@ Step 4 : After execute Mosquitto yaml with Volume
   4. For this Client I will configure Niginx Ingress -> Deploy Ingress controller in the cluster and configure Ingress rule in order to demonstrate handling browser request in the cluster
 
   !!! Almost 100% of this whole setup is what I properly will always need to do when I set up my Kubernetes Cluster 
-```
+
 
 **Create K8s Cluster on LKE Linode**
   
@@ -1563,7 +1565,7 @@ Step 4 : After execute Mosquitto yaml with Volume
     - And on top of that it included the domain or application specific knowledge to automate the entire lifecycle of the application it manage or operate 
 ```
 
-## Secure Cluster - Authentication with RBAC 
+## Secure Cluster Authentication with RBAC 
 
 **Overview**
 ```
@@ -1861,7 +1863,7 @@ Step 4 : After execute Mosquitto yaml with Volume
     -- And I also can define Micro run on the same Namepsace or each Micro has its own Namespace 
 ```
 
-## Deploy Microservices Apps : Demo Project 
+## Deploy Microservices Apps Demo Project
 
 **Overview**
 
@@ -2467,7 +2469,7 @@ Step 1 : Install Chart
 
   <img width="400" alt="Screenshot 2025-02-21 at 14 03 28" src="https://github.com/user-attachments/assets/3057a30b-833e-48c2-bbd8-ff179bfc61f3" />
 
-**Deplploy Microservices with Helmfile**
+## Deplploy Microservices with Helmfile
 
     - There is 2 Options to Deploy 
 
